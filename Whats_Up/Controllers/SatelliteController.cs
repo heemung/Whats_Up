@@ -46,13 +46,13 @@ namespace Whats_Up.Controllers
         public ActionResult SatTracker()
         {
 
-            string SatTracker = WebConfigurationManager.AppSettings["N2YO"];
+            string SatTracker = WebConfigurationManager.AppSettings["Space-Track"];
 
             UriBuilder builder = new UriBuilder
             {
                 Scheme = "https",
                 Host = "n2yo.com",
-                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/&apiKey=" + N2YO,
+                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/&apiKey=" + SatTracker,
             };
 
             HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
