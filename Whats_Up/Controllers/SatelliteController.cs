@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
+using System.Web.Configuration;
 
 namespace Whats_Up.Controllers
 {
@@ -14,12 +15,17 @@ namespace Whats_Up.Controllers
         // GET: Satellite
         public ActionResult Index()
         {
+
+            string N2YO = WebConfigurationManager.AppSettings["N2YO"];
             UriBuilder builder = new UriBuilder
             {
-                Host = "localhost",
-                Path = "api/Car/AllCars",
+                Scheme = "https",
+                Host = "n2yo.com",
+                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/",
+                Query = "&apiKey=key",
                 Port = 63387
             };
+            /*
             HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
             requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
 
@@ -32,8 +38,9 @@ namespace Whats_Up.Controllers
                 string output = reader.ReadToEnd();
                 JObject jSpaceObject = JObject.Parse(output);
 
-                ViewBag.ThisTest = jSpaceObject;
-            }
+                ViewBag.ThisTest = jSpaceObject; */
+                ViewBag.ThisTest2 = N2YO;
+            //}
 
             return View();
         }
