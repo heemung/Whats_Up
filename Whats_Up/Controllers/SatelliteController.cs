@@ -15,7 +15,8 @@ namespace Whats_Up.Controllers
         // GET: Satellite
         public ActionResult Index()
         {
-
+            
+            /*
             string N2YO = WebConfigurationManager.AppSettings["N2YO"];
 
             UriBuilder builder = new UriBuilder
@@ -40,72 +41,112 @@ namespace Whats_Up.Controllers
                 ViewBag.ThisTest = jSpaceObject;
                 ViewBag.ThisTest2 = builder.ToString();
             }
-
+            */
             return View();
         }
 
         //getting user selections for satellites categories 
-        public List<string> GetSatCat()
+        public ActionResult GetSatCat()
         {
-            
+            /////////////////goes in method
+            List<string> userListSelection = new List<string>();
+            /////////////////
 
+            int arrayCatCount = userListSelection.Count;
+            int[] userCatInt = new int[arrayCatCount];
 
+            Dictionary<string, int> Test = AddingCatsToList();
 
+            //checking to make sure there is one category selected
+            if (Test.Count != 0)
+            {
+                //TEMP TESTING ONLY START
+                foreach (KeyValuePair<string, int> k in Test)
+                {
+                    userListSelection.Add(k.Key);
+                }
+                //TEMP END TEST
+
+                //could be simplified
+                int tempForArray = 0;
+                foreach (string s in userListSelection)
+                {
+                    foreach (KeyValuePair<string, int> satCat in Test)
+                    {
+                        if (s == satCat.Key)
+                        {
+                            userCatInt[tempForArray] = satCat.Value;
+                            tempForArray++;
+                        }
+                    }
+
+                }
+
+                return View();
+                //return View("Index");
+            }
+            else
+            {
+                ViewBag.Error = "Error. Need to select 1 category";
+                return View();
+            }
         }
 
+        //better to put in database?
         public Dictionary<string,int> AddingCatsToList()
         {
-            Dictionary<string,int> satCatDic = new Dictionary<string, int>();
-
-            satCatDic.Add("Yaogan", 36);
-            satCatDic.Add("XMandSirius", 33);
-            satCatDic.Add("WestfordNeedles", 37);
-            satCatDic.Add("Weather", 3);
-            satCatDic.Add("TV", 34);
-            satCatDic.Add("Tsiklon", 41);
-            satCatDic.Add("Tsikada", 42);
-            satCatDic.Add("Tselina" ,44);
-            satCatDic.Add("TrackingandDataRelaySatelliteSystem", 9);
-            satCatDic.Add("Strela", 39);
-            satCatDic.Add("Space&EarthScience", 26);
-            satCatDic.Add("Search&Rescue", 7);
-            satCatDic.Add("Satellite-BasedAugmentationSystem", 23);
-            satCatDic.Add("RussianLEONavigation", 25);
-            satCatDic.Add("Raduga", 13);
-            satCatDic.Add("RadarCalibration", 18);
-            satCatDic.Add("QZSS", 47);
-            satCatDic.Add("Parus", 38);
-            satCatDic.Add("Orbcomm", 16);
-            satCatDic.Add("O3BNetworks", 43);
-            satCatDic.Add("NOAA", 4);
-            satCatDic.Add("NavyNavigationSatelliteSystem", 24);
-            satCatDic.Add("Molniya", 14);
-            satCatDic.Add("Military", 30);
-            satCatDic.Add("Lemur", 49);
-            satCatDic.Add("ISS", 2);
-            satCatDic.Add("IRNSS", 46);
-            satCatDic.Add("Iridium", 15);
-            satCatDic.Add("Intelsat", 11);
-            satCatDic.Add("Gorizont", 12);
-            satCatDic.Add("Gonets", 40);
-            satCatDic.Add("GOES", 5);
-            satCatDic.Add("GlonassOperational", 21);
-            satCatDic.Add("Globalstar", 17);
-            satCatDic.Add("GlobalPositioningSystem(GPS)Operational", 20);
-            satCatDic.Add("GlobalPositioningSystem(GPS)Constellation", 50);
-            satCatDic.Add("Geostationary", 10);
-            satCatDic.Add("Geodetic", 27);
-            satCatDic.Add("Galileo", 22);
-            satCatDic.Add("Flock", 48);
-            satCatDic.Add("Experimental", 19);
-            satCatDic.Add("Engineering", 28);
-            satCatDic.Add("Education", 29);
-            satCatDic.Add("EarthResources", 6);
-            satCatDic.Add("DisasterMonitoring", 8);
-            satCatDic.Add("CubeSats", 32);
-            satCatDic.Add("Celestis", 45);
-            satCatDic.Add("Brightest", 1);
-            satCatDic.Add("BeidouNavigationSystem", 35);
+            Dictionary<string, int> satCatDic = new Dictionary<string, int>
+            {
+                { "Yaogan", 36 },
+                { "XMandSirius", 33 },
+                { "WestfordNeedles", 37 },
+                { "Weather", 3 },
+                { "TV", 34 },
+                { "Tsiklon", 41 },
+                { "Tsikada", 42 },
+                { "Tselina", 44 },
+                { "TrackingandDataRelaySatelliteSystem", 9 },
+                { "Strela", 39 },
+                { "Space&EarthScience", 26 },
+                { "Search&Rescue", 7 },
+                { "Satellite-BasedAugmentationSystem", 23 },
+                { "RussianLEONavigation", 25 },
+                { "Raduga", 13 },
+                { "RadarCalibration", 18 },
+                { "QZSS", 47 },
+                { "Parus", 38 },
+                { "Orbcomm", 16 },
+                { "O3BNetworks", 43 },
+                { "NOAA", 4 },
+                { "NavyNavigationSatelliteSystem", 24 },
+                { "Molniya", 14 },
+                { "Military", 30 },
+                { "Lemur", 49 },
+                { "ISS", 2 },
+                { "IRNSS", 46 },
+                { "Iridium", 15 },
+                { "Intelsat", 11 },
+                { "Gorizont", 12 },
+                { "Gonets", 40 },
+                { "GOES", 5 },
+                { "GlonassOperational", 21 },
+                { "Globalstar", 17 },
+                { "GlobalPositioningSystem(GPS)Operational", 20 },
+                { "GlobalPositioningSystem(GPS)Constellation", 50 },
+                { "Geostationary", 10 },
+                { "Geodetic", 27 },
+                { "Galileo", 22 },
+                { "Flock", 48 },
+                { "Experimental", 19 },
+                { "Engineering", 28 },
+                { "Education", 29 },
+                { "EarthResources", 6 },
+                { "DisasterMonitoring", 8 },
+                { "CubeSats", 32 },
+                { "Celestis", 45 },
+                { "Brightest", 1 },
+                { "BeidouNavigationSystem", 35 }
+            };
 
             return satCatDic;
         }
