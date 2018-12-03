@@ -199,6 +199,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Satellite\Index.cshtml" />
     <Content Include="Views\Home\Creators.cshtml" />
+    <Content Include="Views\Satellite\GetSatCat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
