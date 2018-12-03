@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Whats_Up.Controllers
 {
     public class HomeController : Controller
@@ -13,18 +14,18 @@ namespace Whats_Up.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult WhatsUp()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Creators()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your 2018 C# .NET Developers";
 
-            return View();
+            return View("/Home/Creators");
         }
     }
 }

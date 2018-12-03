@@ -27,7 +27,7 @@ namespace Whats_Up.Controllers
                 Query = "key=" + bing,
             };
 
-            HttpWebRequest requestLongLat = WebRequest.CreateHttp(builder.ToString());
+            HttpWebRequest requestLongLat = WebRequest.CreateHttp(builder.ToC:\Users\grand\Desktop\WhatsUp\Whats_Up\Whats_Up\Controllers\MapperController.csString());
             requestLongLat.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
 
             HttpWebResponse reponse = (HttpWebResponse)requestLongLat.GetResponse();

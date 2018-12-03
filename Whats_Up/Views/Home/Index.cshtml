@@ -1,31 +1,51 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <h1 align="center" style="font-size:450%; color:gold">What's Up?</h1>
+    <br />
+    <br />
+    <p class="lead" align="center">We are your favorite web site dedicated to enlightening you on what's up above us in Space!</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<img src="https://scitechdaily.com/images/Image-of-the-Nile-at-Night-from-the-International-Space-Station.jpg" alt="World View"/>
+
+@*.earth {
+      width: 300px;
+      height: 300px;
+      position: fixed;
+      top: 0;
+      bottom: 0;       
+      left: 0;
+      right: 0;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 50%;
+      box-shadow: 0 0 20px 20px #000 inset, 0 0 20px 2px #000;
+    }
+
+    .earth:after {
+      position: absolute;
+      content: "";
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      box-shadow: -20px -20px 50px 2px #000 inset;
+      border-radius: 50%;
+    }
+
+    .earth > div {
+      width: 200%;
+      height: 100%;
+      -webkit-animation: spin 30s linear alternate infinite;
+      background: url(https://web.opendrive.com/api/v1/download/file.json/NTlfMTQ1MTkzNDhf?inline=1);
+      /*orginal image at https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earthmap1000x500compac.jpg/640px-Earthmap1000x500compac.jpg */
+      background-size: cover;
+    }
+    @keyframes spin {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+*@
