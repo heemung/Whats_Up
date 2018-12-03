@@ -90,7 +90,7 @@ namespace Whats_Up.Controllers
                     }
 
                 }
-                ViewBag.ThisTest = jSpaceObjects;
+                ViewBag.TableSatData = jSpaceObjects;
                 return View();
                 //return View("Index");
             }
@@ -101,6 +101,7 @@ namespace Whats_Up.Controllers
             }
         }
 
+        //testing small sample
         public Dictionary<string, int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
@@ -114,7 +115,7 @@ namespace Whats_Up.Controllers
         }
 
         //better to put in database?
-       /* public Dictionary<string,int> AddingCatsToList()
+       /*public Dictionary<string,int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {

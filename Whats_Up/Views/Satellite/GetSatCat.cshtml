@@ -4,8 +4,42 @@
 }
 
 <h2>GetSatCat</h2>
+@ViewBag.TableSatData
 
-@foreach (var s in ViewBag.ThisTest)
-{
-    <p>@s</p>
-}
+<table class="table table-bordered table-responsive table-hover">
+    @*table style and below are table headers*@
+    <tr>
+        <th>Sat ID</th>
+        <th>Sat Name </th>
+        <th>Sat Lat </th>
+        <th>Sat Long</th>
+        <th>Sat Alt</th>
+        <th>Launch Date</th>
+        <th>Int Designator</th>
+    </tr>
+    @*from the viewbag in ______ gets all the tasks from the table*@
+    @foreach (var satDataArray in ViewBag.TableSatData)
+    {
+        foreach (var satData in satDataArray["above"])
+        {
+            <tr>
+                <td>@satData["satid"]</td>
+                <td>@satData["satname"]</td>
+                <td>@satData["satlat"]</td>
+                <td>@satData["satlng"]</td>
+                <td>@satData["satalt"]</td>
+                <td>@satData["launchDate"]</td>
+                <td>@satData["intDesignator"]</td>
+
+            </tr>
+        }
+    }
+</table>
+@*
+    {
+      "info": {
+        "category": "XM and Sirius",
+        "transactionscount": 7,
+        "satcount": 6
+      },
+*@
