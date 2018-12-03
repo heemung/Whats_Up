@@ -1,7 +1,36 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+        }
+    </style>
+</head>
+<body>
+    <h3>My Google Maps Demo</h3>
 
-<p>Use this area to provide additional information.</p>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            var uluru = { lat: -25.344, lng: 131.036 };
+            var uluru2 = { lat: 42, lng: -83 };
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 4, center: uluru });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+            var marker2 = new google.maps.Marker({
+                position: uluru2,
+                map: map
+            })
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.BingKey&callback=initMap">
+    </script>
+</body>
+</html>
