@@ -30,7 +30,14 @@
         }
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.BingKey&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
+    
 </body>
 </html>
+<form action="/Home/InputLocation">
+    <input name="addressLine" type="text" placeholder="Enter your address" />
+    <input name="postalCode" type="text" placeholder="Enter your Zip Code" />
+    <input type="submit" value="Submit" />
+</form>
+<div>@ViewBag.Testing</div>

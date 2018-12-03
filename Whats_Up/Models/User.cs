@@ -7,5 +7,7 @@ namespace Whats_Up.Models
 {
     public class User
     {
+        public string addressLine { get; set; }
+        public string postalCode { get; set; }
     }
 }
