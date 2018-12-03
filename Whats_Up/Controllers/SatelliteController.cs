@@ -10,38 +10,12 @@ using System.Web.Configuration;
 
 namespace Whats_Up.Controllers
 {
+
     public class SatelliteController : Controller
     {
         // GET: Satellite
         public ActionResult Index()
         {
-            
-            /*
-            string N2YO = WebConfigurationManager.AppSettings["N2YO"];
-
-            UriBuilder builder = new UriBuilder
-            {
-                Scheme = "https",
-                Host = "n2yo.com",
-                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/&apiKey=" + N2YO,
-            };
-
-            HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
-            requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
-
-            HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
-
-            if(reponse.StatusCode == HttpStatusCode.OK)
-            {
-                StreamReader reader = new StreamReader(reponse.GetResponseStream());
-
-                string output = reader.ReadToEnd();
-                JObject jSpaceObject = JObject.Parse(output);
-
-                ViewBag.ThisTest = jSpaceObject;
-                ViewBag.ThisTest2 = builder.ToString();
-            }
-            */
             return View();
         }
 
@@ -51,22 +25,26 @@ namespace Whats_Up.Controllers
             /////////////////goes in method
             List<string> userListSelection = new List<string>();
             /////////////////
+            //api key
+            string N2YO = WebConfigurationManager.AppSettings["N2YO"];
+            string latitude = "42.327501";
+            string longitude = "-83.048981";
+
+            Dictionary<string, int> Test = AddingCatsToList();
+
+            //TEMP TESTING ONLY START
+            foreach (KeyValuePair<string, int> k in Test)
+            {
+                userListSelection.Add(k.Key);
+            }
+            //TEMP END TEST
 
             int arrayCatCount = userListSelection.Count;
             int[] userCatInt = new int[arrayCatCount];
 
-            Dictionary<string, int> Test = AddingCatsToList();
-
             //checking to make sure there is one category selected
             if (Test.Count != 0)
             {
-                //TEMP TESTING ONLY START
-                foreach (KeyValuePair<string, int> k in Test)
-                {
-                    userListSelection.Add(k.Key);
-                }
-                //TEMP END TEST
-
                 //could be simplified
                 int tempForArray = 0;
                 foreach (string s in userListSelection)
@@ -81,19 +59,62 @@ namespace Whats_Up.Controllers
                     }
 
                 }
+                JArray jSpaceObjects = new JArray();
+                foreach (int catNum in userCatInt)
+                {
+                    UriBuilder builder = new UriBuilder
+                    {
+                        Scheme = "https",
+                        Host = "n2yo.com",
+                        Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + catNum + "/&apiKey=" + N2YO,
+                    };
 
+                    HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
+                    requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
+
+                    HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
+
+                    if (reponse.StatusCode == HttpStatusCode.OK)
+                    {
+                        StreamReader reader = new StreamReader(reponse.GetResponseStream());
+
+                        string output = reader.ReadToEnd();
+
+                        JObject temp = JObject.Parse(output);
+                        jSpaceObjects.Add(temp);
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Could not get HTTP Reponse";
+                        return View("/Shared/Error");
+                    }
+
+                }
+                ViewBag.ThisTest = jSpaceObjects;
                 return View();
                 //return View("Index");
             }
             else
             {
-                ViewBag.Error = "Error. Need to select 1 category";
+                ViewBag.SamePageError = "Error. Need to select 1 category";
                 return View();
             }
         }
 
+        public Dictionary<string, int> AddingCatsToList()
+        {
+            Dictionary<string, int> satCatDic = new Dictionary<string, int>
+            {
+                { "Yaogan", 36 },
+                { "XMandSirius", 33 },
+                { "WestfordNeedles", 37 },
+            };
+
+            return satCatDic;
+        }
+
         //better to put in database?
-        public Dictionary<string,int> AddingCatsToList()
+       /* public Dictionary<string,int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
@@ -149,7 +170,7 @@ namespace Whats_Up.Controllers
             };
 
             return satCatDic;
-        }
+        }*/
 
         public ActionResult SatTracker()
         {
