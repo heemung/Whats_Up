@@ -25,7 +25,7 @@ namespace Whats_Up.Controllers
         {
             ViewBag.Message = "Your 2018 C# .NET Developers";
 
-            return View("/Home/Creators");
+            return View();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Whats_Up.Controllers
             {
                 Scheme = "https",
                 Host = "n2yo.com",
-                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/&apiKey=" + SatTracker,
+                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/&apiKey=" + N2YO,
             };
 
             HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
