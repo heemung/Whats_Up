@@ -133,9 +133,9 @@ namespace Whats_Up.Controllers
                         dbObj.SatName = satData["satname"].Value<string>();
                         dbObj.Designator = satData["intDesignator"].Value<string>();
                         dbObj.LaunchDate = satData["launchDate"].Value<string>();
-                        dbObj.SatLat = satData["satlat"].Value<int>();
-                        dbObj.SatLng = satData["satlng"].Value<int>();
-                        dbObj.SatAlt = satData["satalt"].Value<int>();
+                        dbObj.SatLat = satData["satlat"].Value<double>();
+                        dbObj.SatLng = satData["satlng"].Value<double>();
+                        dbObj.SatAlt = satData["satalt"].Value<double>();
                         dbObj.AtTime = atTime;
                         db.Entry(dbObj).State = EntityState.Added;
                         db.SaveChanges();
@@ -161,7 +161,7 @@ namespace Whats_Up.Controllers
         }
 
         //testing small sample
-        public Dictionary<string, int> AddingCatsToList()
+        /*public Dictionary<string, int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
@@ -171,10 +171,10 @@ namespace Whats_Up.Controllers
             };
 
             return satCatDic;
-        }
+        }*/
 
         //better to put in database?
-       /*public Dictionary<string,int> AddingCatsToList()
+       public Dictionary<string,int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
@@ -230,7 +230,7 @@ namespace Whats_Up.Controllers
             };
 
             return satCatDic;
-        }*/
+        }
 
         public ActionResult SatTracker()
         {
