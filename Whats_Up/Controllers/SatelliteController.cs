@@ -125,26 +125,23 @@ namespace Whats_Up.Controllers
 
                 if (SatRequest["info"]["satcount"].Value<int>() != 0)
                 {
-                    foreach (var satData in SatRequest)
+                    foreach (var satData in SatRequest["above"])
                     {
 
                         //getting all these values from the model
-                        dbObj.SatId = SatRequest["above"]["satid"].Value<int>();
-                        dbObj.SatName = SatRequest["above"]["satname"].Value<string>();
-                        dbObj.Designator = SatRequest["above"]["intdesignator"].Value<int>();
-                        dbObj.LaunchDate = SatRequest["above"]["launchdate"].Value<string>();
-                        dbObj.SatLat = SatRequest["above"]["satlat"].Value<int>();
-                        dbObj.SatLng = SatRequest["above"]["satlng"].Value<int>();
-                        dbObj.SatAlt = SatRequest["above"]["satalt"].Value<int>();
-                        dbObj.AtTime
+                        dbObj.SatId = satData["satid"].Value<int>();
+                        dbObj.SatName = satData["satname"].Value<string>();
+                        dbObj.Designator = satData["intDesignator"].Value<string>();
+                        dbObj.LaunchDate = satData["launchDate"].Value<string>();
+                        dbObj.SatLat = satData["satlat"].Value<int>();
+                        dbObj.SatLng = satData["satlng"].Value<int>();
+                        dbObj.SatAlt = satData["satalt"].Value<int>();
+                        dbObj.AtTime = atTime;
+                        db.Entry(dbObj).State = EntityState.Added;
+                        db.SaveChanges();
                     }
                     //adding to the DB
-
-                    db.Entry(dbObj).State = System.Data.Entity.EntityState.Added;
-
                 }
-
-
                 else
                 {
                     dbObj.SatId = null;
@@ -156,13 +153,11 @@ namespace Whats_Up.Controllers
                     dbObj.SatAlt = null;
                     dbObj.AtTime = null;
 
-                    db.Entry(dbObj).State = System.Data.Entity.EntityState.Added;
+                    db.Entry(dbObj).State = EntityState.Added;
+                    db.SaveChanges();
                 }
-
-
             }
             //saving chnages actually made to the DB
-            db.SaveChanges();
         }
 
         //testing small sample

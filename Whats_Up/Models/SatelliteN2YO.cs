@@ -19,7 +19,7 @@ namespace Whats_Up.Models
 
         public int? SatId { get; set; }
         public string SatName { get; set; }
-        public int? Designator { get; set; }
+        public string Designator { get; set; }
         public string LaunchDate { get; set; }
         public int? SatLat { get; set; }
         public int? SatLng { get; set; }

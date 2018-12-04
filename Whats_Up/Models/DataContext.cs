@@ -17,7 +17,10 @@ namespace Whats_Up.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //fluent API
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.HasDefaultSchema("dbo");
+            modelBuilder.Entity<SatelliteN2YO>().ToTable("SatelliteN2YOs");
         }
 
     }
