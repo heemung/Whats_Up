@@ -14,7 +14,7 @@ namespace Whats_Up.Controllers
 {
     public class SatelliteController : Controller
     {
-
+        public static JArray SatCoordinates;
         private DataContext db = new DataContext();
         // GET: Satellite
         public ActionResult Index()
@@ -23,7 +23,7 @@ namespace Whats_Up.Controllers
         }
 
         //getting user selections for satellites categories 
-        public ActionResult GetSatCat()
+        public void GetSatCat()
         {
             /////////////////goes in method
             List<string> userListSelection = new List<string>();
@@ -89,7 +89,7 @@ namespace Whats_Up.Controllers
                     else
                     {
                         ViewBag.Error = "Could not get HTTP Reponse";
-                        return View("/Shared/Error");
+                        //return View("/Shared/Error");
                     }
 
                 }
@@ -97,14 +97,15 @@ namespace Whats_Up.Controllers
                 //sends jarray to database method
                 ToDatabase(jSpaceObjects);
                 ViewBag.TableSatData = jSpaceObjects;
+                SatCoordinates = jSpaceObjects;
                 //TempData["DataToBase"] = jSpaceObjects;
-                return View();
+                //return View();
                 //return View("Index");
             }
             else
             {
                 ViewBag.SamePageError = "Error. Need to select 1 category";
-                return View();
+                //return View();
             }
         }
         //taking the Jarray to push to DB
