@@ -107,11 +107,56 @@ namespace Whats_Up.Controllers
                 return View();
             }
         }
-
+        //taking the Jarray to push to DB
         public void ToDatabase(JArray satdata)
         {
             string atTime = DateTime.Now.ToString();
 
+            // creating a new db object
+            SatelliteN2YO dbObj = new SatelliteN2YO();
+
+            //iterating through the satdata table returnong the request
+            foreach(var SatRequest in satdata)
+            {
+                //returning the data in correct format
+                dbObj.Category = SatRequest["info"]["category"].Value<string>();
+                dbObj.TransactionsCount = SatRequest["info"]["transactionscount"].Value<int>();
+                dbObj.SatCount = SatRequest["info"]["satcount"].Value<int>();
+
+                if (SatRequest["info"]["satcount"].Value<int>() != 0)
+                {
+                    foreach (var satData in SatRequest)
+                    {
+
+                        //getting all these values from the model
+                        dbObj.SatId = SatRequest["above"]["satid"].Value<int>();
+                        dbObj.SatName = SatRequest["above"]["satname"].Value<string>();
+                        dbObj.Designator = SatRequest["above"]["intdesignator"].Value<int>();
+                        dbObj.LaunchDate = SatRequest["above"]["launchdate"].Value<string>();
+                        dbObj.SatLat = SatRequest["above"]["satlat"].Value<int>();
+                        dbObj.SatLng = SatRequest["above"]["satlng"].Value<int>();
+                        dbObj.SatAlt = SatRequest["above"]["satalt"].Value<int>();
+                        //dbObj.AtTime = SatRequest["above"]["attime"].Value<int>();
+                    }
+                    db.SatelliteN2YOs.Add
+                        
+                }
+
+
+                else
+                {
+                    dbObj.SatId = null;
+                    dbObj.SatName = null;
+                    dbObj.Designator = null;
+                    dbObj.LaunchDate = null;
+                    dbObj.SatLat = null;
+                    dbObj.SatLng = null;
+                    dbObj.SatAlt = null;
+                    //dbObj.AtTime = null;
+                }
+
+                }
+            }
 
         }
 

@@ -17,13 +17,13 @@ namespace Whats_Up.Models
         [Required]
         public int SatCount { get; set; }
 
-        public int SatId { get; set; }
-        public int SatName { get; set; }
-        public int Designator { get; set; }
-        public int LaunchDate { get; set; }
-        public int SatLat { get; set; }
-        public int SatLng { get; set; }
-        public int SatAlt { get; set; }
+        public int? SatId { get; set; }
+        public string SatName { get; set; }
+        public int? Designator { get; set; }
+        public string LaunchDate { get; set; }
+        public int? SatLat { get; set; }
+        public int? SatLng { get; set; }
+        public int? SatAlt { get; set; }
         public string AtTime{get; set;}
 
     }
