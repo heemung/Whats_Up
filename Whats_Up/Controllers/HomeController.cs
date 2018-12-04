@@ -13,6 +13,7 @@ namespace Whats_Up.Controllers
 {
     public class HomeController : Controller
     {
+        public SatelliteController SatelliteInfo;
         public string BingKey = WebConfigurationManager.AppSettings["Mapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
         public ActionResult Index()
@@ -22,9 +23,10 @@ namespace Whats_Up.Controllers
 
         public ActionResult WhatsUp()
         {
+            SatelliteInfo.GetSatCat();
             ViewBag.Message = "Your application description page.";
 
-            
+            ViewBag.Coordinates = SatelliteController.SatCoordinates;
             ViewBag.GoogleKey = GoogleKey;
 
             return View();
