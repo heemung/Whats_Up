@@ -7,12 +7,15 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
 using System.Web.Configuration;
+using Whats_Up.Models;
+using System.Data.Entity;
 
 namespace Whats_Up.Controllers
 {
-
     public class SatelliteController : Controller
     {
+
+        private DataContext db = new DataContext();
         // GET: Satellite
         public ActionResult Index()
         {
@@ -90,7 +93,11 @@ namespace Whats_Up.Controllers
                     }
 
                 }
+
+                //sends jarray to database method
+                ToDatabase(jSpaceObjects);
                 ViewBag.TableSatData = jSpaceObjects;
+                //TempData["DataToBase"] = jSpaceObjects;
                 return View();
                 //return View("Index");
             }
@@ -99,6 +106,13 @@ namespace Whats_Up.Controllers
                 ViewBag.SamePageError = "Error. Need to select 1 category";
                 return View();
             }
+        }
+
+        public void ToDatabase(JArray satdata)
+        {
+            string atTime = DateTime.Now.ToString();
+
+
         }
 
         //testing small sample
