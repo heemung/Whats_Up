@@ -52,3 +52,16 @@
       }
     }
     *@
+
+<form action="/Satellite/GetSatCat" method="post">
+    <label>Enter Location:</label><input type="text" name="userlocation" placeholder="Enter Zip Code" required />
+    <label>Range</label><input type="range" min="10" max="100" value="10" class="slider" id="searchRange" name="userlocation" required />
+    <br />
+    <br />
+    <input type="radio" name="emailSelect" value="hasEmail" />Select A Email Address<span>  </span>
+    <input type="radio" name="emailSelect" value="newEmail" />Create A Email Address<span>  </span>
+    <input type="radio" name="emailSelect" value="dontTrack" checked="checked"/>Don't Track<br />
+    <label>Enter Email Address</label><input type="email" name="enterEmail" placeholder="john.doe@gmail.com" hidden="hidden" />
+
+
+</form>
