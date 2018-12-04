@@ -8,14 +8,14 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<img src="https://scitechdaily.com/images/Image-of-the-Nile-at-Night-from-the-International-Space-Station.jpg" alt="World View"/>
+<img src="https://scitechdaily.com/images/Image-of-the-Nile-at-Night-from-the-International-Space-Station.jpg" alt="World View" />
 
 @*.earth {
       width: 300px;
       height: 300px;
       position: fixed;
       top: 0;
-      bottom: 0;       
+      bottom: 0;
       left: 0;
       right: 0;
       margin: auto;
@@ -43,9 +43,12 @@
       /*orginal image at https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earthmap1000x500compac.jpg/640px-Earthmap1000x500compac.jpg */
       background-size: cover;
     }
-    @keyframes spin {
-      to {
+    @@keyframes spin {
+      from {
+        transform: translateX(-1%);
+    }
+     to {
         transform: translateX(-50%);
       }
     }
-*@
+    *@
