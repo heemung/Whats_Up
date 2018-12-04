@@ -116,7 +116,7 @@ namespace Whats_Up.Controllers
             SatelliteN2YO dbObj = new SatelliteN2YO();
 
             //iterating through the satdata table returnong the request
-            foreach(var SatRequest in satdata)
+            foreach (var SatRequest in satdata)
             {
                 //returning the data in correct format
                 dbObj.Category = SatRequest["info"]["category"].Value<string>();
@@ -136,10 +136,12 @@ namespace Whats_Up.Controllers
                         dbObj.SatLat = SatRequest["above"]["satlat"].Value<int>();
                         dbObj.SatLng = SatRequest["above"]["satlng"].Value<int>();
                         dbObj.SatAlt = SatRequest["above"]["satalt"].Value<int>();
-                        //dbObj.AtTime = SatRequest["above"]["attime"].Value<int>();
+                        dbObj.AtTime
                     }
-                    db.SatelliteN2YOs.Add
-                        
+                    //adding to the DB
+
+                    db.Entry(dbObj).State = System.Data.Entity.EntityState.Added;
+
                 }
 
 
@@ -152,12 +154,15 @@ namespace Whats_Up.Controllers
                     dbObj.SatLat = null;
                     dbObj.SatLng = null;
                     dbObj.SatAlt = null;
-                    //dbObj.AtTime = null;
+                    dbObj.AtTime = null;
+
+                    db.Entry(dbObj).State = System.Data.Entity.EntityState.Added;
                 }
 
-                }
+
             }
-
+            //saving chnages actually made to the DB
+            db.SaveChanges();
         }
 
         //testing small sample
