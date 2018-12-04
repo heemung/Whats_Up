@@ -26,13 +26,19 @@ namespace Whats_Up.Controllers
         //getting user selections for satellites categories 
         public void GetSatCat()
         {
+            string latitude = "42.327501";
+            string longitude = "-83.048981";
+            //HomeController home = new HomeController();
+            //latitude = HomeController.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][0].Value<string>();
+            //longitude = HomeController.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][1].Value<string>();
+
+
             /////////////////goes in method
             List<string> userListSelection = new List<string>();
             /////////////////
             //api key
             string N2YO = WebConfigurationManager.AppSettings["N2YO"];
-            string latitude = "42.327501";
-            string longitude = "-83.048981";
+
 
             Dictionary<string, int> Test = AddingCatsToList();
 
