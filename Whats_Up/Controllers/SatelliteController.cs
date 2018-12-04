@@ -15,6 +15,7 @@ namespace Whats_Up.Controllers
     public class SatelliteController : Controller
     {
         public static JArray SatCoordinates;
+
         private DataContext db = new DataContext();
         // GET: Satellite
         public ActionResult Index()
@@ -162,7 +163,7 @@ namespace Whats_Up.Controllers
         }
 
         //testing small sample
-        /*public Dictionary<string, int> AddingCatsToList()
+        public Dictionary<string, int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
@@ -172,10 +173,10 @@ namespace Whats_Up.Controllers
             };
 
             return satCatDic;
-        }*/
+        }
 
         //better to put in database?
-       public Dictionary<string,int> AddingCatsToList()
+       /*public Dictionary<string,int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
@@ -231,7 +232,7 @@ namespace Whats_Up.Controllers
             };
 
             return satCatDic;
-        }
+        }*/
 
         public ActionResult SatTracker()
         {
