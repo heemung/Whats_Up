@@ -26,12 +26,10 @@ namespace Whats_Up.Controllers
         //getting user selections for satellites categories 
         public void GetSatCat()
         {
-            string latitude = "42.327501";
-            string longitude = "-83.048981";
-            HomeController home = new HomeController();
-            latitude = home.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][0].Value<string>();
-            longitude = home.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][1].Value<string>();
-
+            string latitude; //42.327501
+            string longitude; //"-83.048981"
+            latitude = HomeController.geoLat;
+            longitude = HomeController.geoLong;
 
             /////////////////goes in method
             List<string> userListSelection = new List<string>();
@@ -70,11 +68,6 @@ namespace Whats_Up.Controllers
 
                 }
                 JArray jSpaceObjects = new JArray();
-                ////////////////////////////Testing
-                ///
-                string builderTest = "";
-
-
                 foreach (int catNum in userCatInt)
                 {
                     UriBuilder builder = new UriBuilder
@@ -83,7 +76,6 @@ namespace Whats_Up.Controllers
                         Host = "n2yo.com",
                         Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + catNum + "/&apiKey=" + N2YO,
                     };
-                    builderTest = builder.ToString();
                     HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
                     requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
 
@@ -110,7 +102,6 @@ namespace Whats_Up.Controllers
                 ToDatabase(jSpaceObjects);
 
                 //testing location
-                ViewBag.TestBuild = builderTest;
                 ViewBag.TableSatData = jSpaceObjects;
                 SatCoordinates = jSpaceObjects;
                 //return View();

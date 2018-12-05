@@ -14,7 +14,7 @@ namespace Whats_Up.Models
 
         public string addressLine { get; set; }
 
-        [Required]//making this propety
+        
         [RegularExpression(@"^[0 - 9]{5}$")]
         public string postalCode { get; set; }
     }

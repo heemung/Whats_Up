@@ -16,35 +16,38 @@
     <script>
         function initMap() {
 
-            var geoLat = '@ViewBag.geoLat';
-            var geoLong = '@ViewBag.geoLong';
+            var geoLat = @ViewBag.GoogleLat;
+            var geoLong = @ViewBag.GoogleLong;
 
-            if (geoLat != null && geoLong != null)
+            if (GoogleLat != null && GoogleLong != null)
             {
-                var userLocation = { lat: geoLat, lng: geoLong }
+                var userLocation = { lat: GoogleLat, lng: GoogleLong }
                 var map = new google.maps.Map(
                     document.getElementById('map'), { zoom: 3, center: userLocation });
 
-                    @foreach(var outerArray in ViewBag.Coordinates)
-                     {
-                        if (outerArray["info"]["satcount"].Value != 0)
+                    @if (ViewBag.Coordinates != null)
+                    {
+                        foreach (var outerArray in ViewBag.Coordinates)
                         {
-                            foreach (var innerArray in outerArray["above"])
+                            if (outerArray["info"]["satcount"].Value != 0)
                             {
-                                  double latitude = innerArray["satlat"].Value;
-                                  double longitude = innerArray["satlng"].Value;
+                                foreach (var innerArray in outerArray["above"])
+                                {
+                                    double latitude = innerArray["satlat"].Value;
+                                    double longitude = innerArray["satlng"].Value;
                                     <text>
-                var satPosition = { lat: @latitude, lng: @longitude }
-                var satMarker = new google.maps.Marker({
-                    position: satPosition,
-                    map: map
-                })
+                                    var satPosition = { lat: @latitude, lng: @longitude }
+                                    var satMarker = new google.maps.Marker({
+                                    position: satPosition,
+                                    map: map
+                                    })
                                     </text>
 
+                                    }
+                                }
                             }
                         }
-                     }
-            }
+                    }
         }
 
 
