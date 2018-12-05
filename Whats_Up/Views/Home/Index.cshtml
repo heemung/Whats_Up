@@ -7,50 +7,15 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
+<form action="/" method="post">
+    <label for="zcode" style="color:gold">Enter Email</label>
+    <input type="text" id="emaildata" name="Email Data" placeholder="Enter Zip Code.." required>
+    <button type="submit">Submit</button>
+</form>
+
+
 <img src="https://scitechdaily.com/images/Image-of-the-Nile-at-Night-from-the-International-Space-Station.jpg" alt="World View" />
 
-@*.earth {
-      width: 300px;
-      height: 300px;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      overflow: hidden;
-      border-radius: 50%;
-      box-shadow: 0 0 20px 20px #000 inset, 0 0 20px 2px #000;
-    }
-
-    .earth:after {
-      position: absolute;
-      content: "";
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      box-shadow: -20px -20px 50px 2px #000 inset;
-      border-radius: 50%;
-    }
-
-    .earth > div {
-      width: 200%;
-      height: 100%;
-      -webkit-animation: spin 30s linear alternate infinite;
-      background: url(https://web.opendrive.com/api/v1/download/file.json/NTlfMTQ1MTkzNDhf?inline=1);
-      /*orginal image at https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earthmap1000x500compac.jpg/640px-Earthmap1000x500compac.jpg */
-      background-size: cover;
-    }
-    @@keyframes spin {
-      from {
-        transform: translateX(-1%);
-    }
-     to {
-        transform: translateX(-50%);
-      }
-    }
-*@
 <!-- Button to open the modal -->
 <button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
 
@@ -84,7 +49,7 @@
                 }
             </script>
 
-            
+
             <label for="scat" style="color:gold">Satellite Category</label>
             <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
                 <option value="33">XM and Sirius</option>
@@ -135,14 +100,15 @@
                 <option value="45">Celestis</option>
                 <option value="1">Brightest</option>
                 <option value="35">Beidou Navigation System</option>
-             
+
             </select>
-          
+
 
             <label for="regemail" style="color:gold">Email</label>
             <select id="regemail" name="email">
                 <option value="registeremail">I want to enter email to save satellites</option>
                 <option value="noregemail">I don't want to enter email to save satellites</option>
+
             </select>
 
 
@@ -166,51 +132,6 @@
         }
     </script>
 
-    
 
-   
-    @*
-            <link href="~/Content/StyleSheetForm.css" rel="stylesheet" type="text/css" />
-            <h2 style="color:gold"><u>Let's See What's Up!</u></h2>
-
-            <div>
-                <form action="/Satellite/GetSatCat" method="post" class="form-bg">
-                    <label for="zcode" style="color:gold">Zip Code</label>
-                    <input type="text" id="zcode" name="Zipcode" placeholder="Enter Zip Code.." required>
-
-
-                    <div class="slidecontainer">
-                        <label for="radfrom" style="color:gold">Radius From Zip Code</label>
-                        <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
-                        <p>Value:<span id="slider"></span></p>
-                    </div>
-
-                    <script>
-                    var slider = document.getElementById("radfrom");
-                    var output = document.getElementById("slider");
-                    output.innerHTML = slider.value; // Display the default slider value
-
-                    // Update the current slider value (each time you drag the slider handle)
-                    slider.oninput = function() {
-                    output.innerHTML = this.value;
-                    }
-                    </script>
-
-                    @*<label for="radfrom" style="color:gold">Radius From Zip Code</label>
-                <input type="range" id="radfrom" name="radiusfromzip" min="1" max="20" value="10">
-
-        <label for="scat" style="color:gold">Satellite Category</label>
-        <input type="text" id="scat" name="satellitecategory" placeholder="Enter Satellite Category">
-
-        <label for="regemail" style="color:gold">Email</label>
-        <select id="regemail" name="email">
-            <option value="registeremail">I want to enter email to save satellites</option>
-            <option value="noregemail">I don't want to enter email to save satellites</option>
-        </select>
-        <br />
-        <input type="submit" value="Submit">
-                </form>
-            </div>
-    *@
 
 
