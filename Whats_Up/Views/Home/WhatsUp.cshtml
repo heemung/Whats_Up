@@ -15,14 +15,14 @@
     <div id="map"></div>
     <script>
         function initMap() {
-            var lat = document.getElementById("postalCode").innerHTML
+            // var lat = document.getElementById("postalCode").innerHTML
             var uluru = { lat: -25.344, lng: 131.036 };
             var uluru2 = { lat: 42, lng: -83 };
-            
+
 
             var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 4, center: uluru });
-        
+                document.getElementById('map'), { zoom: 2, center: uluru2 });
+
             var marker = new google.maps.Marker({
                 position: uluru,
                 map: map
@@ -31,26 +31,33 @@
                 position: uluru2,
                 map: map
             })
-                @{
 
-                            var ViewThing = ViewBag.Coordinates;
 
-                            if (ViewThing["info"]["satcount"].Value<int>() != 0)
+
+                    @foreach(var outerArray in ViewBag.Coordinates)
+                     {
+                        if (outerArray["info"]["satcount"].Value != 0)
+                        {
+                            foreach (var innerArray in outerArray["above"])
                             {
-                                for (int x = 0; x <= ViewThing["info"]["satcount"]; x++)
-                                {
-                                    
+                                  double latitude = innerArray["satlat"].Value; 
+                                  double longitude = innerArray["satlng"].Value;
                                     <text>
-                                    uluru3 = { lat:  @{ ViewThing["satlat"].Value<double>(); } lng: @{ ViewThing["satlng"].Value<double>(); }
-                                        satMarker = new google.maps.Marker({ position: uluru3, map: map})
-
+                                    var satPosition = { lat: @latitude, lng: @longitude }
+                                    var satMarker = new google.maps.Marker({
+                                    position: satPosition,
+                                    map: map
+                                    })
                                     </text>
 
-                                }
                             }
-                 }
                         }
+                     } 
         }
+        
+
+
+
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">

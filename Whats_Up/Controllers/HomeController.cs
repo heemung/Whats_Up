@@ -25,8 +25,6 @@ namespace Whats_Up.Controllers
         {
 
             ViewBag.Message = "Your application description page.";
-
-            
             ViewBag.GoogleKey = GoogleKey;
 
             return View();
