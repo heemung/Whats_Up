@@ -15,10 +15,13 @@
     <div id="map"></div>
     <script>
         function initMap() {
+            var lat = document.getElementById("postalCode").innerHTML
             var uluru = { lat: -25.344, lng: 131.036 };
             var uluru2 = { lat: 42, lng: -83 };
             var map = new google.maps.Map(
                 document.getElementById('map'), { zoom: 4, center: uluru });
+
+            foreach()
             var marker = new google.maps.Marker({
                 position: uluru,
                 map: map
@@ -41,3 +44,4 @@
     <input type="submit" value="Submit" />
 </form>
 <div>@ViewBag.Testing</div>
+<div>@ViewBag.Coordinates</div>

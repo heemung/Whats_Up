@@ -51,6 +51,7 @@
         transform: translateX(-50%);
       }
     }
+<<<<<<< HEAD
 *@
 
 <h2 style="color:gold"><u>Contact Form</u></h2>
@@ -75,3 +76,20 @@
         <input type="submit" value="Submit">
     </form>
 </div>
+=======
+    *@
+
+<form action="/Satellite/GetSatCat" method="post">
+    <label>Enter Location:</label><input type="text" name="userlocation" placeholder="Enter Zip Code" required />
+    <label>Range</label><input type="range" min="10" max="100" value="10" class="slider" id="searchRange" name="userlocation" required />
+    <br />
+    <br />
+    <input type="radio" name="emailSelect" value="hasEmail" />Select A Email Address<span>  </span>
+    <input type="radio" name="emailSelect" value="newEmail" />Create A Email Address<span>  </span>
+    <input type="radio" name="emailSelect" value="dontTrack" checked="checked" />Don't Track<br />
+    <label>Enter Email Address</label><input type="email" name="enterEmail" placeholder="john.doe@gmail.com" hidden="hidden" />
+    <label>Enter Email Address</label><input type="email" name="enterEmail" placeholder="john.doe@gmail.com" hidden="hidden" />
+
+
+</form>
+>>>>>>> 88f21eec18179ad8d610444a80bd2ecd4d075bc8

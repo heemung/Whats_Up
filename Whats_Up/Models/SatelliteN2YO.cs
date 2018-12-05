@@ -21,9 +21,9 @@ namespace Whats_Up.Models
         public string SatName { get; set; }
         public string Designator { get; set; }
         public string LaunchDate { get; set; }
-        public int? SatLat { get; set; }
-        public int? SatLng { get; set; }
-        public int? SatAlt { get; set; }
+        public double? SatLat { get; set; }
+        public double? SatLng { get; set; }
+        public double? SatAlt { get; set; }
         public string AtTime{get; set;}
 
     }

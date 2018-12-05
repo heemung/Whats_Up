@@ -14,6 +14,7 @@ namespace Whats_Up.Controllers
 {
     public class SatelliteController : Controller
     {
+        public static JArray SatCoordinates;
 
         private DataContext db = new DataContext();
         // GET: Satellite
@@ -23,15 +24,21 @@ namespace Whats_Up.Controllers
         }
 
         //getting user selections for satellites categories 
-        public ActionResult GetSatCat()
+        public void GetSatCat()
         {
+            string latitude = "42.327501";
+            string longitude = "-83.048981";
+            //HomeController home = new HomeController();
+            //latitude = HomeController.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][0].Value<string>();
+            //longitude = HomeController.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][1].Value<string>();
+
+
             /////////////////goes in method
             List<string> userListSelection = new List<string>();
             /////////////////
             //api key
             string N2YO = WebConfigurationManager.AppSettings["N2YO"];
-            string latitude = "42.327501";
-            string longitude = "-83.048981";
+
 
             Dictionary<string, int> Test = AddingCatsToList();
 
@@ -89,7 +96,7 @@ namespace Whats_Up.Controllers
                     else
                     {
                         ViewBag.Error = "Could not get HTTP Reponse";
-                        return View("/Shared/Error");
+                        //return View("/Shared/Error");
                     }
 
                 }
@@ -97,14 +104,15 @@ namespace Whats_Up.Controllers
                 //sends jarray to database method
                 ToDatabase(jSpaceObjects);
                 ViewBag.TableSatData = jSpaceObjects;
+                SatCoordinates = jSpaceObjects;
                 //TempData["DataToBase"] = jSpaceObjects;
-                return View();
+                //return View();
                 //return View("Index");
             }
             else
             {
                 ViewBag.SamePageError = "Error. Need to select 1 category";
-                return View();
+                //return View();
             }
         }
         //taking the Jarray to push to DB
@@ -133,9 +141,9 @@ namespace Whats_Up.Controllers
                         dbObj.SatName = satData["satname"].Value<string>();
                         dbObj.Designator = satData["intDesignator"].Value<string>();
                         dbObj.LaunchDate = satData["launchDate"].Value<string>();
-                        dbObj.SatLat = satData["satlat"].Value<int>();
-                        dbObj.SatLng = satData["satlng"].Value<int>();
-                        dbObj.SatAlt = satData["satalt"].Value<int>();
+                        dbObj.SatLat = satData["satlat"].Value<double>();
+                        dbObj.SatLng = satData["satlng"].Value<double>();
+                        dbObj.SatAlt = satData["satalt"].Value<double>();
                         dbObj.AtTime = atTime;
                         db.Entry(dbObj).State = EntityState.Added;
                         db.SaveChanges();
