@@ -13,7 +13,8 @@ namespace Whats_Up.Controllers
 {
     public class HomeController : Controller
     {
-        public JObject geoLocation;
+        public static string geoLat;
+        public static string geoLong;
         public string BingKey = WebConfigurationManager.AppSettings["Mapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
         public ActionResult Index()
@@ -23,16 +24,14 @@ namespace Whats_Up.Controllers
 
         public ActionResult WhatsUp()
         {
-            if(geoLocation == null)
-            {
-                ViewBag.geoLat = null;
-                ViewBag.geoLong = null;
-            }
+
             ViewBag.GoogleKey = GoogleKey;
             return View();
         }
         public ActionResult InputLocation(User address)
         {
+            JObject JParser = new JObject();
+
             string URL = "http://dev.virtualearth.net/REST/v1/Locations/US/adminDistrict/postalCode/locality/addressLine?" +
                 "addressLine="+address.addressLine+"&postalCode="+address.postalCode+"&maxResults=5&key="+BingKey;
             HttpWebRequest request = WebRequest.CreateHttp(URL);
@@ -42,15 +41,15 @@ namespace Whats_Up.Controllers
             {
                 StreamReader reader = new StreamReader(response.GetResponseStream());
                 string output = reader.ReadToEnd();
-                JObject JParser = JObject.Parse(output);
-
-                geoLocation = JParser;
-
+                JParser = JObject.Parse(output);
             }
 
-            ViewBag.Testing = geoLocation;
+            geoLat = JParser["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0].Value<string>();
+            geoLong = JParser["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1].Value<string>();
             SatelliteController start = new SatelliteController();
             start.GetSatCat();
+            ViewBag.GoogleLat = double.Parse(geoLat);
+            ViewBag.GoogleLong = double.Parse(geoLong);
             ViewBag.Coordinates = start.SatCoordinates;
 
             return View("WhatsUp");
