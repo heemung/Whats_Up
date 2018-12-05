@@ -8,6 +8,7 @@ namespace Whats_Up.Models
 {
     public class Favorite
     {
+        //Making changes baby!
         [Key]
         public int FavID { get; set; }
 
