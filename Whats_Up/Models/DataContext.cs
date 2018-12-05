@@ -16,6 +16,7 @@ namespace Whats_Up.Models
         public DbSet<SatelliteN2YO> SatelliteN2YOs { get; set; }
         public DbSet<User> Users { get; set; }
         //public DbSet<Favorite> Favorites {get; set;}
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //fluent API
@@ -25,7 +26,8 @@ namespace Whats_Up.Models
             modelBuilder.Entity<User>().ToTable("Users");
             //modelBuilder.Entity<Favorite>().ToTable("Favorites");
 
+
         }
-        
+
     }
 }
