@@ -14,7 +14,7 @@ namespace Whats_Up.Controllers
 {
     public class SatelliteController : Controller
     {
-        public static JArray SatCoordinates;
+        public JArray SatCoordinates;
 
         private DataContext db = new DataContext();
         // GET: Satellite

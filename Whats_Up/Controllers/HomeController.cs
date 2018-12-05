@@ -27,7 +27,7 @@ namespace Whats_Up.Controllers
             start.GetSatCat();
             ViewBag.Message = "Your application description page.";
 
-            ViewBag.Coordinates = SatelliteController.SatCoordinates;
+            ViewBag.Coordinates = start.SatCoordinates;
             ViewBag.GoogleKey = GoogleKey;
 
             return View();
