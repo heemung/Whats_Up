@@ -15,27 +15,46 @@
     <div id="map"></div>
     <script>
         function initMap() {
-            var lat = document.getElementById("postalCode").innerHTML
-            var uluru = { lat: -25.344, lng: 131.036 };
-            var uluru2 = { lat: 42, lng: -83 };
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 4, center: uluru });
 
-            foreach()
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map
-            });
-            var marker2 = new google.maps.Marker({
-                position: uluru2,
-                map: map
-            })
+            var geoLat = '@ViewBag.geoLat';
+            var geoLong = '@ViewBag.geoLong';
+
+            if (geoLat != null && geoLong != null)
+            {
+                var userLocation = { lat: geoLat, lng: geoLong }
+                var map = new google.maps.Map(
+                    document.getElementById('map'), { zoom: 3, center: userLocation });
+
+                    @foreach(var outerArray in ViewBag.Coordinates)
+                     {
+                        if (outerArray["info"]["satcount"].Value != 0)
+                        {
+                            foreach (var innerArray in outerArray["above"])
+                            {
+                                  double latitude = innerArray["satlat"].Value;
+                                  double longitude = innerArray["satlng"].Value;
+                                    <text>
+                var satPosition = { lat: @latitude, lng: @longitude }
+                var satMarker = new google.maps.Marker({
+                    position: satPosition,
+                    map: map
+                })
+                                    </text>
+
+                            }
+                        }
+                     }
+            }
         }
+
+
+
+
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
-    
+
 </body>
 </html>
 <form action="/Home/InputLocation">
@@ -45,3 +64,5 @@
 </form>
 <div>@ViewBag.Testing</div>
 <div>@ViewBag.Coordinates</div>
+
+@* var lat = document.getElementById("postalCode").innerHTML*@
