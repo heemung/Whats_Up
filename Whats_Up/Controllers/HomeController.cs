@@ -23,10 +23,12 @@ namespace Whats_Up.Controllers
 
         public ActionResult WhatsUp()
         {
-
-            ViewBag.Message = "Your application description page.";
+            if(geoLocation == null)
+            {
+                ViewBag.geoLat = null;
+                ViewBag.geoLong = null;
+            }
             ViewBag.GoogleKey = GoogleKey;
-
             return View();
         }
         public ActionResult InputLocation(User address)
