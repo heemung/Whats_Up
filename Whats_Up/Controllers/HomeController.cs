@@ -13,7 +13,7 @@ namespace Whats_Up.Controllers
 {
     public class HomeController : Controller
     {
-        public static JObject geoLocation;
+        public JObject geoLocation;
         public string BingKey = WebConfigurationManager.AppSettings["Mapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
         public ActionResult Index()
@@ -23,11 +23,10 @@ namespace Whats_Up.Controllers
 
         public ActionResult WhatsUp()
         {
-            SatelliteController start = new SatelliteController();
-            start.GetSatCat();
+
             ViewBag.Message = "Your application description page.";
 
-            ViewBag.Coordinates = SatelliteController.SatCoordinates;
+            
             ViewBag.GoogleKey = GoogleKey;
 
             return View();
@@ -46,8 +45,14 @@ namespace Whats_Up.Controllers
                 JObject JParser = JObject.Parse(output);
 
                 geoLocation = JParser;
-                ViewBag.Testing = JParser;
+
             }
+
+            ViewBag.Testing = geoLocation;
+            SatelliteController start = new SatelliteController();
+            start.GetSatCat();
+            ViewBag.Coordinates = start.SatCoordinates;
+
             return View("WhatsUp");
         }
 
