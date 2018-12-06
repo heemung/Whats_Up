@@ -235,14 +235,14 @@ namespace Whats_Up.Controllers
                 { "BeidouNavigationSystem",  35}
             };
 
-            List<CheckBoxes> boxItem = new List<CheckBoxes>(new CheckBoxes { (Name = "BeidouNavigationSystem", Value = "35", IsCheck = false) });
+            //List<CheckBoxes> boxItem = new List<CheckBoxes>(new CheckBoxes { (Name = "BeidouNavigationSystem", Value = "35", IsCheck = false) });
             CheckBoxes boxValue = new CheckBoxes();
 
             foreach (KeyValuePair<string, int> k in satCatDic)
             {
-                userListSelection.Add(k.Key);
+                //userListSelection.Add(k.Key);
             }
-            boxItem.Add(boxValue.Name)
+            //boxItem.Add(boxValue.Name)
 
             return satCatDic;
         }
