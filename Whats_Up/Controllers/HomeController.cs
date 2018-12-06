@@ -25,6 +25,23 @@ namespace Whats_Up.Controllers
         public ActionResult WhatsUp()
         {
             ViewBag.GoogleKey = GoogleKey;
+
+            List<CheckBoxes> boxItem = new List<CheckBoxes>()
+            {
+
+                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck = false},
+                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck = true},
+            };
+
+            List<CheckBoxes> boxItem2 = new List<CheckBoxes>()
+            {
+
+                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck2 = ""},
+                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck2 = "checked"},
+            };
+
+            ViewBag.ClaytonsBag = boxItem;
+            ViewBag.ClaytonsOtherBag = boxItem2;
             return View();
         }
 
