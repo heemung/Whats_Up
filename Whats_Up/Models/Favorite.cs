@@ -17,7 +17,5 @@ namespace Whats_Up.Models
 
         [Required]
         public int SatId { get; set; }
-
-        public static string pointless = "This string doesn't do anything";
     }
 }
