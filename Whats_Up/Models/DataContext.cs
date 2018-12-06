@@ -14,7 +14,7 @@ namespace Whats_Up.Models
         }
 
         public DbSet<SatelliteN2YO> SatelliteN2YOs { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         //public DbSet<Favorite> Favorites {get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace Whats_Up.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<SatelliteN2YO>().ToTable("SatelliteN2YOs");
-            modelBuilder.Entity<User>().ToTable("Users");
+            //modelBuilder.Entity<User>().ToTable("Users");
             //modelBuilder.Entity<Favorite>().ToTable("Favorites");
 
 

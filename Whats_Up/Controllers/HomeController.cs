@@ -15,7 +15,7 @@ namespace Whats_Up.Controllers
     {
         public static string geoLat;
         public static string geoLong;
-        public string BingKey = WebConfigurationManager.AppSettings["Mapper"];
+        public string GeoKey = WebConfigurationManager.AppSettings["Mapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
         public ActionResult Index()
         {
@@ -27,11 +27,40 @@ namespace Whats_Up.Controllers
             ViewBag.GoogleKey = GoogleKey;
             return View();
         }
+
+        public string AddressForGoogle(string address)
+        {
+            if (address.Contains(' '))
+            {
+                string addressForLink = address;
+                char[] tempForLoop = new char[addressForLink.Length];
+
+                for (int i = 0; i < addressForLink.Length; i++)
+                {
+                    if (addressForLink[i] == ' ')
+                    {
+                        tempForLoop[i] = '+';
+                    }
+                    else
+                    {
+                        tempForLoop[i] = addressForLink[i];
+                    }
+
+                }
+                string temp = new string(tempForLoop);
+                return temp;
+            }
+            else
+            {
+                return address;
+            }
+        }
         public ActionResult InputLocation(User address)
         {
+            string formattedAddress = AddressForGoogle(address.AddressLine);
             JObject JParser = new JObject();
 
-            string URL = "https://maps.googleapis.com/maps/api/geocode/json?address="+address.addressLine+"&key=" + GoogleKey;
+            string URL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ formattedAddress + "&key=" + GeoKey;
             HttpWebRequest request = WebRequest.CreateHttp(URL);
             request.UserAgent = "Mozilla / 5.0(Windows NT 6.1; Win64; x64; rv: 47.0) Gecko / 20100101 Firefox / 47.0";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();

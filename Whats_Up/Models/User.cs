@@ -12,10 +12,10 @@ namespace Whats_Up.Models
         [RegularExpression(@"^[0-9]{2,5} [A-Z][a-z]{1,15}(Ave|St|Ct|Blvd|Rd|Way|Ln|Dr|Ter|Pl|Ct)$")]
         public string Email { get; set; }
 
-        public string addressLine { get; set; }
+        public string AddressLine { get; set; }
 
         
         [RegularExpression(@"^[0 - 9]{5}$")]
-        public string postalCode { get; set; }
+        public string PostalCode { get; set; }
     }
 }
