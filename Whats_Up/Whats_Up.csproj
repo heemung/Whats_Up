@@ -169,6 +169,7 @@
       <DependentUpon>201812061619467_AddUserandFavs.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CheckBoxes.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Mapper.cs" />
