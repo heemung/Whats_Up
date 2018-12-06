@@ -20,18 +20,31 @@ namespace Whats_Up.Controllers
         {
             return View();
         }
-        /*     public ActionResult AddUser(User registeredUser)
+             public ActionResult AddUser(User registeredUser)
              {
-
-                 DataContext ORM = new DataContext();
+                DataContext ORM = new DataContext();
+                List<User> userList = ORM.Users.ToList<User>();
+             foreach(var x in userList)
+             {
+                if(registeredUser.Email == x.Email)
+                {
+                    List<Favorite> userFavorite = new List<Favorite>();
+                    foreach (var y in ORM.Favorites.Where(y => y.Email == registeredUser.Email))
+                    {
+                        userFavorite.Add(y);
+                    }
+                    ViewBag.Favorites = userFavorite;
+                        return View("../Home/Index");
+                }
+             }
                  if (ModelState.IsValid)
                  {
-                     ORM.Users.Add(registeredUser);
-                     ORM.SaveChanges();
+                    ORM.Entry(registeredUser).State = EntityState.Added;
+                    ORM.SaveChanges();
 
                  }
-                 return View("/Home/Index");
+                 return View("../Home/Index");
                 
-    } */
+             } 
     }
 }
