@@ -24,7 +24,6 @@ namespace Whats_Up.Controllers
 
         public ActionResult WhatsUp()
         {
-
             ViewBag.GoogleKey = GoogleKey;
             return View();
         }
@@ -32,8 +31,7 @@ namespace Whats_Up.Controllers
         {
             JObject JParser = new JObject();
 
-            string URL = "http://dev.virtualearth.net/REST/v1/Locations/US/adminDistrict/postalCode/locality/addressLine?" +
-                "addressLine="+address.addressLine+"&postalCode="+address.postalCode+"&maxResults=5&key="+BingKey;
+            string URL = "https://maps.googleapis.com/maps/api/geocode/json?address="+address.addressLine+"&key=" + GoogleKey;
             HttpWebRequest request = WebRequest.CreateHttp(URL);
             request.UserAgent = "Mozilla / 5.0(Windows NT 6.1; Win64; x64; rv: 47.0) Gecko / 20100101 Firefox / 47.0";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -42,10 +40,11 @@ namespace Whats_Up.Controllers
                 StreamReader reader = new StreamReader(response.GetResponseStream());
                 string output = reader.ReadToEnd();
                 JParser = JObject.Parse(output);
-            }
 
-            geoLat = JParser["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0].Value<string>();
-            geoLong = JParser["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1].Value<string>();
+            }
+            geoLat = JParser["results"][0]["geometry"]["location"]["lat"].Value<string>();
+            geoLong = JParser["results"][0]["geometry"]["location"]["lng"].Value<string>();
+
             SatelliteController start = new SatelliteController();
             start.GetSatCat();
             ViewBag.GoogleLat = double.Parse(geoLat);

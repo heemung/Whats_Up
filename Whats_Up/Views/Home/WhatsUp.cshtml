@@ -19,21 +19,22 @@
             var geoLat = @ViewBag.GoogleLat;
             var geoLong = @ViewBag.GoogleLong;
 
-            if (geoLat != null && geoLong != null) {
-            
-                var userLocation = { lat: geoLat, lng: geoLong }
+            if (GoogleLat != null && GoogleLong != null)
+            {
+                var userLocation = { lat: GoogleLat, lng: GoogleLong }
                 var map = new google.maps.Map(
                     document.getElementById('map'), { zoom: 3, center: userLocation });
-                @if (ViewBag.Coordinates != null)
-                {
-                    foreach (var outerArray in ViewBag.Coordinates)
+
+                    @if (ViewBag.Coordinates != null)
                     {
-                        if (outerArray["info"]["satcount"].Value != 0)
+                        foreach (var outerArray in ViewBag.Coordinates)
                         {
-                            foreach (var innerArray in outerArray["above"])
+                            if (outerArray["info"]["satcount"].Value != 0)
                             {
-                                double latitude = innerArray["satlat"].Value;
-                                double longitude = innerArray["satlng"].Value;
+                                foreach (var innerArray in outerArray["above"])
+                                {
+                                    double latitude = innerArray["satlat"].Value;
+                                    double longitude = innerArray["satlng"].Value;
                                     <text>
                                     var satPosition = { lat: @latitude, lng: @longitude }
                                     var satMarker = new google.maps.Marker({
@@ -42,11 +43,11 @@
                                     })
                                     </text>
 
+                                    }
+                                }
                             }
                         }
                     }
-                 }
-            }
         }
 
 

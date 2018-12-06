@@ -101,6 +101,7 @@ namespace Whats_Up.Controllers
                 //sends jarray to database method
                 ToDatabase(jSpaceObjects);
 
+                //testing location
                 ViewBag.TableSatData = jSpaceObjects;
                 SatCoordinates = jSpaceObjects;
                 //return View();
