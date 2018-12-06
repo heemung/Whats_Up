@@ -8,14 +8,15 @@ namespace Whats_Up.Models
 {
     public class User
     {
+
+        //[RegularExpression(@"^[0-9]{2,5} [A-Z][a-z]{1,15}(Ave|St|Ct|Blvd|Rd|Way|Ln|Dr|Ter|Pl|Ct)$")]
         [Key]
-        [RegularExpression(@"^[0-9]{2,5} [A-Z][a-z]{1,15}(Ave|St|Ct|Blvd|Rd|Way|Ln|Dr|Ter|Pl|Ct)$")]
         public string Email { get; set; }
 
         public string AddressLine { get; set; }
 
         
-        [RegularExpression(@"^[0 - 9]{5}$")]
+        //[RegularExpression(@"^[0 - 9]{5}$")]
         public string PostalCode { get; set; }
     }
 }
