@@ -23,7 +23,8 @@
             {
                 var userLocation = { lat: geoLat, lng: geoLong }
                 var map = new google.maps.Map(
-                    document.getElementById('map'), { zoom: 3, center: userLocation });
+                    document.getElementById('map'), { zoom: 4, center: userLocation });
+                var userMarker = new google.maps.Marker({position: userLocation, map: map})
 
                     @if (ViewBag.Coordinates != null)
                     {
@@ -54,10 +55,10 @@
 
 
     </script>
-    <script async defer
+    <script 
+            async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
-
 </body>
 </html>
 <form action="/Home/InputLocation">
@@ -67,5 +68,4 @@
 </form>
 <div>@ViewBag.Testing</div>
 <div>@ViewBag.Coordinates</div>
-
 @* var lat = document.getElementById("postalCode").innerHTML*@

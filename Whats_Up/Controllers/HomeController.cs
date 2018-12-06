@@ -15,7 +15,7 @@ namespace Whats_Up.Controllers
     {
         public static string geoLat;
         public static string geoLong;
-        public string GeoKey = WebConfigurationManager.AppSettings["Mapper"];
+        public string GeoKey = WebConfigurationManager.AppSettings["GMapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
         public ActionResult Index()
         {
