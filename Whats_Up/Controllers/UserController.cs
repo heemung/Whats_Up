@@ -20,17 +20,18 @@ namespace Whats_Up.Controllers
         {
             return View();
         }
-        public ActionResult AddUser(User registeredUser)
-        {
+        /*     public ActionResult AddUser(User registeredUser)
+             {
 
-            DataContext ORM = new DataContext();
-            if (ModelState.IsValid)
-            {
-                ORM.Users.Add(registeredUser);
-                ORM.SaveChanges();
+                 DataContext ORM = new DataContext();
+                 if (ModelState.IsValid)
+                 {
+                     ORM.Users.Add(registeredUser);
+                     ORM.SaveChanges();
+
+                 }
+                 return View("/Home/Index");
                 
-            }
-            return View("/Home/Index");
-        }
+    } */
     }
 }

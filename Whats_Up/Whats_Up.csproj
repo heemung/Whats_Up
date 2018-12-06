@@ -156,10 +156,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapperController.cs" />
     <Compile Include="Controllers\SatelliteController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataContext.cs" />
+    <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\SatelliteN2YO.cs" />
     <Compile Include="Models\SatelliteST.cs" />
