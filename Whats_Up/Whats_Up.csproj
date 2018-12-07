@@ -168,6 +168,10 @@
     <Compile Include="Migrations\201812061619467_AddUserandFavs.Designer.cs">
       <DependentUpon>201812061619467_AddUserandFavs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812071555556_fixedb.cs" />
+    <Compile Include="Migrations\201812071555556_fixedb.Designer.cs">
+      <DependentUpon>201812071555556_fixedb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\201812062356239_changedfavoritemodel.cs" />
     <Compile Include="Migrations\201812062356239_changedfavoritemodel.Designer.cs">
@@ -250,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812062356239_changedfavoritemodel.resx">
       <DependentUpon>201812062356239_changedfavoritemodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812071555556_fixedb.resx">
+      <DependentUpon>201812071555556_fixedb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
