@@ -150,6 +150,19 @@ namespace Whats_Up.Controllers
 
             return satCatDic;
         }
+        
+        public void BigCategories()
+        {
+            List<String> Astronomy = new List<string>();
+            List<String> AtmosphericStudies = new List<string>();
+            List<String> Communications = new List<string>();
+            List<String> Navigation = new List<string>();
+            List<String> Reconaissance = new List<string>();
+            List<String> RemoteSensing = new List<string>();
+            List<String> SearchRescue = new List<string>();
+            List<String> SpaceExploration = new List<string>();
+            List<String> Weather = new List<string>();
+        }
 
         //better to put in database?
         public List<CheckBoxes> AddingCatsToList()
@@ -206,6 +219,7 @@ namespace Whats_Up.Controllers
 
 
             }
+
             return favBox;
         }
     }

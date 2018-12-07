@@ -14,6 +14,7 @@ namespace Whats_Up.Controllers
 {
     public class UserController : Controller
     {
+        HomeController hometoinput = new HomeController();
 
         // GET: User
         public ActionResult Index()
@@ -22,9 +23,10 @@ namespace Whats_Up.Controllers
         }
              public ActionResult AddUser(User registeredUser)
              {
-                DataContext ORM = new DataContext();
+                
+            DataContext ORM = new DataContext();
                 List<User> userList = ORM.Users.ToList<User>();
-             foreach(var x in userList)
+                foreach(var x in userList)
              {
                 if(registeredUser.Email == x.Email)
                 {
@@ -43,6 +45,7 @@ namespace Whats_Up.Controllers
                     ORM.SaveChanges();
 
                  }
+                 
                  return View("../Home/Index");
                 
              } 
