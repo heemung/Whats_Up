@@ -10,8 +10,6 @@
     </style>
 </head>
 <body>
-    <h3>My Google Maps Demo</h3>
-
     <div id="map"></div>
     <script>
         function initMap() {
@@ -58,6 +56,11 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
+    <form action="/Home/InputLocation">
+        <input name="addressLine" type="text" placeholder="Enter your address" />
+        <input name="postalCode" type="text" placeholder="Enter your Zip Code" />
+        <input type="submit" value="Submit" />
+    </form>
 
 
     <div class="jumbotron">
@@ -68,9 +71,9 @@
         <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
     </div>
 
-    <form action="/" method="post">
+    <form action="/User/AddUser" method="post">
         <label for="zcode" style="color:gold">Enter Email</label>
-        <input type="text" id="emaildata" name="Email Data" placeholder="Enter Zip Code.." required>
+        <input type="text" name="Email"/>
         <button type="submit">Submit</button>
     </form>
 
@@ -111,59 +114,68 @@
                 </script>
                 <input type="checkbox" name="Test" value="1" />
 
+               @{
+                    foreach (var y in @ViewBag.ClaytonsBag)
+                    {
+                        <label>@y.Name</label><input @y.IsCheck
+                                                     name="@y.Name"
+                                                     type="checkbox"
+                                                     value="@y.Value" />
+                    }
+                } 
 
-                <label for="scat" style="color:gold">Satellite Category</label>
-                <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
-                    <option value="33">XM and Sirius</option>
-                    <option value="37">Westford Needles</option>
-                    <option value="3">Weather</option>
-                    <option value="34">TV</option>
-                    <option value="41">Tsiklon</option>
-                    <option value="36">Yaogan</option>
-                    <option value="42">Tsikada</option>
-                    <option value="43">Tselina</option>
-                    <option value="9">Tracking and Data Relay Satellite System</option>
-                    <option value="39">Strela</option>
-                    <option value="26">Space & EarthScience</option>
-                    <option value="7">Search & Rescue</option>
-                    <option value="23">Satellite-Based Augmentation System</option>
-                    <option value="25">Russian LEO Navigation</option>
-                    <option value="13">Raduga</option>
-                    <option value="18">Radar Calibration</option>
-                    <option value="47">QZSS</option>
-                    <option value="38">Parus</option>
-                    <option value="16">Orbcomm</option>
-                    <option value="43">O3BNetworks</option>
-                    <option value="4">NOAA</option>
-                    <option value="24">Navy Navigation Satellite System</option>
-                    <option value="14">Molniya</option>
-                    <option value="30">Military</option>
-                    <option value="49">Lemur</option>
-                    <option value="2">ISS</option>
-                    <option value="46">IRNSS</option>
-                    <option value="15">Iridium</option>
-                    <option value="11">Intelsat</option>
-                    <option value="12">Gorizont</option>
-                    <option value="40">Gonets</option>
-                    <option value="21">GlonassOperational</option>
-                    <option value="17">Globalstar</option>
-                    <option value="20">Global Positioning System(GPS)Operational</option>
-                    <option value="50">Global Positioning System(GPS)Constellation</option>
-                    <option value="10">Geostationary</option>
-                    <option value="27">Geodetic</option>
-                    <option value="22">Galileo</option>
-                    <option value="48">Flock</option>
-                    <option value="19">Experimental</option>
-                    <option value="28">Engineering</option>
-                    <option value="29">Educational</option>
-                    <option value="6">Earth Resources</option>
-                    <option value="8">Disaster Monitoring</option>
-                    <option value="32">Cube Sats</option>
-                    <option value="45">Celestis</option>
-                    <option value="1">Brightest</option>
-                    <option value="35">Beidou Navigation System</option>
+                @*<label for="scat" style="color:gold">Satellite Category</label>
+                    <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
+                        <option value="33">XM and Sirius</option>
+                        <option value="37">Westford Needles</option>
+                        <option value="3">Weather</option>
+                        <option value="34">TV</option>
+                        <option value="41">Tsiklon</option>
+                        <option value="36">Yaogan</option>
+                        <option value="42">Tsikada</option>
+                        <option value="43">Tselina</option>
+                        <option value="9">Tracking and Data Relay Satellite System</option>
+                        <option value="39">Strela</option>
+                        <option value="26">Space & EarthScience</option>
+                        <option value="7">Search & Rescue</option>
+                        <option value="23">Satellite-Based Augmentation System</option>
+                        <option value="25">Russian LEO Navigation</option>
+                        <option value="13">Raduga</option>
+                        <option value="18">Radar Calibration</option>
+                        <option value="47">QZSS</option>
+                        <option value="38">Parus</option>
+                        <option value="16">Orbcomm</option>
+                        <option value="43">O3BNetworks</option>
+                        <option value="4">NOAA</option>
+                        <option value="24">Navy Navigation Satellite System</option>
+                        <option value="14">Molniya</option>
+                        <option value="30">Military</option>
+                        <option value="49">Lemur</option>
+                        <option value="2">ISS</option>
+                        <option value="46">IRNSS</option>
+                        <option value="15">Iridium</option>
+                        <option value="11">Intelsat</option>
+                        <option value="12">Gorizont</option>
+                        <option value="40">Gonets</option>
+                        <option value="21">GlonassOperational</option>
+                        <option value="17">Globalstar</option>
+                        <option value="20">Global Positioning System(GPS)Operational</option>
+                        <option value="50">Global Positioning System(GPS)Constellation</option>
+                        <option value="10">Geostationary</option>
+                        <option value="27">Geodetic</option>
+                        <option value="22">Galileo</option>
+                        <option value="48">Flock</option>
+                        <option value="19">Experimental</option>
+                        <option value="28">Engineering</option>
+                        <option value="29">Educational</option>
+                        <option value="6">Earth Resources</option>
+                        <option value="8">Disaster Monitoring</option>
+                        <option value="32">Cube Sats</option>
+                        <option value="45">Celestis</option>
+                        <option value="1">Brightest</option>
+                        <option value="35">Beidou Navigation System</option>
 
-                </select>
+                    </select> *@
 
 
                 <label for="regemail" style="color:gold">Email</label>
@@ -200,9 +212,5 @@
 
 </body>
 </html>
-<form action="/Home/InputLocation">
-    <input name="addressLine" type="text" placeholder="Enter your address" />
-    <input name="postalCode" type="text" placeholder="Enter your Zip Code" />
-    <input type="submit" value="Submit" />
-</form>
+
 <div>@ViewBag.Coordinates</div>
