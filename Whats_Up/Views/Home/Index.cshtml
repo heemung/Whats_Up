@@ -7,12 +7,6 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<form action="/User/AddUser" method="post">
-    <label for="zcode" style="color:gold">Enter Email</label>
-    <input type="text" name="Email" placeholder="Enter Email"/>
-    <button type="submit">Submit</button>
-</form>
-
 
 <img src="https://scitechdaily.com/images/Image-of-the-Nile-at-Night-from-the-International-Space-Station.jpg" alt="World View" />
 
@@ -22,96 +16,50 @@
 <!-- The Modal (contains the Sign Up form) -->
 <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" style="color:red">X</span>
-    <form action="action_page.php" class="modal-content">
+    <form action="/User/AddUser" class="modal-content" method="post">
         <div class="container">
             <link href="~/Content/StyleSheet2.css" rel="stylesheet" type="text/css" />
             <h2 style="color:gold">What's Up</h2>
             <p>Enter information to see what's up</p>
             <hr>
 
-            <label for="zcode" style="color:gold">Zip Code</label>
-            <input type="text" id="zcode" name="Zipcode" placeholder="Enter Zip Code.." required>
+            <label for="email" style="color:gold">Enter Email</label>
+            <input type="text" name="Email" placeholder="Enter Email.." />
 
-            <div class="slidecontainer">
-                <label for="radfrom" style="color:gold">Radius From Zip Code</label>
-                <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
-                <p>Value:<span id="slider"></span></p>
-            </div>
+            <label for="aline" style="color:gold">Address Line</label>
+            <input type="text" name="AddressLine" placeholder="Enter Address..">
 
-            <script>
-                var slider = document.getElementById("radfrom");
-                var output = document.getElementById("slider");
-                output.innerHTML = slider.value; // Display the default slider value
+            @* <div class="slidecontainer">
+            <label for="radfrom" style="color:gold">Radius From Zip Code</label>
+            <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
+            <p>Value:<span id="slider"></span></p>
+        </div>
 
-                // Update the current slider value (each time you drag the slider handle)
-                slider.oninput = function () {
-                    output.innerHTML = this.value;
-                }
-            </script>
+        <script>
+            var slider = document.getElementById("radfrom");
+            var output = document.getElementById("slider");
+            output.innerHTML = slider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            slider.oninput = function () {
+                output.innerHTML = this.value;
+            }
+        </script>
+            *@
 
 
             <label for="scat" style="color:gold">Satellite Category</label>
             <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
-                <option value="33">XM and Sirius</option>
-                <option value="37">Westford Needles</option>
-                <option value="3">Weather</option>
-                <option value="34">TV</option>
-                <option value="41">Tsiklon</option>
-                <option value="36">Yaogan</option>
-                <option value="42">Tsikada</option>
-                <option value="43">Tselina</option>
-                <option value="9">Tracking and Data Relay Satellite System</option>
-                <option value="39">Strela</option>
-                <option value="26">Space & EarthScience</option>
-                <option value="7">Search & Rescue</option>
-                <option value="23">Satellite-Based Augmentation System</option>
-                <option value="25">Russian LEO Navigation</option>
-                <option value="13">Raduga</option>
-                <option value="18">Radar Calibration</option>
-                <option value="47">QZSS</option>
-                <option value="38">Parus</option>
-                <option value="16">Orbcomm</option>
-                <option value="43">O3BNetworks</option>
-                <option value="4">NOAA</option>
-                <option value="24">Navy Navigation Satellite System</option>
-                <option value="14">Molniya</option>
-                <option value="30">Military</option>
-                <option value="49">Lemur</option>
-                <option value="2">ISS</option>
-                <option value="46">IRNSS</option>
-                <option value="15">Iridium</option>
-                <option value="11">Intelsat</option>
-                <option value="12">Gorizont</option>
-                <option value="40">Gonets</option>
-                <option value="21">GlonassOperational</option>
-                <option value="17">Globalstar</option>
-                <option value="20">Global Positioning System(GPS)Operational</option>
-                <option value="50">Global Positioning System(GPS)Constellation</option>
-                <option value="10">Geostationary</option>
-                <option value="27">Geodetic</option>
-                <option value="22">Galileo</option>
-                <option value="48">Flock</option>
-                <option value="19">Experimental</option>
-                <option value="28">Engineering</option>
-                <option value="29">Educational</option>
-                <option value="6">Earth Resources</option>
-                <option value="8">Disaster Monitoring</option>
-                <option value="32">Cube Sats</option>
-                <option value="45">Celestis</option>
-                <option value="1">Brightest</option>
-                <option value="35">Beidou Navigation System</option>
-
+                <option value="1">Astronomy Satellites</option>
+                <option value="2">Atmospheric Studies Satellites</option>
+                <option value="3">Communications Satellites</option>
+                <option value="4">Navagation Satellites</option>
+                <option value="5">Reconaissance Satellites</option>
+                <option value="6">Remote Sensing Satellites</option>
+                <option value="7">Search & Rescue Satellites</option>
+                <option value="8">Space Exploration Satellites</option>
+                <option value="9">Weather Satellites</option>
             </select>
-
-
-            <label for="regemail" style="color:gold">Email</label>
-            <select id="regemail" name="email">
-                <option value="registeremail">I want to enter email to save satellites</option>
-                <option value="noregemail">I don't want to enter email to save satellites</option>
-
-            </select>
-
-
 
             <div class="clearfix">
                 <button type="button" class="cancelbtn">Cancel</button>
