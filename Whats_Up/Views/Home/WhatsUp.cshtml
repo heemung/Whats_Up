@@ -10,6 +10,8 @@
     </style>
 </head>
 <body>
+    <h3>My Google Maps Demo</h3>
+
     <div id="map"></div>
     <script>
         function initMap() {
@@ -49,173 +51,10 @@
                     }
         }
 
-
-
-
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
-<<<<<<< HEAD
-    <form action="/Home/InputLocation">
-        <input name="addressLine" type="text" placeholder="Enter your address" />
-        <input name="postalCode" type="text" placeholder="Enter your Zip Code" />
-        <input type="submit" value="Submit" />
-    </form>
-
-
-    <div class="jumbotron">
-        <h1 align="center" style="font-size:450%; color:gold">What's Up?</h1>
-        <br />
-        <br />
-        <p class="lead" align="center">We are your favorite web site dedicated to enlightening you on what's up above us in Space!</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
-
-    <form action="/User/AddUser" method="post">
-        <label for="zcode" style="color:gold">Enter Email</label>
-        <input type="text" name="Email"/>
-        <button type="submit">Submit</button>
-    </form>
-
-
-    <img src="https://scitechdaily.com/images/Image-of-the-Nile-at-Night-from-the-International-Space-Station.jpg" alt="World View" />
-
-    <!-- Button to open the modal -->
-    <button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
-
-    <!-- The Modal (contains the Sign Up form) -->
-    <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" style="color:red">X</span>
-        <form action="action_page.php" class="modal-content">
-            <div class="container">
-                <link href="~/Content/StyleSheet2.css" rel="stylesheet" type="text/css" />
-                <h2 style="color:gold">What's Up</h2>
-                <p>Enter information to see what's up</p>
-                <hr>
-
-                <label for="zcode" style="color:gold">Address</label>
-                <input type="text" id="zcode" name="addressLine" placeholder="Enter Address.." required>
-
-                <div class="slidecontainer">
-                    <label for="radfrom" style="color:gold">Radius From Zip Code</label>
-                    <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
-                    <p>Value:<span id="slider"></span></p>
-                </div>
-
-                <script>
-                    var slider = document.getElementById("radfrom");
-                    var output = document.getElementById("slider");
-                    output.innerHTML = slider.value; // Display the default slider value
-
-                    // Update the current slider value (each time you drag the slider handle)
-                    slider.oninput = function () {
-                        output.innerHTML = this.value;
-                    }
-                </script>
-                <input type="checkbox" name="Test" value="1" />
-
-               @{
-                    foreach (var y in @ViewBag.ClaytonsBag)
-                    {
-                        <label>@y.Name</label><input @y.IsCheck
-                                                     name="@y.Name"
-                                                     type="checkbox"
-                                                     value="@y.Value" />
-                    }
-                } 
-
-                @*<label for="scat" style="color:gold">Satellite Category</label>
-                    <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
-                        <option value="33">XM and Sirius</option>
-                        <option value="37">Westford Needles</option>
-                        <option value="3">Weather</option>
-                        <option value="34">TV</option>
-                        <option value="41">Tsiklon</option>
-                        <option value="36">Yaogan</option>
-                        <option value="42">Tsikada</option>
-                        <option value="43">Tselina</option>
-                        <option value="9">Tracking and Data Relay Satellite System</option>
-                        <option value="39">Strela</option>
-                        <option value="26">Space & EarthScience</option>
-                        <option value="7">Search & Rescue</option>
-                        <option value="23">Satellite-Based Augmentation System</option>
-                        <option value="25">Russian LEO Navigation</option>
-                        <option value="13">Raduga</option>
-                        <option value="18">Radar Calibration</option>
-                        <option value="47">QZSS</option>
-                        <option value="38">Parus</option>
-                        <option value="16">Orbcomm</option>
-                        <option value="43">O3BNetworks</option>
-                        <option value="4">NOAA</option>
-                        <option value="24">Navy Navigation Satellite System</option>
-                        <option value="14">Molniya</option>
-                        <option value="30">Military</option>
-                        <option value="49">Lemur</option>
-                        <option value="2">ISS</option>
-                        <option value="46">IRNSS</option>
-                        <option value="15">Iridium</option>
-                        <option value="11">Intelsat</option>
-                        <option value="12">Gorizont</option>
-                        <option value="40">Gonets</option>
-                        <option value="21">GlonassOperational</option>
-                        <option value="17">Globalstar</option>
-                        <option value="20">Global Positioning System(GPS)Operational</option>
-                        <option value="50">Global Positioning System(GPS)Constellation</option>
-                        <option value="10">Geostationary</option>
-                        <option value="27">Geodetic</option>
-                        <option value="22">Galileo</option>
-                        <option value="48">Flock</option>
-                        <option value="19">Experimental</option>
-                        <option value="28">Engineering</option>
-                        <option value="29">Educational</option>
-                        <option value="6">Earth Resources</option>
-                        <option value="8">Disaster Monitoring</option>
-                        <option value="32">Cube Sats</option>
-                        <option value="45">Celestis</option>
-                        <option value="1">Brightest</option>
-                        <option value="35">Beidou Navigation System</option>
-
-                    </select> *@
-
-
-                <label for="regemail" style="color:gold">Email</label>
-                <select id="regemail" name="email">
-                    <option value="registeremail">I want to enter email to save satellites</option>
-                    <option value="noregemail">I don't want to enter email to save satellites</option>
-
-                </select>
-
-
-
-                <div class="clearfix">
-                    <button type="button" class="cancelbtn">Cancel</button>
-                    <button type="submit" class="signupbtn">Enter Info.</button>
-                </div>
-            </div>
-        </form>
-
-        <script>
-            // Get the modal
-            var modal = document.getElementById('id01');
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == !modal) {
-                    close.modal
-                }
-            }
-        </script>
-
-
-
-
-
-</body>
-</html>
-
-<div>@ViewBag.Coordinates</div>
-=======
 </body>
 </html>
 <form action="/Home/InputLocation" method="post">
@@ -239,9 +78,6 @@
 
     <input type="submit" value="Submit" />
 </form>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 <table class="table table-bordered table-responsive table-hover">
 
     <tr>
@@ -276,10 +112,4 @@
         }
     }
 </table>
->>>>>>> f3e7aa8105eae58d4febe89a47d4f1cbbe8381f2
-=======
-<div>@ViewBag.Coordinates</div>
->>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
-=======
-<div>@ViewBag.Coordinates</div>
->>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
+

@@ -156,11 +156,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapperController.cs" />
     <Compile Include="Controllers\SatelliteController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
     <Compile Include="Migrations\201812042030261_InitialCreate.cs" />
     <Compile Include="Migrations\201812042030261_InitialCreate.Designer.cs">
       <DependentUpon>201812042030261_InitialCreate.cs</DependentUpon>
@@ -170,9 +169,13 @@
       <DependentUpon>201812061619467_AddUserandFavs.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201812062356239_changedfavoritemodel.cs" />
+    <Compile Include="Migrations\201812062356239_changedfavoritemodel.Designer.cs">
+      <DependentUpon>201812062356239_changedfavoritemodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckBoxes.cs" />
->>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
     <Compile Include="Models\DataContext.cs" />
+    <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\SatelliteN2YO.cs" />
     <Compile Include="Models\SatelliteST.cs" />
@@ -238,8 +241,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-<<<<<<< HEAD
-=======
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812042030261_InitialCreate.resx">
       <DependentUpon>201812042030261_InitialCreate.cs</DependentUpon>
@@ -247,8 +248,10 @@
     <EmbeddedResource Include="Migrations\201812061619467_AddUserandFavs.resx">
       <DependentUpon>201812061619467_AddUserandFavs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812062356239_changedfavoritemodel.resx">
+      <DependentUpon>201812062356239_changedfavoritemodel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
->>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
