@@ -193,6 +193,7 @@ namespace Whats_Up.Controllers
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             List<CheckBoxes> boxItem = new List<CheckBoxes>()
             {
                 new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
@@ -227,6 +228,8 @@ namespace Whats_Up.Controllers
 /*
 =======
 >>>>>>> 983136fcd933b7f540e04e611138f568a1d6cbf5
+=======
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
 =======
 >>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
@@ -283,6 +286,7 @@ namespace Whats_Up.Controllers
             };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             return satCatDic;
         }*/
 
@@ -316,6 +320,8 @@ namespace Whats_Up.Controllers
 
             return View();
 =======
+=======
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
             List<CheckBoxes> boxItem = new List<CheckBoxes>()
             {
 
@@ -332,6 +338,9 @@ namespace Whats_Up.Controllers
             };
 
             return boxItem;
+<<<<<<< HEAD
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
+=======
 >>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
         }
     }
