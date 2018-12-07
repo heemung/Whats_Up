@@ -167,15 +167,15 @@ namespace Whats_Up.Controllers
         
         public void BigCategories()
         {
-            List<String> Astronomy = new List<string>();
-            List<String> AtmosphericStudies = new List<string>();
-            List<String> Communications = new List<string>();
-            List<String> Navigation = new List<string>();
-            List<String> Reconaissance = new List<string>();
-            List<String> RemoteSensing = new List<string>();
-            List<String> SearchRescue = new List<string>();
-            List<String> SpaceExploration = new List<string>();
-            List<String> Weather = new List<string>();
+            List<string> Astronomy = new List<string>();
+            List<string> AtmosphericStudies = new List<string>();
+            List<string> Communications = new List<string>();
+            List<string> Navigation = new List<string>();
+            List<string> Reconaissance = new List<string>();
+            List<string> RemoteSensing = new List<string>();
+            List<string> SearchRescue = new List<string>();
+            List<string> SpaceExploration = new List<string>();
+            List<string> Weather = new List<string>();
         }
 
         //better to put in database?
@@ -206,6 +206,12 @@ namespace Whats_Up.Controllers
                 new CheckBoxes(){Name = "IRNSS", CheckName="satelliteCategoies", Value = "46",IsCheck = false},
 
             };
+            return boxItem;
+        }
+
+        public List<CheckBoxes> SettingCheckBoxes()
+        {
+            
             //current email user???
             User currentFavUser = new User();
             List<Favorite> favoriteList = new List<Favorite>();
@@ -214,11 +220,15 @@ namespace Whats_Up.Controllers
 
             IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();
             favQuery = favQuery.Where(x => x.Email == currentFavUser.Email);
-            favoriteList = favQuery.ToList();
 
-            List<CheckBoxes> favBox = new List<CheckBoxes>();
-            foreach (CheckBoxes box in boxItem)
+
+            favoriteList = favQuery.ToList();
+            if (favoriteList.Count != 0)
             {
+
+                List<CheckBoxes> favBox = new List<CheckBoxes>();
+                foreach (CheckBoxes box in AddingCatsToList())
+                {
                     foreach (Favorite fav in favoriteList)
                     {
                         if (fav.Category == box.Name)
@@ -232,14 +242,19 @@ namespace Whats_Up.Controllers
                     }
 
 
-            }
+                }
 
-            return favBox;
+                return favBox;
+            }
+            else
+            {
+                return AddingCatsToList();
+            }
         }
 
         public ActionResult SatErrors(string error)
         {
-            ViewBag.WhereError = error;
+            ViewBag.ErrorBag = error;
             return View("Error");
         }
     }
