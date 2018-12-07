@@ -15,8 +15,10 @@ namespace Whats_Up.Controllers
     {
         public static string geoLat;
         public static string geoLong;
+        public SatelliteController checkbox = new SatelliteController();
         public string GeoKey = WebConfigurationManager.AppSettings["GMapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
+
         public ActionResult Index()
         {
             return View();
@@ -26,22 +28,7 @@ namespace Whats_Up.Controllers
         {
             ViewBag.GoogleKey = GoogleKey;
 
-            List<CheckBoxes> boxItem = new List<CheckBoxes>()
-            {
-
-                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck = false},
-                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck = true},
-            };
-
-            List<CheckBoxes> boxItem2 = new List<CheckBoxes>()
-            {
-
-                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck2 = ""},
-                new CheckBoxes(){Name = "satChecked", Value = "35",IsCheck2 = "checked"},
-            };
-
-            ViewBag.ClaytonsBag = boxItem;
-            ViewBag.ClaytonsOtherBag = boxItem2;
+            TempData["SatList"] = checkbox.AddingCatsToList();
             return View();
         }
 
@@ -72,7 +59,9 @@ namespace Whats_Up.Controllers
                 return address;
             }
         }
-        public ActionResult InputLocation(User address)
+
+
+        public ActionResult InputLocation(User address, string[] satelliteCategoies)
         {
             string formattedAddress = AddressForGoogle(address.AddressLine);
             JObject JParser = new JObject();
@@ -92,10 +81,12 @@ namespace Whats_Up.Controllers
             geoLong = JParser["results"][0]["geometry"]["location"]["lng"].Value<string>();
 
             SatelliteController start = new SatelliteController();
-            start.GetSatCat();
+            start.GetSatCat(satelliteCategoies);
             ViewBag.GoogleLat = double.Parse(geoLat);
             ViewBag.GoogleLong = double.Parse(geoLong);
+            TempData["SatList"] = checkbox.AddingCatsToList();
             ViewBag.Coordinates = start.SatCoordinates;
+            ViewBag.Coordinates2 = start.SatCoordinates;
 
             return View("WhatsUp");
         }

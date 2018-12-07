@@ -24,57 +24,29 @@ namespace Whats_Up.Controllers
         }
 
         //getting user selections for satellites categories 
-        public void GetSatCat()
+        public void GetSatCat(string[] satelliteCategoies)
         {
             string latitude; //42.327501
             string longitude; //"-83.048981"
             latitude = HomeController.geoLat;
             longitude = HomeController.geoLong;
 
-            /////////////////goes in method
-            List<string> userListSelection = new List<string>();
-            /////////////////
             //api key
             string N2YO = WebConfigurationManager.AppSettings["N2YO"];
 
-
-            Dictionary<string, int> Test = AddingCatsToList1();
-
-            //TEMP TESTING ONLY START
-            foreach (KeyValuePair<string, int> k in Test)
-            {
-                userListSelection.Add(k.Key);
-            }
-            //TEMP END TEST
-
-            int arrayCatCount = userListSelection.Count;
-            int[] userCatInt = new int[arrayCatCount];
-
             //checking to make sure there is one category selected
-            if (Test.Count != 0)
+            if (satelliteCategoies.Length != 0)
             {
-                //could be simplified
-                int tempForArray = 0;
-                foreach (string s in userListSelection)
-                {
-                    foreach (KeyValuePair<string, int> satCat in Test)
-                    {
-                        if (s == satCat.Key)
-                        {
-                            userCatInt[tempForArray] = satCat.Value;
-                            tempForArray++;
-                        }
-                    }
 
-                }
                 JArray jSpaceObjects = new JArray();
-                foreach (int catNum in userCatInt)
+
+                foreach (string categoryNum in satelliteCategoies)
                 {
                     UriBuilder builder = new UriBuilder
                     {
                         Scheme = "https",
                         Host = "n2yo.com",
-                        Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + catNum + "/&apiKey=" + N2YO,
+                        Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + categoryNum + "/&apiKey=" + N2YO,
                     };
                     HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
                     requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
@@ -180,8 +152,40 @@ namespace Whats_Up.Controllers
         }
 
         //better to put in database?
-       public Dictionary<string,int> AddingCatsToList()
+       public List<CheckBoxes> AddingCatsToList()
         {
+            List<CheckBoxes> boxItem = new List<CheckBoxes>()
+            {
+                new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
+                new CheckBoxes(){Name = "Brightest", CheckName="satelliteCategoies", Value = "1",IsCheck = false},
+                new CheckBoxes(){Name = "Celestis", CheckName="satelliteCategoies", Value = "45",IsCheck = false},
+                new CheckBoxes(){Name = "CubeSats", CheckName="satelliteCategoies", Value = "32",IsCheck = false},
+                new CheckBoxes(){Name = "DisasterMonitoring", CheckName="satelliteCategoies", Value = "8",IsCheck = false},
+                new CheckBoxes(){Name = "EarthResources", CheckName="satelliteCategoies", Value = "6",IsCheck = false},
+                new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
+                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = true},
+                new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
+
+            };
+            /*
+            //current email user???
+            User currentFavUser = new User();
+
+            currentFavUser = db.Favorites.Where(x => x.Email == )
+            foreach(CheckBoxes CB in boxItem)
+            {
+                if(CB.Name == currentUser.)
+                //if (obj != null) obj.OtherProperty = newValue;
+
+            }
+            */
+            return boxItem;
+        }
+
+
+    }
+}
+/*
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
                 { "Yaogan", 36 },
@@ -227,17 +231,5 @@ namespace Whats_Up.Controllers
                 { "Experimental", 19 },
                 { "Engineering", 28 },
                 { "Education", 29 },
-                { "EarthResources", 6 },
-                { "DisasterMonitoring", 8 },
-                { "CubeSats", 32 },
-                { "Celestis", 45 },
-                { "Brightest", 1 },
-                { "BeidouNavigationSystem",  35}
             };
-
-
-
-            return satCatDic;
-        }
-    }
-}
+*/

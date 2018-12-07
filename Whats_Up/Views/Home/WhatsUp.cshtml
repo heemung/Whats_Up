@@ -1,4 +1,4 @@
-﻿ <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -47,6 +47,7 @@
                             }
                         }
                     }
+
         }
 
 
@@ -56,6 +57,7 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
+<<<<<<< HEAD
     <form action="/Home/InputLocation">
         <input name="addressLine" type="text" placeholder="Enter your address" />
         <input name="postalCode" type="text" placeholder="Enter your Zip Code" />
@@ -214,3 +216,63 @@
 </html>
 
 <div>@ViewBag.Coordinates</div>
+=======
+</body>
+</html>
+<form action="/Home/InputLocation" method="post">
+    <input name="addressLine" type="text" placeholder="Enter your address" />
+    @using Whats_Up.Models;
+    @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
+    @foreach (CheckBoxes x in SatList)
+    {
+        if (x.IsCheck == true)
+        {
+            <label>@x.Name</label>
+            <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
+        }
+        else
+        {
+            <label>@x.Name</label>
+            <input type="checkbox" name="@x.CheckName" value="@x.Value" />
+        }
+
+    }
+
+    <input type="submit" value="Submit" />
+</form>
+
+<table class="table table-bordered table-responsive table-hover">
+
+    <tr>
+        <th>Sat ID</th>
+        <th>Sat Name </th>
+        <th>Sat Lat </th>
+        <th>Sat Long</th>
+        <th>Sat Alt</th>
+        <th>Launch Date</th>
+        <th>Int Designator</th>
+    </tr>
+    @if (ViewBag.Coordinates2 != null)
+    {
+        foreach (var satDataArray in ViewBag.Coordinates2)
+        {
+            if (satDataArray["info"]["satcount"].Value != 0)
+            {
+                foreach (var satData in satDataArray["above"])
+                {
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+
+                    </tr>
+                }
+            }
+        }
+    }
+</table>
+>>>>>>> f3e7aa8105eae58d4febe89a47d4f1cbbe8381f2
