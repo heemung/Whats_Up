@@ -192,6 +192,7 @@ namespace Whats_Up.Controllers
        /*public Dictionary<string,int> AddingCatsToList()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             List<CheckBoxes> boxItem = new List<CheckBoxes>()
             {
                 new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
@@ -226,6 +227,8 @@ namespace Whats_Up.Controllers
 /*
 =======
 >>>>>>> 983136fcd933b7f540e04e611138f568a1d6cbf5
+=======
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
                 { "Yaogan", 36 },
@@ -279,6 +282,7 @@ namespace Whats_Up.Controllers
                 { "BeidouNavigationSystem", 35 }
             };
 
+<<<<<<< HEAD
             return satCatDic;
         }*/
 
@@ -311,6 +315,24 @@ namespace Whats_Up.Controllers
             }
 
             return View();
+=======
+            List<CheckBoxes> boxItem = new List<CheckBoxes>()
+            {
+
+                new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
+                new CheckBoxes(){Name = "Brightest", CheckName="satelliteCategoies", Value = "1",IsCheck = false},
+                new CheckBoxes(){Name = "Celestis", CheckName="satelliteCategoies", Value = "45",IsCheck = false},
+                new CheckBoxes(){Name = "CubeSats", CheckName="satelliteCategoies", Value = "32",IsCheck = false},
+                new CheckBoxes(){Name = "DisasterMonitoring", CheckName="satelliteCategoies", Value = "8",IsCheck = false},
+                new CheckBoxes(){Name = "EarthResources", CheckName="satelliteCategoies", Value = "6",IsCheck = false},
+                new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
+                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = true},
+                new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
+
+            };
+
+            return boxItem;
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
         }
     }
 }

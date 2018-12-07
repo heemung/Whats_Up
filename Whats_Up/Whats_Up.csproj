@@ -159,6 +159,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Migrations\201812042030261_InitialCreate.cs" />
+    <Compile Include="Migrations\201812042030261_InitialCreate.Designer.cs">
+      <DependentUpon>201812042030261_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812061619467_AddUserandFavs.cs" />
+    <Compile Include="Migrations\201812061619467_AddUserandFavs.Designer.cs">
+      <DependentUpon>201812061619467_AddUserandFavs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CheckBoxes.cs" />
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\SatelliteN2YO.cs" />
@@ -225,6 +238,17 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812042030261_InitialCreate.resx">
+      <DependentUpon>201812042030261_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812061619467_AddUserandFavs.resx">
+      <DependentUpon>201812061619467_AddUserandFavs.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+>>>>>>> parent of b39f145... added tables and rebuilt database, started work on favorites to user favorites
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
