@@ -1,4 +1,4 @@
-﻿ <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -49,6 +49,7 @@
                             }
                         }
                     }
+
         }
 
 
@@ -81,4 +82,38 @@
 
     <input type="submit" value="Submit" />
 </form>
-<div>@ViewBag.Coordinates</div>
+
+<table class="table table-bordered table-responsive table-hover">
+
+    <tr>
+        <th>Sat ID</th>
+        <th>Sat Name </th>
+        <th>Sat Lat </th>
+        <th>Sat Long</th>
+        <th>Sat Alt</th>
+        <th>Launch Date</th>
+        <th>Int Designator</th>
+    </tr>
+    @if (ViewBag.Coordinates2 != null)
+    {
+        foreach (var satDataArray in ViewBag.Coordinates2)
+        {
+            if (satDataArray["info"]["satcount"].Value != 0)
+            {
+                foreach (var satData in satDataArray["above"])
+                {
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+
+                    </tr>
+                }
+            }
+        }
+    }
+</table>

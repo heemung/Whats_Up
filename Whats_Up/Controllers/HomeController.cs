@@ -86,6 +86,7 @@ namespace Whats_Up.Controllers
             ViewBag.GoogleLong = double.Parse(geoLong);
             TempData["SatList"] = checkbox.AddingCatsToList();
             ViewBag.Coordinates = start.SatCoordinates;
+            ViewBag.Coordinates2 = start.SatCoordinates;
 
             return View("WhatsUp");
         }

@@ -154,6 +154,38 @@ namespace Whats_Up.Controllers
         //better to put in database?
        public List<CheckBoxes> AddingCatsToList()
         {
+            List<CheckBoxes> boxItem = new List<CheckBoxes>()
+            {
+                new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
+                new CheckBoxes(){Name = "Brightest", CheckName="satelliteCategoies", Value = "1",IsCheck = false},
+                new CheckBoxes(){Name = "Celestis", CheckName="satelliteCategoies", Value = "45",IsCheck = false},
+                new CheckBoxes(){Name = "CubeSats", CheckName="satelliteCategoies", Value = "32",IsCheck = false},
+                new CheckBoxes(){Name = "DisasterMonitoring", CheckName="satelliteCategoies", Value = "8",IsCheck = false},
+                new CheckBoxes(){Name = "EarthResources", CheckName="satelliteCategoies", Value = "6",IsCheck = false},
+                new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
+                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = true},
+                new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
+
+            };
+            /*
+            //current email user???
+            User currentFavUser = new User();
+
+            currentFavUser = db.Favorites.Where(x => x.Email == )
+            foreach(CheckBoxes CB in boxItem)
+            {
+                if(CB.Name == currentUser.)
+                //if (obj != null) obj.OtherProperty = newValue;
+
+            }
+            */
+            return boxItem;
+        }
+
+
+    }
+}
+/*
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
                 { "Yaogan", 36 },
@@ -200,23 +232,4 @@ namespace Whats_Up.Controllers
                 { "Engineering", 28 },
                 { "Education", 29 },
             };
-
-            List<CheckBoxes> boxItem = new List<CheckBoxes>()
-            {
-
-                new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
-                new CheckBoxes(){Name = "Brightest", CheckName="satelliteCategoies", Value = "1",IsCheck = false},
-                new CheckBoxes(){Name = "Celestis", CheckName="satelliteCategoies", Value = "45",IsCheck = false},
-                new CheckBoxes(){Name = "CubeSats", CheckName="satelliteCategoies", Value = "32",IsCheck = false},
-                new CheckBoxes(){Name = "DisasterMonitoring", CheckName="satelliteCategoies", Value = "8",IsCheck = false},
-                new CheckBoxes(){Name = "EarthResources", CheckName="satelliteCategoies", Value = "6",IsCheck = false},
-                new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
-                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = true},
-                new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
-
-            };
-
-            return boxItem;
-        }
-    }
-}
+*/

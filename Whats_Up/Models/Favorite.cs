@@ -16,6 +16,6 @@ namespace Whats_Up.Models
         public string Email { get; set; }
 
         [Required]
-        public int SatId { get; set; }
+        public string Category { get; set; }
     }
 }
