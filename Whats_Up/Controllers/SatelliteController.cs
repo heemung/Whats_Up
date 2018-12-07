@@ -167,6 +167,7 @@ namespace Whats_Up.Controllers
         
         public void BigCategories()
         {
+
             List<CheckBoxes> AllItems = AddingCatsToList();
 
             List<string> Astronomy = new List<string>();
@@ -232,6 +233,7 @@ namespace Whats_Up.Controllers
             Weather.Add(AllItems[23].Name);
             Weather.Add(AllItems[24].Name);
             Weather.Add(AllItems[25].Name);
+
         }
 
         //better to put in database?
@@ -262,6 +264,12 @@ namespace Whats_Up.Controllers
                 new CheckBoxes(){Name = "IRNSS", CheckName="satelliteCategoies", Value = "46",IsCheck = false},
 
             };
+            return boxItem;
+        }
+
+        public List<CheckBoxes> SettingCheckBoxes()
+        {
+            
             //current email user???
             User currentFavUser = new User();
             List<Favorite> favoriteList = new List<Favorite>();
@@ -270,11 +278,15 @@ namespace Whats_Up.Controllers
 
             IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();
             favQuery = favQuery.Where(x => x.Email == currentFavUser.Email);
-            favoriteList = favQuery.ToList();
 
-            List<CheckBoxes> favBox = new List<CheckBoxes>();
-            foreach (CheckBoxes box in boxItem)
+
+            favoriteList = favQuery.ToList();
+            if (favoriteList.Count != 0)
             {
+
+                List<CheckBoxes> favBox = new List<CheckBoxes>();
+                foreach (CheckBoxes box in AddingCatsToList())
+                {
                     foreach (Favorite fav in favoriteList)
                     {
                         if (fav.Category == box.Name)
@@ -288,14 +300,19 @@ namespace Whats_Up.Controllers
                     }
 
 
-            }
+                }
 
-            return favBox;
+                return favBox;
+            }
+            else
+            {
+                return AddingCatsToList();
+            }
         }
 
         public ActionResult SatErrors(string error)
         {
-            ViewBag.WhereError = error;
+            ViewBag.ErrorBag = error;
             return View("Error");
         }
     }
