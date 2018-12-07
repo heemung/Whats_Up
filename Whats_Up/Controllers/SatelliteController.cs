@@ -14,13 +14,15 @@ namespace Whats_Up.Controllers
 {
     public class SatelliteController : Controller
     {
+        //json of satellite data for each category in a array
         public JArray SatCoordinates;
 
+        //ORM private to this class.
         private DataContext db = new DataContext();
         // GET: Satellite
         public ActionResult Index()
         {
-            return View();
+            return View("../Shared/Error");
         }
 
         //getting user selections for satellites categories 
@@ -40,51 +42,63 @@ namespace Whats_Up.Controllers
 
                 JArray jSpaceObjects = new JArray();
 
-                foreach (string categoryNum in satelliteCategoies)
+                int lastSatRecordDB = 0;
+                lastSatRecordDB = db.SatelliteN2YOs.Max(x => x.ID);
+
+                int ApiOverLimit = db.SatelliteN2YOs.Find(lastSatRecordDB).TransactionsCount;
+
+                ApiOverLimit += satelliteCategoies.Length;
+
+                if (ApiOverLimit < 1000)
                 {
-                    UriBuilder builder = new UriBuilder
+                    foreach (string categoryNum in satelliteCategoies)
                     {
-                        Scheme = "https",
-                        Host = "n2yo.com",
-                        Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + categoryNum + "/&apiKey=" + N2YO,
-                    };
-                    HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
-                    requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
+                        UriBuilder builder = new UriBuilder
+                        {
+                            Scheme = "https",
+                            Host = "n2yo.com",
+                            Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + categoryNum + "/&apiKey=" + N2YO,
+                        };
+                        HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
+                        requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
 
-                    HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
+                        HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
 
-                    if (reponse.StatusCode == HttpStatusCode.OK)
-                    {
-                        StreamReader reader = new StreamReader(reponse.GetResponseStream());
+                        if (reponse.StatusCode == HttpStatusCode.OK)
+                        {
+                            StreamReader reader = new StreamReader(reponse.GetResponseStream());
 
-                        string output = reader.ReadToEnd();
+                            string output = reader.ReadToEnd();
 
-                        JObject temp = JObject.Parse(output);
-                        jSpaceObjects.Add(temp);
+                            JObject temp = JObject.Parse(output);
+                            jSpaceObjects.Add(temp);
+                        }
+                        else
+                        {
+                            SatErrors("Could not get HTTP Reponse");                           
+                        }
+
                     }
-                    else
-                    {
-                        ViewBag.Error = "Could not get HTTP Reponse";
-                        //return View("/Shared/Error");
-                    }
 
+                    //sends jarray to database method
+                    ToDatabase(jSpaceObjects);
+
+                    // sets json of satellite data for each category in a array
+                    SatCoordinates = jSpaceObjects;
+
+                    ViewBag.TableSatData = jSpaceObjects;
                 }
-
-                //sends jarray to database method
-                ToDatabase(jSpaceObjects);
-
-                //testing location
-                ViewBag.TableSatData = jSpaceObjects;
-                SatCoordinates = jSpaceObjects;
-                //return View();
-                //return View("Index");
+                else
+                {
+                    SatErrors("Over API limit. Please Try Again Later");
+                }
             }
             else
             {
-                ViewBag.SamePageError = "Error. Need to select 1 category";
-                //return View();
+                SatErrors("Error: Need to select 1 category");
             }
         }
+
         //taking the Jarray to push to DB
         public void ToDatabase(JArray satdata)
         {
@@ -150,6 +164,19 @@ namespace Whats_Up.Controllers
 
             return satCatDic;
         }
+        
+        public void BigCategories()
+        {
+            List<String> Astronomy = new List<string>();
+            List<String> AtmosphericStudies = new List<string>();
+            List<String> Communications = new List<string>();
+            List<String> Navigation = new List<string>();
+            List<String> Reconaissance = new List<string>();
+            List<String> RemoteSensing = new List<string>();
+            List<String> SearchRescue = new List<string>();
+            List<String> SpaceExploration = new List<string>();
+            List<String> Weather = new List<string>();
+        }
 
         //better to put in database?
         public List<CheckBoxes> AddingCatsToList()
@@ -206,7 +233,14 @@ namespace Whats_Up.Controllers
 
 
             }
+
             return favBox;
+        }
+
+        public ActionResult SatErrors(string error)
+        {
+            ViewBag.WhereError = error;
+            return View("Error");
         }
     }
     
