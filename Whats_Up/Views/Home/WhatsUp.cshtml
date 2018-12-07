@@ -1,4 +1,4 @@
-﻿ <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -16,35 +16,40 @@
     <script>
         function initMap() {
 
-            var geoLat = '@ViewBag.geoLat';
-            var geoLong = '@ViewBag.geoLong';
+            var geoLat = @ViewBag.GoogleLat;
+            var geoLong = @ViewBag.GoogleLong;
 
             if (geoLat != null && geoLong != null)
             {
                 var userLocation = { lat: geoLat, lng: geoLong }
                 var map = new google.maps.Map(
-                    document.getElementById('map'), { zoom: 3, center: userLocation });
+                    document.getElementById('map'), { zoom: 4, center: userLocation });
+                var userMarker = new google.maps.Marker({position: userLocation, map: map})
 
-                    @foreach(var outerArray in ViewBag.Coordinates)
-                     {
-                        if (outerArray["info"]["satcount"].Value != 0)
+                    @if (ViewBag.Coordinates != null)
+                    {
+                        foreach (var outerArray in ViewBag.Coordinates)
                         {
-                            foreach (var innerArray in outerArray["above"])
+                            if (outerArray["info"]["satcount"].Value != 0)
                             {
-                                  double latitude = innerArray["satlat"].Value;
-                                  double longitude = innerArray["satlng"].Value;
+                                foreach (var innerArray in outerArray["above"])
+                                {
+                                    double latitude = innerArray["satlat"].Value;
+                                    double longitude = innerArray["satlng"].Value;
                                     <text>
-                var satPosition = { lat: @latitude, lng: @longitude }
-                var satMarker = new google.maps.Marker({
-                    position: satPosition,
-                    map: map
-                })
+                                    var satPosition = { lat: @latitude, lng: @longitude }
+                                    var satMarker = new google.maps.Marker({
+                                    position: satPosition,
+                                    map: map
+                                    })
                                     </text>
 
+                                    }
+                                }
                             }
                         }
-                     }
-            }
+                    }
+
         }
 
 
@@ -54,15 +59,61 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
-
 </body>
 </html>
-<form action="/Home/InputLocation">
+<form action="/Home/InputLocation" method="post">
     <input name="addressLine" type="text" placeholder="Enter your address" />
-    <input name="postalCode" type="text" placeholder="Enter your Zip Code" />
+    @using Whats_Up.Models;
+    @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
+    @foreach (CheckBoxes x in SatList)
+    {
+        if (x.IsCheck == true)
+        {
+            <label>@x.Name</label>
+            <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
+        }
+        else
+        {
+            <label>@x.Name</label>
+            <input type="checkbox" name="@x.CheckName" value="@x.Value" />
+        }
+
+    }
+
     <input type="submit" value="Submit" />
 </form>
-<div>@ViewBag.Testing</div>
-<div>@ViewBag.Coordinates</div>
 
-@* var lat = document.getElementById("postalCode").innerHTML*@
+<table class="table table-bordered table-responsive table-hover">
+
+    <tr>
+        <th>Sat ID</th>
+        <th>Sat Name </th>
+        <th>Sat Lat </th>
+        <th>Sat Long</th>
+        <th>Sat Alt</th>
+        <th>Launch Date</th>
+        <th>Int Designator</th>
+    </tr>
+    @if (ViewBag.Coordinates2 != null)
+    {
+        foreach (var satDataArray in ViewBag.Coordinates2)
+        {
+            if (satDataArray["info"]["satcount"].Value != 0)
+            {
+                foreach (var satData in satDataArray["above"])
+                {
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+
+                    </tr>
+                }
+            }
+        }
+    }
+</table>
