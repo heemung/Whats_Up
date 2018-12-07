@@ -261,7 +261,33 @@ namespace Whats_Up.Controllers
                 new CheckBoxes(){Name = "Gorizont", CheckName="satelliteCategoies", Value = "12",IsCheck = false},
                 new CheckBoxes(){Name = "Intelsat", CheckName="satelliteCategoies", Value = "11",IsCheck = false},
                 new CheckBoxes(){Name = "Iridium", CheckName="satelliteCategoies", Value = "15",IsCheck = false},
-                new CheckBoxes(){Name = "IRNSS", CheckName="satelliteCategoies", Value = "46",IsCheck = false},
+                new CheckBoxes(){Name = "ISS", CheckName="satelliteCategoies", Value = "2",IsCheck = false},
+                new CheckBoxes(){Name = "Lemur", CheckName="satelliteCategoies", Value = "49",IsCheck = false},
+                new CheckBoxes(){Name = "Military", CheckName="satelliteCategoies", Value = "30",IsCheck = false},
+                new CheckBoxes(){Name = "Molniya", CheckName="satelliteCategoies", Value = "14",IsCheck = false},
+                new CheckBoxes(){Name = "NavyNavigationSatelliteSystem", CheckName="satelliteCategoies", Value = "46",IsCheck = false},
+                new CheckBoxes(){Name = "NOAA", CheckName="satelliteCategoies", Value = "4",IsCheck = false},
+                new CheckBoxes(){Name = "O3BNetworks", CheckName="satelliteCategoies", Value = "43",IsCheck = false},
+                new CheckBoxes(){Name = "Orbcomm", CheckName="satelliteCategoies", Value = "16",IsCheck = false},
+                new CheckBoxes(){Name = "Parus", CheckName="satelliteCategoies", Value = "38",IsCheck = false},
+                new CheckBoxes(){Name = "QZSS", CheckName="satelliteCategoies", Value = "47",IsCheck = false},
+                new CheckBoxes(){Name = "RadarCalibration", CheckName="satelliteCategoies", Value = "18",IsCheck = false},
+                new CheckBoxes(){Name = "Raduga", CheckName="satelliteCategoies", Value = "13",IsCheck = false},
+                new CheckBoxes(){Name = "RussianLEONavigation", CheckName="satelliteCategoies", Value = "25",IsCheck = false},
+                new CheckBoxes(){Name = "Satellite-BasedAugmentationSystem", CheckName="satelliteCategoies", Value = "23",IsCheck = false},
+                new CheckBoxes(){Name = "Search&Rescue", CheckName="satelliteCategoies", Value = "7",IsCheck = false},
+                new CheckBoxes(){Name = "Space&EarthScience", CheckName="satelliteCategoies", Value = "26",IsCheck = false},
+                new CheckBoxes(){Name = "Strela", CheckName="satelliteCategoies", Value = "39",IsCheck = false},
+                new CheckBoxes(){Name = "TrackingandDataRelaySatelliteSystem", CheckName="satelliteCategoies", Value = "9",IsCheck = false},
+                new CheckBoxes(){Name = "Tselina", CheckName="satelliteCategoies", Value = "44",IsCheck = false},
+                new CheckBoxes(){Name = "Tsikada", CheckName="satelliteCategoies", Value = "42",IsCheck = false},
+                new CheckBoxes(){Name = "Tsiklon", CheckName="satelliteCategoies", Value = "41",IsCheck = false},
+                new CheckBoxes(){Name = "TV", CheckName="satelliteCategoies", Value = "34",IsCheck = false},
+                new CheckBoxes(){Name = "Weather", CheckName="satelliteCategoies", Value = "3",IsCheck = false},
+                new CheckBoxes(){Name = "WestfordNeedles", CheckName="satelliteCategoies", Value = "37",IsCheck = false},
+                new CheckBoxes(){Name = "XMandSirius", CheckName="satelliteCategoies", Value = "33",IsCheck = false},
+                new CheckBoxes(){Name = "Yaogan", CheckName="satelliteCategoies", Value = "36",IsCheck = false},
+
 
             };
             return boxItem;
@@ -298,8 +324,6 @@ namespace Whats_Up.Controllers
                             favBox.Add(new CheckBoxes() { IsCheck = box.IsCheck, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
                         }
                     }
-
-
                 }
 
                 return favBox;
@@ -318,37 +342,5 @@ namespace Whats_Up.Controllers
     }
     
 }
-/*
-            Dictionary<string, int> satCatDic = new Dictionary<string, int>
-            {
-                { "Yaogan", 36 },
-                { "XMandSirius", 33 },
-                { "WestfordNeedles", 37 },
-                { "Weather", 3 },
-                { "TV", 34 },
-                { "Tsiklon", 41 },
-                { "Tsikada", 42 },
-                { "Tselina", 44 },
-                { "TrackingandDataRelaySatelliteSystem", 9 },
-                { "Strela", 39 },
-                { "Space&EarthScience", 26 },
-                { "Search&Rescue", 7 },
-                { "Satellite-BasedAugmentationSystem", 23 },
-                { "RussianLEONavigation", 25 },
-                { "Raduga", 13 },
-                { "RadarCalibration", 18 },
-                { "QZSS", 47 },
-                { "Parus", 38 },
-                { "Orbcomm", 16 },
-                { "O3BNetworks", 43 },
-                { "NOAA", 4 },
-                { "NavyNavigationSatelliteSystem", 24 },
-                { "Molniya", 14 },
-                { "Military", 30 },
-                { "Lemur", 49 },
-                { "ISS", 2 },
 
-            };
-            return satCatDic;
-        }*/
 
