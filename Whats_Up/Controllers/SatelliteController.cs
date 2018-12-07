@@ -24,30 +24,66 @@ namespace Whats_Up.Controllers
         }
 
         //getting user selections for satellites categories 
-        public void GetSatCat(string[] satelliteCategoies)
+        public void GetSatCat()
         {
-            string latitude; //42.327501
-            string longitude; //"-83.048981"
-            latitude = HomeController.geoLat;
-            longitude = HomeController.geoLong;
+            string latitude = "42.327501";
+            string longitude = "-83.048981";
+            HomeController home = new HomeController();
+            latitude = home.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][0].Value<string>();
+            longitude = home.geoLocation["resourceSets"]["resources"]["geocodePoints"]["coordinates"][1].Value<string>();
 
+
+            /////////////////goes in method
+            List<string> userListSelection = new List<string>();
+            /////////////////
             //api key
             string N2YO = WebConfigurationManager.AppSettings["N2YO"];
 
-            //checking to make sure there is one category selected
-            if (satelliteCategoies.Length != 0)
+
+            Dictionary<string, int> Test = AddingCatsToList();
+
+            //TEMP TESTING ONLY START
+            foreach (KeyValuePair<string, int> k in Test)
             {
+                userListSelection.Add(k.Key);
+            }
+            //TEMP END TEST
 
+            int arrayCatCount = userListSelection.Count;
+            int[] userCatInt = new int[arrayCatCount];
+
+            //checking to make sure there is one category selected
+            if (Test.Count != 0)
+            {
+                //could be simplified
+                int tempForArray = 0;
+                foreach (string s in userListSelection)
+                {
+                    foreach (KeyValuePair<string, int> satCat in Test)
+                    {
+                        if (s == satCat.Key)
+                        {
+                            userCatInt[tempForArray] = satCat.Value;
+                            tempForArray++;
+                        }
+                    }
+
+                }
                 JArray jSpaceObjects = new JArray();
+                ////////////////////////////Testing
+                ///
+                string builderTest = "";
 
-                foreach (string categoryNum in satelliteCategoies)
+
+                foreach (int catNum in userCatInt)
                 {
                     UriBuilder builder = new UriBuilder
                     {
                         Scheme = "https",
                         Host = "n2yo.com",
-                        Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + categoryNum + "/&apiKey=" + N2YO,
+                        Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + catNum + "/&apiKey=" + N2YO,
                     };
+                    builderTest = builder.ToString();
                     HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
                     requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
 
@@ -74,6 +110,7 @@ namespace Whats_Up.Controllers
                 ToDatabase(jSpaceObjects);
 
                 //testing location
+                ViewBag.TestBuild = builderTest;
                 ViewBag.TableSatData = jSpaceObjects;
                 SatCoordinates = jSpaceObjects;
                 //return View();
@@ -139,7 +176,7 @@ namespace Whats_Up.Controllers
         }
 
         //testing small sample
-        public Dictionary<string, int> AddingCatsToList1()
+        public Dictionary<string, int> AddingCatsToList()
         {
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
@@ -152,40 +189,8 @@ namespace Whats_Up.Controllers
         }
 
         //better to put in database?
-       public List<CheckBoxes> AddingCatsToList()
+       /*public Dictionary<string,int> AddingCatsToList()
         {
-            List<CheckBoxes> boxItem = new List<CheckBoxes>()
-            {
-                new CheckBoxes(){Name = "BeidouNavigationSystem", CheckName="satelliteCategoies", Value = "35",IsCheck = false},
-                new CheckBoxes(){Name = "Brightest", CheckName="satelliteCategoies", Value = "1",IsCheck = false},
-                new CheckBoxes(){Name = "Celestis", CheckName="satelliteCategoies", Value = "45",IsCheck = false},
-                new CheckBoxes(){Name = "CubeSats", CheckName="satelliteCategoies", Value = "32",IsCheck = false},
-                new CheckBoxes(){Name = "DisasterMonitoring", CheckName="satelliteCategoies", Value = "8",IsCheck = false},
-                new CheckBoxes(){Name = "EarthResources", CheckName="satelliteCategoies", Value = "6",IsCheck = false},
-                new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
-                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = true},
-                new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
-
-            };
-            /*
-            //current email user???
-            User currentFavUser = new User();
-
-            currentFavUser = db.Favorites.Where(x => x.Email == )
-            foreach(CheckBoxes CB in boxItem)
-            {
-                if(CB.Name == currentUser.)
-                //if (obj != null) obj.OtherProperty = newValue;
-
-            }
-            */
-            return boxItem;
-        }
-
-
-    }
-}
-/*
             Dictionary<string, int> satCatDic = new Dictionary<string, int>
             {
                 { "Yaogan", 36 },
@@ -231,5 +236,46 @@ namespace Whats_Up.Controllers
                 { "Experimental", 19 },
                 { "Engineering", 28 },
                 { "Education", 29 },
+                { "EarthResources", 6 },
+                { "DisasterMonitoring", 8 },
+                { "CubeSats", 32 },
+                { "Celestis", 45 },
+                { "Brightest", 1 },
+                { "BeidouNavigationSystem", 35 }
             };
-*/
+
+            return satCatDic;
+        }*/
+
+        public ActionResult SatTracker()
+        {
+
+            string SatTracker = WebConfigurationManager.AppSettings["Space-Track"];
+
+            UriBuilder builder = new UriBuilder
+            {
+                Scheme = "https",
+                Host = "n2yo.com",
+                Path = "/rest/v1/satellite/positions/25544//1/1/0/2/&apiKey=" + SatTracker,
+            };
+
+            HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
+            requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
+
+            HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
+
+            if (reponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader reader = new StreamReader(reponse.GetResponseStream());
+
+                string output = reader.ReadToEnd();
+                JObject jSpaceObject = JObject.Parse(output);
+
+                ViewBag.ThisTest = jSpaceObject;
+                ViewBag.ThisTest2 = builder.ToString();
+            }
+
+            return View();
+        }
+    }
+}
