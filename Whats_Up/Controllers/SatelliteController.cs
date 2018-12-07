@@ -163,23 +163,42 @@ namespace Whats_Up.Controllers
                 new CheckBoxes(){Name = "DisasterMonitoring", CheckName="satelliteCategoies", Value = "8",IsCheck = false},
                 new CheckBoxes(){Name = "EarthResources", CheckName="satelliteCategoies", Value = "6",IsCheck = false},
                 new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
-                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = true},
+                new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = false},
                 new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
 
             };
-            /*
+            
             //current email user???
             User currentFavUser = new User();
+            List<Favorite> favoriteList = new List<Favorite>();
+            //currentFavUser.Email = db.Users.Where(x => x.Email == "clayton.cox@gmail.com").ToString();
+            currentFavUser.Email = "clayton.cox@gmail.com";
+            IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();
+            favQuery = favQuery.Where(x => x.Email == currentFavUser.Email);
+            favoriteList = favQuery.ToList();
 
-            currentFavUser = db.Favorites.Where(x => x.Email == )
-            foreach(CheckBoxes CB in boxItem)
+            List<CheckBoxes> favBox = new List<CheckBoxes>();
+            foreach (CheckBoxes box in boxItem)
             {
-                if(CB.Name == currentUser.)
-                //if (obj != null) obj.OtherProperty = newValue;
+
+                foreach (Favorite fav in favoriteList)
+                {
+                    if (fav.Category == box.Name)
+                    {
+
+                        favBox.Add(new CheckBoxes() { IsCheck = true, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+
+                    }
+                    else if (!favBox.Any(x => x.Name == box.Name))
+                    {
+                        favBox.Add(new CheckBoxes() { IsCheck = box.IsCheck, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+                    }
+                }
+
 
             }
-            */
-            return boxItem;
+
+            return favBox;
         }
 
 
