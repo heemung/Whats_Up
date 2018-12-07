@@ -13,12 +13,9 @@ namespace Whats_Up.Controllers
 {
     public class HomeController : Controller
     {
-        public static string geoLat;
-        public static string geoLong;
-        public SatelliteController checkbox = new SatelliteController();
-        public string GeoKey = WebConfigurationManager.AppSettings["GMapper"];
+        public JObject geoLocation;
+        public string BingKey = WebConfigurationManager.AppSettings["Mapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
-
         public ActionResult Index()
         {
             return View();
@@ -26,47 +23,18 @@ namespace Whats_Up.Controllers
 
         public ActionResult WhatsUp()
         {
+            if(geoLocation == null)
+            {
+                ViewBag.geoLat = null;
+                ViewBag.geoLong = null;
+            }
             ViewBag.GoogleKey = GoogleKey;
-
-            TempData["SatList"] = checkbox.AddingCatsToList();
             return View();
         }
-
-        public string AddressForGoogle(string address)
+        public ActionResult InputLocation(User address)
         {
-            if (address.Contains(' '))
-            {
-                string addressForLink = address;
-                char[] tempForLoop = new char[addressForLink.Length];
-
-                for (int i = 0; i < addressForLink.Length; i++)
-                {
-                    if (addressForLink[i] == ' ')
-                    {
-                        tempForLoop[i] = '+';
-                    }
-                    else
-                    {
-                        tempForLoop[i] = addressForLink[i];
-                    }
-
-                }
-                string temp = new string(tempForLoop);
-                return temp;
-            }
-            else
-            {
-                return address;
-            }
-        }
-
-
-        public ActionResult InputLocation(User address, string[] satelliteCategoies)
-        {
-            string formattedAddress = AddressForGoogle(address.AddressLine);
-            JObject JParser = new JObject();
-
-            string URL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ formattedAddress + "&key=" + GeoKey;
+            string URL = "http://dev.virtualearth.net/REST/v1/Locations/US/adminDistrict/postalCode/locality/addressLine?" +
+                "addressLine="+address.addressLine+"&postalCode="+address.postalCode+"&maxResults=5&key="+BingKey;
             HttpWebRequest request = WebRequest.CreateHttp(URL);
             request.UserAgent = "Mozilla / 5.0(Windows NT 6.1; Win64; x64; rv: 47.0) Gecko / 20100101 Firefox / 47.0";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -74,19 +42,16 @@ namespace Whats_Up.Controllers
             {
                 StreamReader reader = new StreamReader(response.GetResponseStream());
                 string output = reader.ReadToEnd();
-                JParser = JObject.Parse(output);
+                JObject JParser = JObject.Parse(output);
+
+                geoLocation = JParser;
 
             }
-            geoLat = JParser["results"][0]["geometry"]["location"]["lat"].Value<string>();
-            geoLong = JParser["results"][0]["geometry"]["location"]["lng"].Value<string>();
 
+            ViewBag.Testing = geoLocation;
             SatelliteController start = new SatelliteController();
-            start.GetSatCat(satelliteCategoies);
-            ViewBag.GoogleLat = double.Parse(geoLat);
-            ViewBag.GoogleLong = double.Parse(geoLong);
-            TempData["SatList"] = checkbox.AddingCatsToList();
+            start.GetSatCat();
             ViewBag.Coordinates = start.SatCoordinates;
-            ViewBag.Coordinates2 = start.SatCoordinates;
 
             return View("WhatsUp");
         }

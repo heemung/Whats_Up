@@ -8,7 +8,6 @@ namespace Whats_Up.Models
 {
     public class Favorite
     {
-        //Making changes baby! More changes baby!!
         [Key]
         public int FavID { get; set; }
 
@@ -16,6 +15,6 @@ namespace Whats_Up.Models
         public string Email { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public int SatId { get; set; }
     }
 }
