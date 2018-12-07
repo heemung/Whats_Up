@@ -165,9 +165,20 @@ namespace Whats_Up.Controllers
                 new CheckBoxes(){Name = "Education", CheckName="satelliteCategoies", Value = "29",IsCheck = false},
                 new CheckBoxes(){Name = "Engineering", CheckName="satelliteCategoies", Value = "28",IsCheck = false},
                 new CheckBoxes(){Name = "Experimental", CheckName="satelliteCategoies", Value = "19",IsCheck = false},
+                new CheckBoxes(){Name = "Geodetic", CheckName="satelliteCategoies", Value = "27",IsCheck = false},
+                new CheckBoxes(){Name = "Geostationary", CheckName="satelliteCategoies", Value = "10",IsCheck = false},
+                new CheckBoxes(){Name = "GlobalPositioningSystem(GPS)Constellation", CheckName="satelliteCategoies", Value = "50",IsCheck = false},
+                new CheckBoxes(){Name = "GlobalPositioningSystem(GPS)Operational", CheckName="satelliteCategoies", Value = "20",IsCheck = false},
+                new CheckBoxes(){Name = "Globalstar", CheckName="satelliteCategoies", Value = "17",IsCheck = false},
+                new CheckBoxes(){Name = "GlonassOperational", CheckName="satelliteCategoies", Value = "21",IsCheck = false},
+                new CheckBoxes(){Name = "GOES", CheckName="satelliteCategoies", Value = "5",IsCheck = false},
+                new CheckBoxes(){Name = "Gonets", CheckName="satelliteCategoies", Value = "40",IsCheck = false},
+                new CheckBoxes(){Name = "Gorizont", CheckName="satelliteCategoies", Value = "12",IsCheck = false},
+                new CheckBoxes(){Name = "Intelsat", CheckName="satelliteCategoies", Value = "11",IsCheck = false},
+                new CheckBoxes(){Name = "Iridium", CheckName="satelliteCategoies", Value = "15",IsCheck = false},
+                new CheckBoxes(){Name = "IRNSS", CheckName="satelliteCategoies", Value = "46",IsCheck = false},
 
             };
-
             //current email user???
             User currentFavUser = new User();
             List<Favorite> favoriteList = new List<Favorite>();
@@ -229,23 +240,7 @@ namespace Whats_Up.Controllers
                 { "Military", 30 },
                 { "Lemur", 49 },
                 { "ISS", 2 },
-                { "IRNSS", 46 },
-                { "Iridium", 15 },
-                { "Intelsat", 11 },
-                { "Gorizont", 12 },
-                { "Gonets", 40 },
-                { "GOES", 5 },
-                { "GlonassOperational", 21 },
-                { "Globalstar", 17 },
-                { "GlobalPositioningSystem(GPS)Operational", 20 },
-                { "GlobalPositioningSystem(GPS)Constellation", 50 },
-                { "Geostationary", 10 },
-                { "Geodetic", 27 },
-                { "Galileo", 22 },
-                { "Flock", 48 },
-                { "Experimental", 19 },
-                { "Engineering", 28 },
-                { "Education", 29 },
+
             };
             return satCatDic;
         }*/
