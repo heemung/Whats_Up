@@ -167,15 +167,71 @@ namespace Whats_Up.Controllers
         
         public void BigCategories()
         {
-            List<String> Astronomy = new List<string>();
-            List<String> AtmosphericStudies = new List<string>();
-            List<String> Communications = new List<string>();
-            List<String> Navigation = new List<string>();
-            List<String> Reconaissance = new List<string>();
-            List<String> RemoteSensing = new List<string>();
-            List<String> SearchRescue = new List<string>();
-            List<String> SpaceExploration = new List<string>();
-            List<String> Weather = new List<string>();
+            List<CheckBoxes> AllItems = AddingCatsToList();
+
+            List<string> Astronomy = new List<string>();
+            Astronomy.Add(AllItems[0].Name);
+            Astronomy.Add(AllItems[1].Name);
+            Astronomy.Add(AllItems[2].Name);
+            Astronomy.Add(AllItems[3].Name);
+            Astronomy.Add(AllItems[4].Name);
+
+            List<string> AtmosphericStudies = new List<string>();
+            AtmosphericStudies.Add(AllItems[5].Name);
+            AtmosphericStudies.Add(AllItems[6].Name);
+            AtmosphericStudies.Add(AllItems[7].Name);
+            AtmosphericStudies.Add(AllItems[8].Name);
+            AtmosphericStudies.Add(AllItems[9].Name);
+            AtmosphericStudies.Add(AllItems[10].Name);
+
+            List<string> Communications = new List<string>();
+            Communications.Add(AllItems[11].Name);
+            Communications.Add(AllItems[12].Name);
+            Communications.Add(AllItems[13].Name);
+            Communications.Add(AllItems[14].Name);
+            Communications.Add(AllItems[15].Name);
+
+            List<string> Navigation = new List<string>();
+            Navigation.Add(AllItems[16].Name);
+            Navigation.Add(AllItems[17].Name);
+            Navigation.Add(AllItems[18].Name);
+            Navigation.Add(AllItems[19].Name);
+            Navigation.Add(AllItems[20].Name);
+
+            List<string> Reconaissance = new List<string>();
+            Reconaissance.Add(AllItems[21].Name);
+            Reconaissance.Add(AllItems[22].Name);
+            Reconaissance.Add(AllItems[23].Name);
+            Reconaissance.Add(AllItems[24].Name);
+            Reconaissance.Add(AllItems[25].Name);
+
+            List<string> RemoteSensing = new List<string>();
+            RemoteSensing.Add(AllItems[26].Name);
+            RemoteSensing.Add(AllItems[27].Name);
+            RemoteSensing.Add(AllItems[23].Name);
+            RemoteSensing.Add(AllItems[24].Name);
+            RemoteSensing.Add(AllItems[25].Name);
+
+            List<string> SearchRescue = new List<string>();
+            SearchRescue.Add(AllItems[21].Name);
+            SearchRescue.Add(AllItems[22].Name);
+            SearchRescue.Add(AllItems[23].Name);
+            SearchRescue.Add(AllItems[24].Name);
+            SearchRescue.Add(AllItems[25].Name);
+
+            List<string> SpaceExploration = new List<string>();
+            SpaceExploration.Add(AllItems[21].Name);
+            SpaceExploration.Add(AllItems[22].Name);
+            SpaceExploration.Add(AllItems[23].Name);
+            SpaceExploration.Add(AllItems[24].Name);
+            SpaceExploration.Add(AllItems[25].Name);
+
+            List<string> Weather = new List<string>();
+            Weather.Add(AllItems[21].Name);
+            Weather.Add(AllItems[22].Name);
+            Weather.Add(AllItems[23].Name);
+            Weather.Add(AllItems[24].Name);
+            Weather.Add(AllItems[25].Name);
         }
 
         //better to put in database?
