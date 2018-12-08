@@ -23,7 +23,30 @@ namespace Whats_Up.Controllers
         }
              public ActionResult AddUser(User registeredUser)
              {
-                
+             HttpCookie userCookie;
+                if (Request.Cookies["Email"] == null)
+                {
+                userCookie = new HttpCookie("Email", registeredUser.Email);
+                }
+             else
+                {
+                userCookie = Request.Cookies["Email"];
+                }
+            userCookie.Value = registeredUser.Email;
+            Response.Cookies.Add(userCookie);
+
+
+             string usersEmail;
+             if (Request.Cookies["Email"] != null)
+             {
+           
+                usersEmail = Request.Cookies["Email"].Value;
+                ViewBag.EmailTest = usersEmail;
+             }
+
+
+
+
             DataContext ORM = new DataContext();
                 List<User> userList = ORM.Users.ToList<User>();
                 foreach(var x in userList)
@@ -36,7 +59,7 @@ namespace Whats_Up.Controllers
                         userFavorite.Add(y);
                     }
                     ViewBag.Favorites = userFavorite;
-                        return View("../Home/Index");
+                        return View("../Home/WhatsUp");
                 }
              }
                  if (ModelState.IsValid)
@@ -46,7 +69,7 @@ namespace Whats_Up.Controllers
 
                  }
                  
-                 return View("../Home/Index");
+                 return View("../Home/WhatsUp");
                 
              } 
     }
