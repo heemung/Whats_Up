@@ -14,7 +14,7 @@ namespace Whats_Up.Controllers
 {
     public class UserController : Controller
     {
-        HomeController hometoinput = new HomeController();
+        //HomeController hometoinput = new HomeController();
 
         // GET: User
         public ActionResult Index()
