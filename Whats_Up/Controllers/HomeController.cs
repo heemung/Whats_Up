@@ -63,27 +63,66 @@ namespace Whats_Up.Controllers
 
         public ActionResult InputLocation(User address, string[] satelliteCategoies)
         {
-            string formattedAddress = AddressForGoogle(address.AddressLine);
-            JObject JParser = new JObject();
+            //string addresses for testing
+            string address1 ="indianapolis", address2 = "south korea";
 
-            string URL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ formattedAddress + "&key=" + GeoKey;
-            HttpWebRequest request = WebRequest.CreateHttp(URL);
-            request.UserAgent = "Mozilla / 5.0(Windows NT 6.1; Win64; x64; rv: 47.0) Gecko / 20100101 Firefox / 47.0";
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            if (response.StatusCode == HttpStatusCode.OK)
+            bool addressesIs2 = false;
+            List<string> addresses = new List<string>();
+            List<string> geoLocations = new List<string>();
+
+            if (address2 != null)
             {
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                string output = reader.ReadToEnd();
-                JParser = JObject.Parse(output);
 
+                string formattedAddress1 = AddressForGoogle(address1);
+                string formattedAddress2 = AddressForGoogle(address2);
+
+                addresses.Add(formattedAddress1);
+                addresses.Add(formattedAddress2);
+                addressesIs2 = true;
             }
-            geoLat = JParser["results"][0]["geometry"]["location"]["lat"].Value<string>();
-            geoLong = JParser["results"][0]["geometry"]["location"]["lng"].Value<string>();
+            else
+            {
+                string formattedAddress1 = AddressForGoogle(address1);
+                addresses.Add(formattedAddress1);
+                addressesIs2 = false;
+            }
+
+            foreach (string listFormattedAddress in addresses)
+            {
+                JObject JParser = new JObject();
+
+                string URL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + listFormattedAddress + "&key=" + GeoKey;
+                HttpWebRequest request = WebRequest.CreateHttp(URL);
+                request.UserAgent = "Mozilla / 5.0(Windows NT 6.1; Win64; x64; rv: 47.0) Gecko / 20100101 Firefox / 47.0";
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    StreamReader reader = new StreamReader(response.GetResponseStream());
+                    string output = reader.ReadToEnd();
+                    JParser = JObject.Parse(output);
+
+                }
+
+                geoLocations.Add(geoLat = JParser["results"][0]["geometry"]["location"]["lat"].Value<string>());
+                geoLocations.Add(geoLong = JParser["results"][0]["geometry"]["location"]["lng"].Value<string>());
+            }
 
             SatelliteController start = new SatelliteController();
             start.GetSatCat(satelliteCategoies);
-            ViewBag.GoogleLat = double.Parse(geoLat);
-            ViewBag.GoogleLong = double.Parse(geoLong);
+
+            if(addressesIs2 == false)
+            {
+                geoLocations[0] = ViewBag.GoogleLat = double.Parse(geoLat);
+                geoLocations[1] = ViewBag.GoogleLong = double.Parse(geoLong);
+            }
+            else
+            {
+                geoLocations[0] = ViewBag.GoogleLat = double.Parse(geoLat);
+                geoLocations[1] = ViewBag.GoogleLong = double.Parse(geoLong);
+                geoLocations[3] = ViewBag.GoogleLat2 = double.Parse(geoLat);
+                geoLocations[4] = ViewBag.GoogleLong2 = double.Parse(geoLong);
+            }
+
             TempData["SatList"] = checkbox.AddingCatsToList();
             ViewBag.Coordinates = start.SatCoordinates;
             ViewBag.Coordinates2 = start.SatCoordinates;
