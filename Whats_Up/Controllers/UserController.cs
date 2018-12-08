@@ -21,56 +21,31 @@ namespace Whats_Up.Controllers
         {
             return View();
         }
-             public ActionResult AddUser(User registeredUser)
-             {
-             HttpCookie userCookie;
-                if (Request.Cookies["Email"] == null)
-                {
+
+        public string AddUser(User registeredUser)
+        {
+            HttpCookie userCookie;
+            if (Request.Cookies["Email"] == null)
+            {
                 userCookie = new HttpCookie("Email", registeredUser.Email);
-                }
-             else
-                {
+            }
+            else
+            {
                 userCookie = Request.Cookies["Email"];
-                }
+            }
             userCookie.Value = registeredUser.Email;
             Response.Cookies.Add(userCookie);
 
 
-             string usersEmail;
-             if (Request.Cookies["Email"] != null)
-             {
-           
+            string usersEmail ="";
+            if (Request.Cookies["Email"] != null)
+            {
+
                 usersEmail = Request.Cookies["Email"].Value;
-                ViewBag.EmailTest = usersEmail;
-             }
+            }
 
+            return usersEmail;
 
-
-
-            DataContext ORM = new DataContext();
-                List<User> userList = ORM.Users.ToList<User>();
-                foreach(var x in userList)
-             {
-                if(registeredUser.Email == x.Email)
-                {
-                    List<Favorite> userFavorite = new List<Favorite>();
-                    foreach (var y in ORM.Favorites.Where(y => y.Email == registeredUser.Email))
-                    {
-                        userFavorite.Add(y);
-                    }
-                    ViewBag.Favorites = userFavorite;
-                        return View("../Home/WhatsUp");
-                }
-             }
-                 if (ModelState.IsValid)
-                 {
-                    ORM.Entry(registeredUser).State = EntityState.Added;
-                    ORM.SaveChanges();
-
-                 }
-                 
-                 return View("../Home/WhatsUp");
-                
-             } 
+        }
     }
 }

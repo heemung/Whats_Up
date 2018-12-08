@@ -64,13 +64,14 @@ namespace Whats_Up.Controllers
         public ActionResult InputLocation(User address, string[] satelliteCategoies)
         {
             //string addresses for testing
-            string address1 ="indianapolis", address2 = "south korea";
+            string address1 = address.AddressLine;
+            string address2 = "";
 
             bool addressesIs2 = false;
             List<string> addresses = new List<string>();
             List<string> geoLocations = new List<string>();
 
-            if (address2 != null)
+            if (address2 != "")
             {
 
                 string formattedAddress1 = AddressForGoogle(address1);
@@ -112,15 +113,15 @@ namespace Whats_Up.Controllers
 
             if(addressesIs2 == false)
             {
-                geoLocations[0] = ViewBag.GoogleLat = double.Parse(geoLat);
-                geoLocations[1] = ViewBag.GoogleLong = double.Parse(geoLong);
+                ViewBag.GoogleLat = double.Parse(geoLocations[0]);
+                ViewBag.GoogleLong = double.Parse(geoLocations[1]);
             }
             else
             {
-                geoLocations[0] = ViewBag.GoogleLat = double.Parse(geoLat);
-                geoLocations[1] = ViewBag.GoogleLong = double.Parse(geoLong);
-                geoLocations[3] = ViewBag.GoogleLat2 = double.Parse(geoLat);
-                geoLocations[4] = ViewBag.GoogleLong2 = double.Parse(geoLong);
+                ViewBag.GoogleLat = double.Parse(geoLocations[0]);
+                ViewBag.GoogleLong = double.Parse(geoLocations[1]);
+                ViewBag.GoogleLat1 = double.Parse(geoLocations[2]);
+                ViewBag.GoogleLong2 = double.Parse(geoLocations[3]);
             }
 
             TempData["SatList"] = checkbox.AddingCatsToList();

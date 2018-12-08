@@ -36,6 +36,22 @@
              <form action="/Home/InputLocation" method="post">
                  <label for="addressline" style="color:gold">Enter House Address...</label>
                  <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
+                 @using Whats_Up.Models;
+                 @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
+                 @foreach (CheckBoxes x in SatList)
+                 {
+                     if (x.IsCheck == true)
+                     {
+                         <label>@x.Name</label>
+                         <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
+                     }
+                     else
+                     {
+                         <label>@x.Name</label>
+                         <input type="checkbox" name="@x.CheckName" value="@x.Value" />
+                     }
+
+                 }
                  <button type="submit" class="signupbtn">Enter Info.</button>
              </form>
 
@@ -127,22 +143,7 @@
  </html>
 <form action="/Home/InputLocation" method="post">
     <input name="addressLine" type="text" placeholder="Enter your address" />
-    @using Whats_Up.Models;
-    @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
-    @foreach (CheckBoxes x in SatList)
-    {
-        if (x.IsCheck == true)
-        {
-            <label>@x.Name</label>
-            <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
-        }
-        else
-        {
-            <label>@x.Name</label>
-            <input type="checkbox" name="@x.CheckName" value="@x.Value" />
-        }
-
-    }
+    @*this is where checkboxes went*@
 
     <input type="submit" value="Submit" />
 </form>
