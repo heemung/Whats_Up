@@ -42,6 +42,23 @@ namespace Whats_Up.Controllers
 
         public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2)
         {
+
+            HttpCookie userCookie;           //making same cookie reguardless
+            if (Request.Cookies["RegisteredUser"] == null) //still throwing null
+            {
+                userCookie = new HttpCookie("RegisteredUser");
+                userCookie.Values.Add("Email", currentUser.Email);
+                userCookie.Values.Add("Address", currentUser.AddressLine);
+            }
+            else
+            {
+                userCookie = Request.Cookies["RegisteredUser"];
+                userCookie.Values.Add("Email", currentUser.Email);
+                userCookie.Values.Add("Address", currentUser.AddressLine);
+            }
+
+            Response.Cookies.Add(userCookie); //save cookie?
+
             //TEST BIG CAT SELECTION
             List<string> bigCategory = new List<string>();
             //TEST END

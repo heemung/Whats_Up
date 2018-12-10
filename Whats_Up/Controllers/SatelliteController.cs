@@ -53,7 +53,7 @@ namespace Whats_Up.Controllers
                         JArray jSpaceObjects = new JArray();                        //new jarray for each location object
 
                         latitude = location["results"][0]["geometry"]["location"]   //setting lat and long in each address to string
-                            ["lat"].Value<string>(); 
+                            ["lat"].Value<string>();
                         longitude = location["results"][0]["geometry"]["location"]
                             ["lng"].Value<string>();
 
