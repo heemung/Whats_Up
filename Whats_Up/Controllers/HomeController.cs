@@ -32,6 +32,31 @@ namespace Whats_Up.Controllers
             return View();
         }
 
+        public ActionResult Favorites()
+        {
+            DataContext db = new DataContext();
+            ViewBag.FavoriteList = db.Favorites.ToList();
+            return View();
+        }
+
+        public ActionResult DeleteFavorite(int id)
+        {
+            DataContext db = new DataContext();
+            List<Favorite> NewFavoriteList = db.Favorites.Where(x => x.FavID == id).ToList();
+            
+            foreach(Favorite favorite in NewFavoriteList)
+            {
+                db.Favorites.Remove(favorite);
+            }
+
+            Favorite found = db.Favorites.Find(id);
+            db.Favorites.Remove(found);
+            db.SaveChanges();
+            
+            return RedirectToAction("Favorites");
+        }
+        
+        
         public ActionResult WhatsUp()
         {
 
