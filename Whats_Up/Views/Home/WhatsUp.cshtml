@@ -1,103 +1,82 @@
-﻿ <!DOCTYPE html>
- <html>
- <head>
-     <style>
-         /* Set the size of the div element that contains the map */
-         #map {
-             height: 400px; /* The height is 400 pixels */
-             width: 100%; /* The width is the width of the web page */
-         }
-     </style>
- </head>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+        }
+    </style>
+</head>
 
- <br />
- <br /> 
+<br />
+<br />
 
- <!-- Button to open the modal -->
- <button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
+<!-- Button to open the modal -->
+<button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
 
- <!-- The Modal (contains the Sign Up form) -->
- <div id="id01" class="modal">
-     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" style="color:red">X</span>
-     <div class="modal-content">
-         <div class="container">
-             <link href="~/Content/StyleSheet2.css" rel="stylesheet" type="text/css" />
-             <h2 style="color:gold">What's Up</h2>
-             <p>Enter information to see what's up</p>
-             <hr>
+<!-- The Modal (contains the Sign Up form) -->
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" style="color:red">X</span>
+    <div class="modal-content">
+        <div class="container">
+            <link href="~/Content/StyleSheet2.css" rel="stylesheet" type="text/css" />
+            <h2 style="color:gold">What's Up</h2>
+            <p>Enter information to see what's up</p>
+            <hr>
 
-             <label for="email" style="color:gold">Enter Email...</label>
-             <form action="/User/AddUser" method="post">
-                 <input type="text" id="email" name="Email" placeholder="Enter Email Address.." required>
-                 <button type="submit" class="signupbtn">Enter Info.</button>
-             </form>
+            <label for="email" style="color:gold">Enter Email...</label>
+            <form action="/Home/FormCollection" method="post">
+                <input type="text" id="email" name="Email" placeholder="Enter Email Address.." required>
+                <label for="addressline" style="color:gold">Enter House Address...</label>
+                <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
+                <button type="submit" class="signupbtn">Submit</button>
+            </form>
 
+            @*<div class="slidecontainer">
+                    <label for="radfrom" style="color:gold">Radius From Zip Code</label>
+                    <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
+                    <p>Value:<span id="slider"></span></p>
+                </div>
 
-             <form action="/Home/InputLocation" method="post">
-                 <label for="addressline" style="color:gold">Enter House Address...</label>
-                 <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
-                 @using Whats_Up.Models;
-                 @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
-                 @foreach (CheckBoxes x in SatList)
-                 {
-                     if (x.IsCheck == true)
-                     {
-                         <label>@x.Name</label>
-                         <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
-                     }
-                     else
-                     {
-                         <label>@x.Name</label>
-                         <input type="checkbox" name="@x.CheckName" value="@x.Value" />
-                     }
+                <script>
+                    var slider = document.getElementById("radfrom");
+                    var output = document.getElementById("slider");
+                    output.innerHTML = slider.value; // Display the default slider value
 
-                 }
-                 <button type="submit" class="signupbtn">Enter Info.</button>
-             </form>
+                    // Update the current slider value (each time you drag the slider handle)
+                    slider.oninput = function () {
+                        output.innerHTML = this.value;
+                    }
+                </script>*@
 
-             @*<div class="slidecontainer">
-            <label for="radfrom" style="color:gold">Radius From Zip Code</label>
-            <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
-            <p>Value:<span id="slider"></span></p>
+            <form action="/Home/InputLocation" method="post">
+                <label for="scat" style="color:gold">Satellite Category</label>
+                <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
+                    <option value="1">Astronomy Satellites</option>
+                    <option value="2">Atmospheric Studies Satellites</option>
+                    <option value="3">Communications Satellites</option>
+                    <option value="4">Navigation Satellites</option>
+                    <option value="5">Reconaissance Satellites</option>
+                    <option value="6">Remote Sensing Satellites</option>
+                    <option value="7">Search & Rescue Satellites</option>
+                    <option value="8">Space Exploration Satellites</option>
+                    <option value="9">Weather Satellites</option>
+
+                </select>
+                <button type="submit" class="signupbtn">Enter Info.</button>
+            </form>
+
         </div>
+    </div>
+</div>
 
-        <script>
-            var slider = document.getElementById("radfrom");
-            var output = document.getElementById("slider");
-            output.innerHTML = slider.value; // Display the default slider value
+<body>
+    <h3>My Google Maps Demo</h3>
 
-            // Update the current slider value (each time you drag the slider handle)
-            slider.oninput = function () {
-                output.innerHTML = this.value;
-            }
-        </script>*@
-
-             <form action="/Home/InputLocation" method="post">
-                 <label for="scat" style="color:gold">Satellite Category</label>
-                 <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
-                     <option value="1">Astronomy Satellites</option>
-                     <option value="2">Atmospheric Studies Satellites</option>
-                     <option value="3">Communications Satellites</option>
-                     <option value="4">Navigation Satellites</option>
-                     <option value="5">Reconaissance Satellites</option>
-                     <option value="6">Remote Sensing Satellites</option>
-                     <option value="7">Search & Rescue Satellites</option>
-                     <option value="8">Space Exploration Satellites</option>
-                     <option value="9">Weather Satellites</option>
-
-                 </select>
-                 <button type="submit" class="signupbtn">Enter Info.</button>
-             </form>
-
-         </div>
-     </div>
-     </div>
-
-     <body>
-         <h3>My Google Maps Demo</h3>
-
-         <div id="map"></div>
-         <script>
+    <div id="map"></div>
+    <script>
         function initMap() {
 
             var geoLat = @ViewBag.GoogleLat;
@@ -135,16 +114,35 @@
                     }
         }
 
-         </script>
-         <script async defer
-                 src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
-         </script>
-     </body>
- </html>
-<form action="/Home/InputLocation" method="post">
-    <input name="addressLine" type="text" placeholder="Enter your address" />
-    @*this is where checkboxes went*@
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
+    </script>
+</body>
+</html>
+<form action="/Home/FormCollection" method="post">
+    <input type="text" id="email" name="Email" placeholder="Enter Email Address.." required>
+    <label for="addressline" style="color:gold">Enter House Address...</label>
+    <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
+    @using Whats_Up.Models;
+    @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
+    @if (SatList != null)
+    {
+        foreach (CheckBoxes x in SatList)
+        {
+            if (x.IsCheck == true)
+            {
+                <label>@x.Name</label>
+                <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
+            }
+            else
+            {
+                <label>@x.Name</label>
+                <input type="checkbox" name="@x.CheckName" value="@x.Value" />
+            }
 
+        }
+    }
     <input type="submit" value="Submit" />
 </form>
 <table class="table table-bordered table-responsive table-hover">

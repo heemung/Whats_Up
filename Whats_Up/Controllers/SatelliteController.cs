@@ -16,6 +16,7 @@ namespace Whats_Up.Controllers
     {
         //json of satellite data for each category in a array
         public JArray SatCoordinates;
+        public JArray SatCoordinates2;
 
         //ORM private to this class.
         private DataContext db = new DataContext();
@@ -26,77 +27,87 @@ namespace Whats_Up.Controllers
         }
 
         //getting user selections for satellites categories 
-        public void GetSatCat(string[] satelliteCategoies)
+        public void GetSatCat(string[] satelliteCategoies, List<JObject> geoLocations)           
         {
+            List<JArray> satsForEachAddress = new List<JArray>();
+
             string latitude; //42.327501
             string longitude; //"-83.048981"
-            latitude = HomeController.geoLat;
-            longitude = HomeController.geoLong;
 
             //api key
             string N2YO = WebConfigurationManager.AppSettings["N2YO"];
 
             //checking to make sure there is one category selected
-            if (satelliteCategoies.Length != 0)
+            if (satelliteCategoies != null && geoLocations != null)
             {
-
-                JArray jSpaceObjects = new JArray();
-
                 int lastSatRecordDB = 0;
-                lastSatRecordDB = db.SatelliteN2YOs.Max(x => x.ID);
+                lastSatRecordDB = db.SatelliteN2YOs.Max(x => x.ID);                 //getting last entry in database
 
                 int ApiOverLimit = db.SatelliteN2YOs.Find(lastSatRecordDB).TransactionsCount;
-
-                ApiOverLimit += satelliteCategoies.Length;
-
-                if (ApiOverLimit < 1000)
+                ApiOverLimit += satelliteCategoies.Length;                          //getting transaction count from last entry and adding it to current transaction
+                                        //TO DO
+                if (ApiOverLimit < 1000)//NEED TO ACCOUNT FOR DOUBLE ADDRESS                                            //checking to see if API current Transaction is over 1000
                 {
-                    foreach (string categoryNum in satelliteCategoies)
+                    foreach (JObject location in geoLocations)
                     {
-                        UriBuilder builder = new UriBuilder
+                        JArray jSpaceObjects = new JArray();                        //new jarray for each location object
+
+                        latitude = location["results"][0]["geometry"]["location"]   //setting lat and long in each address to string
+                            ["lat"].Value<string>(); 
+                        longitude = location["results"][0]["geometry"]["location"]
+                            ["lng"].Value<string>();
+
+                        foreach (string categoryNum in satelliteCategoies)          //each add will have one request puts that request into a jobject and goes into an array
                         {
-                            Scheme = "https",
-                            Host = "n2yo.com",
-                            Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + categoryNum + "/&apiKey=" + N2YO,
-                        };
-                        HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
-                        requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
+                            
+                            UriBuilder builder = new UriBuilder
+                            {
+                                Scheme = "https",
+                                Host = "n2yo.com",
+                                Path = "rest/v1/satellite/above/" + latitude + "/" + longitude + "/0/70/" + categoryNum + "/&apiKey=" + N2YO,
+                            };
+                            HttpWebRequest requestN2YO = WebRequest.CreateHttp(builder.ToString());
+                            requestN2YO.UserAgent = "Mozilla / 5.0(Windows NT 6.1; WOW64; rv: 64.0) Gecko / 20100101 Firefox / 64.0";
 
-                        HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
+                            HttpWebResponse reponse = (HttpWebResponse)requestN2YO.GetResponse();
 
-                        if (reponse.StatusCode == HttpStatusCode.OK)
-                        {
-                            StreamReader reader = new StreamReader(reponse.GetResponseStream());
+                            if (reponse.StatusCode == HttpStatusCode.OK)
+                            {
+                                StreamReader reader = new StreamReader(reponse.GetResponseStream());
 
-                            string output = reader.ReadToEnd();
+                                string output = reader.ReadToEnd();
 
-                            JObject temp = JObject.Parse(output);
-                            jSpaceObjects.Add(temp);
+                                JObject temp = JObject.Parse(output);
+
+                                jSpaceObjects.Add(temp);                            //adding jobjects to jarray
+                            }
+                            else
+                            {
+                                //SatErrors("Could not get HTTP Reponse");
+                            }
+
                         }
-                        else
-                        {
-                            SatErrors("Could not get HTTP Reponse");                           
-                        }
+                        satsForEachAddress.Add(jSpaceObjects);
 
+
+                        //sends jarray to database method
+                        ToDatabase(jSpaceObjects);
+
+                        // sets json of satellite data for each category in a array
+                        SatCoordinates = jSpaceObjects;
                     }
-
-                    //sends jarray to database method
-                    ToDatabase(jSpaceObjects);
-
-                    // sets json of satellite data for each category in a array
-                    SatCoordinates = jSpaceObjects;
-
-                    ViewBag.TableSatData = jSpaceObjects;
                 }
                 else
                 {
-                    SatErrors("Over API limit. Please Try Again Later");
+                    //SatErrors("Over API limit. Please Try Again Later");
                 }
             }
             else
             {
-                SatErrors("Error: Need to select 1 category");
+                //SatInfo("Need to at least select 1 category and location");
             }
+
+
         }
 
         //taking the Jarray to push to DB
@@ -150,19 +161,6 @@ namespace Whats_Up.Controllers
                 }
             }
             //saving chnages actually made to the DB
-        }
-
-        //testing small sample
-        public Dictionary<string, int> AddingCatsToList1()
-        {
-            Dictionary<string, int> satCatDic = new Dictionary<string, int>
-            {
-                { "Yaogan", 36 },
-                { "XMandSirius", 33 },
-                { "WestfordNeedles", 37 },
-            };
-
-            return satCatDic;
         }
         
         public void BigCategories()
@@ -293,23 +291,31 @@ namespace Whats_Up.Controllers
             return boxItem;
         }
 
-        public List<CheckBoxes> SettingCheckBoxes()
+        public List<CheckBoxes> SettingCheckBoxes(string currentUserEmail, List<string> bigCategory)
         {
-            
-            //current email user???
-            User currentFavUser = new User();
             List<Favorite> favoriteList = new List<Favorite>();
-
-            currentFavUser.Email = "clayton.cox@gmail.com";
-
-            IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();
-            favQuery = favQuery.Where(x => x.Email == currentFavUser.Email);
-
-
-            favoriteList = favQuery.ToList();
-            if (favoriteList.Count != 0)
+            if (currentUserEmail == null)                            //first time log in or no log in
             {
 
+                if("cookie there" == "cookie there")
+                {
+                    //COOKIE CHECK CAN GO HERE
+                    currentUserEmail = "test1234@gmail.com";
+                }
+                else
+                {
+                    currentUserEmail = "1";                         //meaning no favorite check, user did not select to sign in
+                }
+            }
+
+            IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();     //favorites search in DB
+            favQuery = favQuery.Where(x => x.Email == currentUserEmail);
+
+
+            favoriteList = favQuery.ToList();                               //to List and are there favorites?
+            if (favoriteList.Count != 0)
+            {
+                //add big list check here
                 List<CheckBoxes> favBox = new List<CheckBoxes>();
                 foreach (CheckBoxes box in AddingCatsToList())
                 {
@@ -339,8 +345,27 @@ namespace Whats_Up.Controllers
             ViewBag.ErrorBag = error;
             return View("Error");
         }
+
+        public ActionResult SatInfo(string info)
+        {
+            ViewBag.InfoBag = info;
+            return View("WhatsUp");
+        }
     }
     
 }
 
+/*
+ *         //testing small sample
+        public Dictionary<string, int> AddingCatsToList1()
+        {
+            Dictionary<string, int> satCatDic = new Dictionary<string, int>
+            {
+                { "Yaogan", 36 },
+                { "XMandSirius", 33 },
+                { "WestfordNeedles", 37 },
+            };
+
+            return satCatDic;
+        }*/
 
