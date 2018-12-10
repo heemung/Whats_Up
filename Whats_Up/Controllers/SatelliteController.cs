@@ -447,6 +447,14 @@ namespace Whats_Up.Controllers
             }
         }
 
+        public ActionResult SaveFavorties(Favorite newFavorite)
+        {
+            DataContext db = new DataContext();
+            db.Favorites.Add(newFavorite);
+            db.SaveChanges();
+            return RedirectToAction("Favorites"); 
+        }
+
         public ActionResult SatErrors(string error)
         {
             ViewBag.ErrorBag = error;
