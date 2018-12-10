@@ -22,29 +22,31 @@ namespace Whats_Up.Controllers
             return View();
         }
 
-        public string AddUser(User registeredUser)
+        public void AddUser(User registeredUser)
         {
-            HttpCookie userCookie;
+            string Email = registeredUser.Email;
+            HttpCookie userCookie;           //making same cookie reguardless
             if (Request.Cookies["Email"] == null)
             {
-                userCookie = new HttpCookie("Email", registeredUser.Email);
+                userCookie = new HttpCookie("RegisteredUser");
+                userCookie.Values.Add("Email", registeredUser.Email);
+                userCookie.Values.Add("Address", registeredUser.AddressLine);
             }
             else
             {
-                userCookie = Request.Cookies["Email"];
-            }
-            userCookie.Value = registeredUser.Email;
-            Response.Cookies.Add(userCookie);
-
-
-            string usersEmail ="";
-            if (Request.Cookies["Email"] != null)
-            {
-
-                usersEmail = Request.Cookies["Email"].Value;
+                userCookie = Request.Cookies["RegisteredUser"];
+                userCookie.Values.Add("Email", registeredUser.Email);
+                userCookie.Values.Add("Address", registeredUser.AddressLine);
             }
 
-            return usersEmail;
+            Response.Cookies.Add(userCookie); //save cookie?
+
+
+            /*HttpCookie cookie = new HttpCookie("some_cookie_name");
+            HttpContext.Response.Cookies.Remove("some_cookie_name");
+            HttpContext.Response.SetCookie(cookie);*/ //save cookie?
+
+            //return usersEmail;
 
         }
     }

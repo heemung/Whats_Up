@@ -61,7 +61,7 @@ namespace Whats_Up.Controllers
             }
 
             ViewBag.Coordinates = satController.SatCoordinates;
-            ViewBag.Coordinates2 = satController.SatCoordinates2;
+            ViewBag.Coordinates2 = satController.SatCoordinates;
 
             if (resultFromLocation.Count == 1)
             {
@@ -168,21 +168,6 @@ namespace Whats_Up.Controllers
 
             return geoLocations;
 
-            /* GO TO VIEW?????
-             * user locations on map?
-            if(addressesIs2 == false)
-            {
-                ViewBag.GoogleLat = double.Parse(geoLocations[0]);
-                ViewBag.GoogleLong = double.Parse(geoLocations[1]);
-            }
-            else
-            {
-                ViewBag.GoogleLat = double.Parse(geoLocations[0]);
-                ViewBag.GoogleLong = double.Parse(geoLocations[1]);
-                ViewBag.GoogleLat1 = double.Parse(geoLocations[2]);
-                ViewBag.GoogleLong2 = double.Parse(geoLocations[3]);
-            }
-            */
         }
 
         public ActionResult Creators()
@@ -191,22 +176,19 @@ namespace Whats_Up.Controllers
 
             return View();
         }
+
+        public User GetCookie() //getting the cookie to a new user object.
+        {
+            User cookieUser = new User();
+            if(HttpContext.Request.Cookies["RegisteredUser"] != null)
+            {
+                HttpCookie cookie = HttpContext.Request.Cookies.Get("RegisteredUser");
+                cookieUser.Email = cookie.Values["Email"].ToString();
+                cookieUser.AddressLine = cookie.Values["Address"].ToString();
+            }
+
+            return cookieUser;
+        }
     }
 }
-/*             SatelliteController start = new SatelliteController();
-            start.GetSatCat(satelliteCategoies);
 
-            return View("WhatsUp");
-
-    from input location
-
-                    ViewBag.GoogleLat = double.Parse(geoLocations[0]);
-                ViewBag.GoogleLong = double.Parse(geoLocations[1]);
-            }
-            else
-            {
-                ViewBag.GoogleLat = double.Parse(geoLocations[0]);
-                ViewBag.GoogleLong = double.Parse(geoLocations[1]);
-                ViewBag.GoogleLat1 = double.Parse(geoLocations[2]);
-                ViewBag.GoogleLong2 = double.Parse(geoLocations[3]);
-    */
