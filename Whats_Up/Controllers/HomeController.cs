@@ -40,7 +40,7 @@ namespace Whats_Up.Controllers
             return View();
         }
 
-        public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2)
+        public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2, string bigCategory)
         {
             HttpCookie userCookie;           //making same cookie reguardless
             if (Request.Cookies["RegisteredUser"] == null) //still throwing null
@@ -59,10 +59,6 @@ namespace Whats_Up.Controllers
             Response.Cookies.Add(userCookie); //save cookie?
             TempData["Email"] = currentUser.Email;
             TempData["Address"] = currentUser.AddressLine;
-
-            //TEST BIG CAT SELECTION
-            List<string> bigCategory = new List<string>();
-            //TEST END
 
             currentUserController.AddUser(currentUser);
             resultFromLocation = InputLocation(currentUser.AddressLine, address2);     //calling method to get user information in home controller
