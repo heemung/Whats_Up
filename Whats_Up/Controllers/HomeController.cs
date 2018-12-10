@@ -17,6 +17,7 @@ namespace Whats_Up.Controllers
         public SatelliteController satController = new SatelliteController();
         public UserController currentUserController = new UserController();
 
+
         private List<CheckBoxes> homeCheckBoxData = new List<CheckBoxes>();
         private List<CheckBoxes> homeSatData = new List<CheckBoxes>();
         private List<JObject> resultFromLocation = new List<JObject>();
@@ -45,7 +46,7 @@ namespace Whats_Up.Controllers
             List<string> bigCategory = new List<string>();
             //TEST END
 
-
+            currentUserController.AddUser(currentUser);
             resultFromLocation = InputLocation(currentUser.AddressLine, address2);     //calling method to get user information in home controller
 
             satController.GetSatCat(satelliteCategoies, resultFromLocation);                //calling satcat and passing geo and user view selected categories, this posts data into two public jarrays in sat controller

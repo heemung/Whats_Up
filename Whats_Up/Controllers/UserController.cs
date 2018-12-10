@@ -24,9 +24,12 @@ namespace Whats_Up.Controllers
 
         public void AddUser(User registeredUser)
         {
+            //TO DO
+            //1. add user to database if exists
+
             string Email = registeredUser.Email;
             HttpCookie userCookie;           //making same cookie reguardless
-            if (Request.Cookies["Email"] == null)
+            if (Request.Cookies["Email"] == null) //still throwing null
             {
                 userCookie = new HttpCookie("RegisteredUser");
                 userCookie.Values.Add("Email", registeredUser.Email);
