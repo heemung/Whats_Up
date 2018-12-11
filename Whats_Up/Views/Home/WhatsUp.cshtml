@@ -55,12 +55,11 @@
             var geoLat = @ViewBag.GoogleLat;
             var geoLong = @ViewBag.GoogleLong;
 
-            if (geoLat != null && geoLong != null)
-            {
+            if (geoLat != null && geoLong != null) {
                 var userLocation = { lat: geoLat, lng: geoLong }
                 var map = new google.maps.Map(
                     document.getElementById('map'), { zoom: 4, center: userLocation });
-                var userMarker = new google.maps.Marker({position: userLocation, map: map})
+                var userMarker = new google.maps.Marker({ position: userLocation, map: map })
 
                     @if (ViewBag.CoordinatesComparison1 != null)
                     {
@@ -69,113 +68,153 @@
                                     double latitude = satList["satlat"].Value;
                                     double longitude = satList["satlng"].Value;
                                    <text>
-                                    var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                                    var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: '+ '@satList["launchDate"]';
-                                    var satInfoWindow = new google.maps.InfoWindow({
-                                    //position: satPosition,
-                                    content: satContent
-                                    });
+                var satPosition = new google.maps.LatLng(@latitude, @longitude);
+                var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: ' + '@satList["launchDate"]';
+                var satInfoWindow = new google.maps.InfoWindow({
+                    //position: satPosition,
+                    content: satContent
+                });
 
 
-                                    var satMarker = new google.maps.Marker({
-                                        position: satPosition,
-                                        map: map,
-                                        info: satContent,
-                                        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                                    });
-                                    //satMarker.infowindow = satInfoWindow;
-                                    google.maps.event.addListener(satMarker, 'click', function () {
+                var satMarker = new google.maps.Marker({
+                    position: satPosition,
+                    map: map,
+                    info: satContent,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                });
+                //satMarker.infowindow = satInfoWindow;
+                google.maps.event.addListener(satMarker, 'click', function () {
 
-                                        satInfoWindow.setContent(this.info);
-                                        satInfoWindow.open(map, this);
+                    satInfoWindow.setContent(this.info);
+                    satInfoWindow.open(map, this);
 
-                                    });
-                                    //satMarker.addListener('click', function () {
-                                    //    return this.infowindow.open(map, satMarker)
-                                    //});
+                });
+                //satMarker.addListener('click', function () {
+                //    return this.infowindow.open(map, satMarker)
+                //});
                                     </text>
 
                                 
                             
                         }
                      }
-            }
 
 
-             @if (ViewBag.CoordinatesComparison2 != null)
+
+                @if (ViewBag.CoordinatesComparison2 != null)
                     {
                         foreach (var satList in ViewBag.CoordinatesComparison2)
                         {
                                     double latitude = satList["satlat"].Value;
                                     double longitude = satList["satlng"].Value;
                                    <text>
-                                    var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                                    var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: '+ '@satList["launchDate"]';
-                                    var satInfoWindow = new google.maps.InfoWindow({
-                                    //position: satPosition,
-                                    content: satContent
-                                    });
+                var satPosition = new google.maps.LatLng(@latitude, @longitude);
+                var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: ' + '@satList["launchDate"]';
+                var satInfoWindow = new google.maps.InfoWindow({
+                    //position: satPosition,
+                    content: satContent
+                });
 
 
-                                    var satMarker = new google.maps.Marker({
-                                        position: satPosition,
-                                        map: map,
-                                        info: satContent,
-                                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                                    });
-                                    //satMarker.infowindow = satInfoWindow;
-                                    google.maps.event.addListener(satMarker, 'click', function () {
+                var satMarker = new google.maps.Marker({
+                    position: satPosition,
+                    map: map,
+                    info: satContent,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                });
+                //satMarker.infowindow = satInfoWindow;
+                google.maps.event.addListener(satMarker, 'click', function () {
 
-                                        satInfoWindow.setContent(this.info);
-                                        satInfoWindow.open(map, this);
+                    satInfoWindow.setContent(this.info);
+                    satInfoWindow.open(map, this);
 
-                                    });
-                                    //satMarker.addListener('click', function () {
-                                    //    return this.infowindow.open(map, satMarker)
-                                    //});
+                });
+                //satMarker.addListener('click', function () {
+                //    return this.infowindow.open(map, satMarker)
+                //});
                                     </text>
 
                                 
                             
                         }
               }
-              @if (ViewBag.CoordinatesUnique != null)
+                @if (ViewBag.CoordinatesUnique != null)
                {
                         foreach (var satList in ViewBag.CoordinatesUnique)
                         {
                                     double latitude = satList["satlat"].Value;
                                     double longitude = satList["satlng"].Value;
                                    <text>
-                                    var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                                    var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: '+ '@satList["launchDate"]';
-                                    var satInfoWindow = new google.maps.InfoWindow({
-                                    //position: satPosition,
-                                    content: satContent
-                                    });
+                var satPosition = new google.maps.LatLng(@latitude, @longitude);
+                var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: ' + '@satList["launchDate"]';
+                var satInfoWindow = new google.maps.InfoWindow({
+                    //position: satPosition,
+                    content: satContent
+                });
 
 
-                                    var satMarker = new google.maps.Marker({
-                                        position: satPosition,
-                                        map: map,
-                                        info: satContent,
-                                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                                    });
-                                    //satMarker.infowindow = satInfoWindow;
-                                    google.maps.event.addListener(satMarker, 'click', function () {
+                var satMarker = new google.maps.Marker({
+                    position: satPosition,
+                    map: map,
+                    info: satContent,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                });
+                //satMarker.infowindow = satInfoWindow;
+                google.maps.event.addListener(satMarker, 'click', function () {
 
-                                        satInfoWindow.setContent(this.info);
-                                        satInfoWindow.open(map, this);
+                    satInfoWindow.setContent(this.info);
+                    satInfoWindow.open(map, this);
 
-                                    });
-                                    //satMarker.addListener('click', function () {
-                                    //    return this.infowindow.open(map, satMarker)
-                                    //});
+                });
+                //satMarker.addListener('click', function () {
+                //    return this.infowindow.open(map, satMarker)
+                //});
                                     </text>
 
                                 
                             
                         }
                }
+
+                @if (ViewBag.Coodinates1Address != null)
+             {
+                       foreach (var outerArray in ViewBag.Coodinates1Address)
+                       {
+                           if (outerArray["info"]["satcount"].Value != 0)
+                           {
+                               foreach (var innerArray in outerArray["above"])
+                               {
+                                   double latitude = innerArray["satlat"].Value;
+                                   double longitude = innerArray["satlng"].Value;
+                                  <text>
+                var satPosition = new google.maps.LatLng(@latitude, @longitude);
+                var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: ' + '@innerArray["launchDate"]';
+                var satInfoWindow = new google.maps.InfoWindow({
+                    //position: satPosition,
+                    content: satContent
+                });
+                var satMarker = new google.maps.Marker({
+                    position: satPosition,
+                    map: map,
+                    info: satContent,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+
+                });
+                //satMarker.infowindow = satInfoWindow;
+                google.maps.event.addListener(satMarker, 'click', function () {
+                    satInfoWindow.setContent(this.info);
+                    satInfoWindow.open(map, this);
+                });
+                //satMarker.addListener('click', function () {
+                //    return this.infowindow.open(map, satMarker)
+                //});
+                                   </text>
+                                }
+                           }
+                       }
+                
+             }
+            }
         }
 
 

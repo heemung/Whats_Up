@@ -18,6 +18,7 @@ namespace Whats_Up.Controllers
         public JArray SatCoordinates;
         public JArray SatCoordinates2;
         public JArray SatCoordinates3;
+        public JArray SatCoordinates1Address;
         public string Error;
         public string Info;
         public string TransCount;
@@ -129,7 +130,7 @@ namespace Whats_Up.Controllers
                 if (returnFromSatCat.Count == 1)
                 {
                     oneAddress = true;
-                    SatCoordinates2 = returnFromSatCat[0];
+                    SatCoordinates1Address = returnFromSatCat[0];
                     //for testing
                     //SatCoordinates = returnFromSatCat[0];
                 }
