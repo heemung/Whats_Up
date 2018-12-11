@@ -61,7 +61,9 @@ namespace Whats_Up.Controllers
         {
 
             ViewBag.GoogleKey = GoogleKey;                                  //sends google key for embedded map
-
+            ViewBag.Error = satController.Error;
+            ViewBag.Info = satController.Info;
+            ViewBag.Count = satController.TransCount;
             return View();
         }
 
@@ -103,6 +105,7 @@ namespace Whats_Up.Controllers
             ViewBag.CoordinatesUnique = satController.SatCoordinates;
             ViewBag.CoordinatesComparison1 = satController.SatCoordinates2;
             ViewBag.CoodinatesComparison2 = satController.SatCoordinates3;
+            ViewBag.Coodinates1Address = satController.SatCoordinates1Address;
             /*
             TempData["CoordinatesUnique"] = satController.SatCoordinates;
             TempData["CoordinatesComparison1"] = satController.SatCoordinates2;
