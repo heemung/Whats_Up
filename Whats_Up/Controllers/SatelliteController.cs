@@ -18,6 +18,9 @@ namespace Whats_Up.Controllers
         public JArray SatCoordinates;
         public JArray SatCoordinates2;
         public JArray SatCoordinates3;
+        public string Error;
+        public string Info;
+        public string TransCount;
         //ORM private to this class.
         private DataContext db = new DataContext();
         // GET: Satellite
@@ -29,6 +32,10 @@ namespace Whats_Up.Controllers
         //getting user selections for satellites categories 
         public void GetSatCat(string[] satelliteCategoies, List<JObject> geoLocations)           
         {
+            //reset messages
+            Error = "";
+            Info = "";
+            TransCount = "";
             List<JArray> satsForEachAddress = new List<JArray>();
 
             string latitude; //42.327501
@@ -83,7 +90,7 @@ namespace Whats_Up.Controllers
                             }
                             else
                             {
-                                //SatErrors("Could not get HTTP Reponse");
+                                Error = "Could not get HTTP Reponse";
                             }
 
                         }
@@ -100,12 +107,12 @@ namespace Whats_Up.Controllers
                 }
                 else
                 {
-                    //SatErrors("Over API limit. Please Try Again Later");
+                    TransCount ="Over API limit. Please Try Again Later";
                 }
             }
             else
             {
-                //SatInfo("Need to at least select 1 category and location");
+                Info = "Need to at least select 1 category and location";
             }
         }
 
@@ -510,17 +517,6 @@ namespace Whats_Up.Controllers
             return RedirectToAction("Favorites"); 
         }
 
-        public ActionResult SatErrors(string error)
-        {
-            ViewBag.ErrorBag = error;
-            return View("Error");
-        }
-
-        public ActionResult SatInfo(string info)
-        {
-            ViewBag.InfoBag = info;
-            return View("WhatsUp");
-        }
     }
     
 }
