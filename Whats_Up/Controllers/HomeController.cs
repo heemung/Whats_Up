@@ -100,8 +100,15 @@ namespace Whats_Up.Controllers
                 TempData["SatList"] = homeCheckBoxData;
             }
 
-            ViewBag.Coordinates = satController.SatCoordinates;
-            ViewBag.Coordinates2 = satController.SatCoordinates;
+            ViewBag.CoordinatesUnique = satController.SatCoordinates;
+            ViewBag.CoordinatesComparison1 = satController.SatCoordinates2;
+            ViewBag.CoodinatesComparison2 = satController.SatCoordinates3;
+            /*
+            TempData["CoordinatesUnique"] = satController.SatCoordinates;
+            TempData["CoordinatesComparison1"] = satController.SatCoordinates2;
+            TempData["CoodinatesComparison2"] = satController.SatCoordinates3;
+            */
+
 
             if (resultFromLocation.Count == 1)
             {
@@ -133,7 +140,7 @@ namespace Whats_Up.Controllers
 
         public string AddressForGoogle(string address)
         {
-            if (address.Contains(' '))
+            if (address.Contains(' ') && address != null)
             {
                 string addressForLink = address;
                 char[] tempForLoop = new char[addressForLink.Length];
@@ -168,13 +175,18 @@ namespace Whats_Up.Controllers
 
             if (address2 != null)
             {
-
-                string formattedAddress1 = AddressForGoogle(address1);      //method use to format " " to +
-                string formattedAddress2 = AddressForGoogle(address2);
-
-                addresses.Add(formattedAddress1);
-                addresses.Add(formattedAddress2);
-
+                if (address2 != "")
+                {
+                    string formattedAddress1 = AddressForGoogle(address1);      //method use to format " " to +
+                    string formattedAddress2 = AddressForGoogle(address2);
+                    addresses.Add(formattedAddress1);
+                    addresses.Add(formattedAddress2);
+                }
+                else
+                {                                                               //used for only 1 address
+                    string formattedAddress1 = AddressForGoogle(address1);
+                    addresses.Add(formattedAddress1);
+                }
             }
             else
             {                                                               //used for only 1 address

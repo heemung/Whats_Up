@@ -17,7 +17,10 @@ namespace Whats_Up.Controllers
         //json of satellite data for each category in a array
         public JArray SatCoordinates;
         public JArray SatCoordinates2;
-
+        public JArray SatCoordinates3;
+        public string Error;
+        public string Info;
+        public string TransCount;
         //ORM private to this class.
         private DataContext db = new DataContext();
         // GET: Satellite
@@ -29,6 +32,10 @@ namespace Whats_Up.Controllers
         //getting user selections for satellites categories 
         public void GetSatCat(string[] satelliteCategoies, List<JObject> geoLocations)           
         {
+            //reset messages
+            Error = "";
+            Info = "";
+            TransCount = "";
             List<JArray> satsForEachAddress = new List<JArray>();
 
             string latitude; //42.327501
@@ -83,7 +90,7 @@ namespace Whats_Up.Controllers
                             }
                             else
                             {
-                                //SatErrors("Could not get HTTP Reponse");
+                                Error = "Could not get HTTP Reponse";
                             }
 
                         }
@@ -94,22 +101,76 @@ namespace Whats_Up.Controllers
                         ToDatabase(jSpaceObjects);
 
                         // sets json of satellite data for each category in a array
-                        SatCoordinates = jSpaceObjects;
+
                     }
+                    CompareSatData(satsForEachAddress);
                 }
                 else
                 {
-                    //SatErrors("Over API limit. Please Try Again Later");
+                    TransCount ="Over API limit. Please Try Again Later";
                 }
             }
             else
             {
-                //SatInfo("Need to at least select 1 category and location");
+                Info = "Need to at least select 1 category and location";
             }
-
-
         }
 
+        public void CompareSatData(List<JArray> returnFromSatCat)
+        {
+            JArray comparision1;
+            JArray comparision2;
+            JArray comparisionSame = new JArray();
+            JArray comparision1Unque = new JArray();
+            JArray comparision2Unque = new JArray();
+            try
+            {
+                if (returnFromSatCat.Count == 1)
+                {
+                    SatCoordinates = returnFromSatCat[0];
+                }
+                else if (returnFromSatCat.Count == 2)
+                {
+                    comparision1 = returnFromSatCat[0];
+                    comparision2 = returnFromSatCat[1];
+
+                    foreach (dynamic outerArrayIn2 in comparision2)                 //going in outer json array in list 2
+                    {
+                        if ((outerArrayIn2["info"]["satcount"] != 0))               //checking if there is satellites in the list
+                        {
+                            foreach (dynamic outerArrayIn1 in comparision1)         //going into outer json in list 1
+                            {
+                                if (outerArrayIn1["info"]["satcount"] != 0)         //checking if there is satellites in the list
+                                {
+                                    foreach (dynamic innerArray1 in outerArrayIn1["above"]) //inner above array for each sat.
+                                    {
+                                        foreach (dynamic innerArray2 in outerArrayIn2["above"]) //inner above array for each sat2
+                                        {
+                                            if (innerArray1["satid"].Value == innerArray2["satid"].Value) //comparing satellites ID's
+                                            {
+                                                comparisionSame.Add(innerArray1);
+                                            }
+                                            else
+                                            {
+                                                comparision1Unque.Add(innerArray1);
+                                                comparision2Unque.Add(innerArray2);
+                                            }
+                                        }//end of 2nd inner loop or loop 4
+                                    } //end of 1st inner loop or loop 3
+                                }//end of second if
+                            } //end 2nd loop
+                        } //end 1st if
+                    } //end 1st loop
+                } //end else if
+                comparisionSame = SatCoordinates;
+                comparision1Unque = SatCoordinates2;
+                comparision2Unque = SatCoordinates3;
+            } //end try
+            catch (Exception)
+            {
+
+            }
+        }
         //taking the Jarray to push to DB
         public void ToDatabase(JArray satdata)
         {
@@ -348,6 +409,7 @@ namespace Whats_Up.Controllers
             bool hasFavorites = false;
             List<string> bigListSelection = BigCategories(bigCategory);
             List<Favorite> favoriteList = new List<Favorite>();
+
             if (currentUserEmail == null)                            //first time log in or no log in
             {
 
@@ -455,17 +517,6 @@ namespace Whats_Up.Controllers
             return RedirectToAction("Favorites"); 
         }
 
-        public ActionResult SatErrors(string error)
-        {
-            ViewBag.ErrorBag = error;
-            return View("Error");
-        }
-
-        public ActionResult SatInfo(string info)
-        {
-            ViewBag.InfoBag = info;
-            return View("WhatsUp");
-        }
     }
     
 }

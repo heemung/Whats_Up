@@ -15,7 +15,6 @@ namespace Whats_Up.Controllers
     public class UserController : Controller
     {
         
-
         // GET: User
         public ActionResult Index()
         {
