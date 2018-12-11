@@ -182,7 +182,11 @@ namespace Whats_Up.Controllers
                     addresses.Add(formattedAddress1);
                     addresses.Add(formattedAddress2);
                 }
-
+                else
+                {                                                               //used for only 1 address
+                    string formattedAddress1 = AddressForGoogle(address1);
+                    addresses.Add(formattedAddress1);
+                }
             }
             else
             {                                                               //used for only 1 address
