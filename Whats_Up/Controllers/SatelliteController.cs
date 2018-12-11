@@ -169,9 +169,10 @@ namespace Whats_Up.Controllers
                 } //end else if
                 if (oneAddress == false)
                 {
-                    comparisionSame = SatCoordinates;
-                    comparision1Unque = SatCoordinates2;
-                    comparision2Unque = SatCoordinates3;
+                    SatCoordinates = comparisionSame;
+                    SatCoordinates2 = comparision1Unque;
+                    SatCoordinates3 = comparision2Unque;
+
                 }
 
             } //end try

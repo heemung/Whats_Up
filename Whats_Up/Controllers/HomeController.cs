@@ -61,7 +61,9 @@ namespace Whats_Up.Controllers
         {
 
             ViewBag.GoogleKey = GoogleKey;                                  //sends google key for embedded map
-
+            ViewBag.Error = satController.Error;
+            ViewBag.Info = satController.Info;
+            ViewBag.Count = satController.TransCount;
             return View();
         }
 

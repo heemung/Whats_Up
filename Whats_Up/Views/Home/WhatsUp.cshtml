@@ -64,17 +64,13 @@
 
                     @if (ViewBag.CoordinatesComparison1 != null)
                     {
-                        foreach (var outerArray in ViewBag.CoordinatesComparison1)
+                        foreach (var satList in ViewBag.CoordinatesComparison1)
                         {
-                            if (outerArray["info"]["satcount"].Value != 0)
-                            {
-                                foreach (var innerArray in outerArray["above"])
-                                {
-                                    double latitude = innerArray["satlat"].Value;
-                                    double longitude = innerArray["satlng"].Value;
+                                    double latitude = satList["satlat"].Value;
+                                    double longitude = satList["satlng"].Value;
                                    <text>
                                     var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                                    var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: '+ '@innerArray["launchDate"]';
+                                    var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: '+ '@satList["launchDate"]';
                                     var satInfoWindow = new google.maps.InfoWindow({
                                     //position: satPosition,
                                     content: satContent
@@ -99,8 +95,8 @@
                                     //});
                                     </text>
 
-                                }
-                            }
+                                
+                            
                         }
                      }
             }
@@ -108,17 +104,13 @@
 
              @if (ViewBag.CoordinatesComparison2 != null)
                     {
-                        foreach (var outerArray in ViewBag.CoordinatesComparison2)
+                        foreach (var satList in ViewBag.CoordinatesComparison2)
                         {
-                            if (outerArray["info"]["satcount"].Value != 0)
-                            {
-                                foreach (var innerArray in outerArray["above"])
-                                {
-                                    double latitude = innerArray["satlat"].Value;
-                                    double longitude = innerArray["satlng"].Value;
+                                    double latitude = satList["satlat"].Value;
+                                    double longitude = satList["satlng"].Value;
                                    <text>
                                     var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                                    var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: '+ '@innerArray["launchDate"]';
+                                    var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: '+ '@satList["launchDate"]';
                                     var satInfoWindow = new google.maps.InfoWindow({
                                     //position: satPosition,
                                     content: satContent
@@ -143,23 +135,19 @@
                                     //});
                                     </text>
 
-                                }
-                            }
+                                
+                            
                         }
               }
               @if (ViewBag.CoordinatesUnique != null)
                {
-                        foreach (var outerArray in ViewBag.CoordinatesUnique)
+                        foreach (var satList in ViewBag.CoordinatesUnique)
                         {
-                            if (outerArray["info"]["satcount"].Value != 0)
-                            {
-                                foreach (var innerArray in outerArray["above"])
-                                {
-                                    double latitude = innerArray["satlat"].Value;
-                                    double longitude = innerArray["satlng"].Value;
+                                    double latitude = satList["satlat"].Value;
+                                    double longitude = satList["satlng"].Value;
                                    <text>
                                     var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                                    var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: '+ '@innerArray["launchDate"]';
+                                    var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: '+ '@satList["launchDate"]';
                                     var satInfoWindow = new google.maps.InfoWindow({
                                     //position: satPosition,
                                     content: satContent
@@ -184,12 +172,12 @@
                                     //});
                                     </text>
 
-                                }
-                            }
+                                
+                            
                         }
                }
         }
-        
+
 
     </script>
     <script async defer
