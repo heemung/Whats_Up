@@ -100,8 +100,11 @@ namespace Whats_Up.Controllers
                 TempData["SatList"] = homeCheckBoxData;
             }
 
-            ViewBag.Coordinates = satController.SatCoordinates;
-            ViewBag.Coordinates2 = satController.SatCoordinates;
+            TempData["CoordinatesUnique"] = satController.SatCoordinates;
+            TempData["CoordinatesComparison1"] = satController.SatCoordinates1;
+            TempData["CoodinatesComparison2"] = satController.SatCoordinates2;
+
+
 
             if (resultFromLocation.Count == 1)
             {
