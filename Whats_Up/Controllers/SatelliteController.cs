@@ -118,6 +118,7 @@ namespace Whats_Up.Controllers
 
         public void CompareSatData(List<JArray> returnFromSatCat)
         {
+            bool oneAddress = true;
             JArray comparision1;
             JArray comparision2;
             JArray comparisionSame = new JArray();
@@ -127,10 +128,14 @@ namespace Whats_Up.Controllers
             {
                 if (returnFromSatCat.Count == 1)
                 {
-                    SatCoordinates = returnFromSatCat[0];
+                    oneAddress = true;
+                    SatCoordinates2 = returnFromSatCat[0];
+                    //for testing
+                    //SatCoordinates = returnFromSatCat[0];
                 }
                 else if (returnFromSatCat.Count == 2)
                 {
+                    oneAddress = false;
                     comparision1 = returnFromSatCat[0];
                     comparision2 = returnFromSatCat[1];
 
@@ -162,9 +167,13 @@ namespace Whats_Up.Controllers
                         } //end 1st if
                     } //end 1st loop
                 } //end else if
-                comparisionSame = SatCoordinates;
-                comparision1Unque = SatCoordinates2;
-                comparision2Unque = SatCoordinates3;
+                if (oneAddress == false)
+                {
+                    comparisionSame = SatCoordinates;
+                    comparision1Unque = SatCoordinates2;
+                    comparision2Unque = SatCoordinates3;
+                }
+
             } //end try
             catch (Exception)
             {
