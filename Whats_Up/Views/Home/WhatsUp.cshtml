@@ -15,55 +15,38 @@
 <!-- Button to open the modal -->
 <button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
 <!-- The Modal (contains the Sign Up form) -->
-<div id="id01" class="modal">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" style="color:red">X</span>
-    <div class="modal-content">
-        <div class="container">
-            <link href="~/Content/StyleSheet2.css" rel="stylesheet" type="text/css" />
-            <h2 style="color:gold">What's Up</h2>
-            <p>Enter information to see what's up</p>
-            <hr>
-            <label for="email" style="color:gold">Enter Email...</label>
-            <form action="/Home/FormCollection" method="post">
+<form action="/Home/FormCollection" method="post">
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" style="color:red">X</span>
+        <div class="modal-content">
+            <div class="container">
+                <link href="~/Content/StyleSheet2.css" rel="stylesheet" type="text/css" />
+                <h2 style="color:gold">What's Up</h2>
+                <p>Enter information to see what's up</p>
+                <hr>
+
+                <label for="email" style="color:gold">Enter Email...</label>
                 <input type="text" id="email" name="Email" placeholder="Enter Email Address.." required>
                 <label for="addressline" style="color:gold">Enter House Address...</label>
                 <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
-                <button type="submit" class="signupbtn">Submit</button>
-            </form>
-            @*<div class="slidecontainer">
-                    <label for="radfrom" style="color:gold">Radius From Zip Code</label>
-                    <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
-                    <p>Value:<span id="slider"></span></p>
-                </div>
-
-                <script>
-                    var slider = document.getElementById("radfrom");
-                    var output = document.getElementById("slider");
-                    output.innerHTML = slider.value; // Display the default slider value
-
-                    // Update the current slider value (each time you drag the slider handle)
-                    slider.oninput = function () {
-                        output.innerHTML = this.value;
-                    }
-                </script>*@
-            <form action="/Home/InputLocation" method="post">
                 <label for="scat" style="color:gold">Satellite Category</label>
-                <select size="5" multiple="multiple" onchange="" name="satellitecategory" id="scat">
-                    <option value="1">Astronomy Satellites</option>
-                    <option value="2">Atmospheric Studies Satellites</option>
-                    <option value="3">Communications Satellites</option>
-                    <option value="4">Navigation Satellites</option>
-                    <option value="5">Reconaissance Satellites</option>
-                    <option value="6">Remote Sensing Satellites</option>
-                    <option value="7">Search & Rescue Satellites</option>
-                    <option value="8">Space Exploration Satellites</option>
-                    <option value="9">Weather Satellites</option>
+                <select size="9" multiple="multiple" onchange="" name="bigCategory" id="scat">
+                    <option value="Astronomy">Astronomy Satellites</option>
+                    <option value="AtmosphericStudies">Atmospheric Studies Satellites</option>
+                    <option value="Communications">Communications Satellites</option>
+                    <option value="Navigation">Navigation Satellites</option>
+                    <option value="Reconaissance">Reconaissance Satellites</option>
+                    <option value="RemoteSensing">Remote Sensing Satellites</option>
+                    <option value="SearchRescue">Search & Rescue Satellites</option>
+                    <option value="SpaceExploration">Space Exploration Satellites</option>
+                    <option value="Weather">Weather Satellites</option>
                 </select>
                 <button type="submit" class="signupbtn">Enter Info.</button>
-            </form>
+
+            </div>
         </div>
     </div>
-</div>
+</form>
 <body>
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
@@ -77,28 +60,12 @@
             {
                 var userLocation = { lat: geoLat, lng: geoLong }
                 var map = new google.maps.Map(
-                    document.getElementById('map'), {
-                        zoom: 4, center: userLocation
-                    });
-                var contentStuff = '<h2>Your Location</h2><div id="content">This marker is your first inputted address</div>';
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentStuff
-                });
-                var userMarker = new google.maps.Marker({
-                    position: userLocation,
-                    map: map,
-                    title: 'Title'
-                });
-                
+                    document.getElementById('map'), { zoom: 4, center: userLocation });
+                var userMarker = new google.maps.Marker({position: userLocation, map: map})
 
-                userMarker.addListener('click', function () {
-                    infowindow.open(map, userMarker);
-                });
-
-
-                    @if (ViewBag.Coordinates2 != null)
+                    @if (ViewBag.Coordinates != null)
                     {
-                        foreach (var outerArray in ViewBag.Coordinates2)
+                        foreach (var outerArray in ViewBag.Coordinates)
                         {
                             if (outerArray["info"]["satcount"].Value != 0)
                             {
@@ -106,15 +73,15 @@
                                 {
                                     double latitude = innerArray["satlat"].Value;
                                     double longitude = innerArray["satlng"].Value;
-                                    <text>
+                                   <text>
                                     var satPosition = new google.maps.LatLng(@latitude, @longitude);
                                     var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: '+ '@innerArray["launchDate"]';
                                     var satInfoWindow = new google.maps.InfoWindow({
                                     //position: satPosition,
                                     content: satContent
                                     });
-                                    
-                    
+
+
                                     var satMarker = new google.maps.Marker({
                                         position: satPosition,
                                         map: map,
@@ -133,23 +100,37 @@
                                     //});
                                     </text>
 
+                                    }
                                 }
                             }
                         }
-                     }
-            }
+                    }
         }
 
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl-2JvdKq7X0XyKha-OC6DyrZ4HEtKxJU&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
     </script>
 </body>
 </html>
+
 <form action="/Home/FormCollection" method="post">
-    <input type="text" id="email" name="Email" placeholder="Enter Email Address.." required>
-    <label for="addressline" style="color:gold">Enter House Address...</label>
-    <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
+    @if (TempData["Address"] != null)
+    {
+        <p>@TempData["Address"]</p>
+
+        <input type="hidden" id="email" name="Email" value="@TempData["Email"]" required>
+
+        <label for="addressline" style="color:gold"></label>
+        <input type="hidden" id="addressline" name="AddressLine" value="@TempData["Address"]" hidden>
+
+        <label for="address2" style="color:gold">Add Another Address for Comparison</label>
+        <input type="text" id="addressline" name="address2" placeholder="Optional..">
+
+        <input type="submit" value="Submit" />
+
+    }
+    <h2 style="color:gold">Satellites</h2>
     @using Whats_Up.Models;
     @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
     @if (SatList != null)
@@ -169,17 +150,20 @@
 
         }
     }
-    <input type="submit" value="Submit" />
+    <br />
+    <input type="submit" class="btn-primary" value="Add Satellites to Favorites" formaction="/Satellite/SaveFavorties" />
+    <input type="reset" value="Reset Form" />
 </form>
+
 <table class="table table-bordered table-responsive table-hover">
     <tr>
-        <th>Sat ID</th>
-        <th>Sat Name </th>
-        <th>Sat Lat </th>
-        <th>Sat Long</th>
-        <th>Sat Alt</th>
-        <th>Launch Date</th>
-        <th>Int Designator</th>
+        <th align="center" style="color:gold">Sat ID</th>
+        <th align="center" style="color:gold">Sat Name </th>
+        <th align="center" style="color:gold">Sat Lat </th>
+        <th align="center" style="color:gold">Sat Long</th>
+        <th align="center" style="color:gold">Sat Alt</th>
+        <th align="center" style="color:gold">Launch Date</th>
+        <th align="center" style="color:gold">Int Designator</th>
     </tr>
     @if (ViewBag.Coordinates2 != null)
     {
@@ -203,3 +187,19 @@
         }
     }
 </table>
+@*<div class="slidecontainer">
+        <label for="radfrom" style="color:gold">Radius From Zip Code</label>
+        <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
+        <p>Value:<span id="slider"></span></p>
+    </div>
+
+    <script>
+        var slider = document.getElementById("radfrom");
+        var output = document.getElementById("slider");
+        output.innerHTML = slider.value; // Display the default slider value
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        }
+    </script>*@

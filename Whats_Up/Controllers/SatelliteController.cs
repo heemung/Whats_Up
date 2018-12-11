@@ -163,75 +163,127 @@ namespace Whats_Up.Controllers
             //saving chnages actually made to the DB
         }
         
-        public void BigCategories()
+        public List<string> BigCategories(string bigListSelection)
         {
 
             List<CheckBoxes> AllItems = AddingCatsToList();
 
-            List<string> Astronomy = new List<string>();
-            Astronomy.Add(AllItems[0].Name);
-            Astronomy.Add(AllItems[1].Name);
-            Astronomy.Add(AllItems[2].Name);
-            Astronomy.Add(AllItems[3].Name);
-            Astronomy.Add(AllItems[4].Name);
+            switch(bigListSelection)
+            {
+                case "Astronomy":
+                    List<string> Astronomy = new List<string>
+                    {
+                        AllItems[0].Name,
+                        AllItems[1].Name,
+                        AllItems[2].Name,
+                        AllItems[3].Name,
+                        AllItems[4].Name
+                    };
+                    return Astronomy;
+                    
+                case "AtmosphericStudies":
+                    List<string> AtmosphericStudies = new List<string>
+                    {
+                        AllItems[5].Name,
+                        AllItems[6].Name,
+                        AllItems[7].Name,
+                        AllItems[8].Name,
+                        AllItems[9].Name,
+                        AllItems[10].Name
+                    };
+                    return AtmosphericStudies;
 
-            List<string> AtmosphericStudies = new List<string>();
-            AtmosphericStudies.Add(AllItems[5].Name);
-            AtmosphericStudies.Add(AllItems[6].Name);
-            AtmosphericStudies.Add(AllItems[7].Name);
-            AtmosphericStudies.Add(AllItems[8].Name);
-            AtmosphericStudies.Add(AllItems[9].Name);
-            AtmosphericStudies.Add(AllItems[10].Name);
+                case "Communications":
 
-            List<string> Communications = new List<string>();
-            Communications.Add(AllItems[11].Name);
-            Communications.Add(AllItems[12].Name);
-            Communications.Add(AllItems[13].Name);
-            Communications.Add(AllItems[14].Name);
-            Communications.Add(AllItems[15].Name);
+                    List<string> Communications = new List<string>
+                    {
+                        AllItems[11].Name,
+                        AllItems[12].Name,
+                        AllItems[13].Name,
+                        AllItems[14].Name,
+                        AllItems[15].Name
+                    };
 
-            List<string> Navigation = new List<string>();
-            Navigation.Add(AllItems[16].Name);
-            Navigation.Add(AllItems[17].Name);
-            Navigation.Add(AllItems[18].Name);
-            Navigation.Add(AllItems[19].Name);
-            Navigation.Add(AllItems[20].Name);
+                    return Communications;
 
-            List<string> Reconaissance = new List<string>();
-            Reconaissance.Add(AllItems[21].Name);
-            Reconaissance.Add(AllItems[22].Name);
-            Reconaissance.Add(AllItems[23].Name);
-            Reconaissance.Add(AllItems[24].Name);
-            Reconaissance.Add(AllItems[25].Name);
+                case "Navigation":
+                    List<string> Navigation = new List<string>
+                    {
+                        AllItems[16].Name,
+                        AllItems[17].Name,
+                        AllItems[18].Name,
+                        AllItems[19].Name,
+                        AllItems[20].Name
+                    };
 
-            List<string> RemoteSensing = new List<string>();
-            RemoteSensing.Add(AllItems[26].Name);
-            RemoteSensing.Add(AllItems[27].Name);
-            RemoteSensing.Add(AllItems[23].Name);
-            RemoteSensing.Add(AllItems[24].Name);
-            RemoteSensing.Add(AllItems[25].Name);
+                    return Navigation;
 
-            List<string> SearchRescue = new List<string>();
-            SearchRescue.Add(AllItems[21].Name);
-            SearchRescue.Add(AllItems[22].Name);
-            SearchRescue.Add(AllItems[23].Name);
-            SearchRescue.Add(AllItems[24].Name);
-            SearchRescue.Add(AllItems[25].Name);
+                case "Reconaissance":
 
-            List<string> SpaceExploration = new List<string>();
-            SpaceExploration.Add(AllItems[21].Name);
-            SpaceExploration.Add(AllItems[22].Name);
-            SpaceExploration.Add(AllItems[23].Name);
-            SpaceExploration.Add(AllItems[24].Name);
-            SpaceExploration.Add(AllItems[25].Name);
+                    List<string> Reconaissance = new List<string>
+                    {
+                        AllItems[21].Name,
+                        AllItems[22].Name,
+                        AllItems[23].Name,
+                        AllItems[24].Name,
+                        AllItems[25].Name
+                    };
 
-            List<string> Weather = new List<string>();
-            Weather.Add(AllItems[21].Name);
-            Weather.Add(AllItems[22].Name);
-            Weather.Add(AllItems[23].Name);
-            Weather.Add(AllItems[24].Name);
-            Weather.Add(AllItems[25].Name);
+                    return Reconaissance;
 
+                case "RemoteSensing":
+                    List<string> RemoteSensing = new List<string>
+                    {
+                        AllItems[26].Name,
+                        AllItems[27].Name,
+                        AllItems[23].Name,
+                        AllItems[24].Name,
+                        AllItems[25].Name
+                    };
+
+                    return RemoteSensing;
+                case "SearchRescue":
+
+                    List<string> SearchRescue = new List<string>
+                    {
+                        AllItems[21].Name,
+                        AllItems[22].Name,
+                        AllItems[23].Name,
+                        AllItems[24].Name,
+                        AllItems[25].Name
+                    };
+                    return SearchRescue;
+
+                case "SpaceExploration":
+                    List<string> SpaceExploration = new List<string>
+                    {
+                        AllItems[21].Name,
+                        AllItems[22].Name,
+                        AllItems[23].Name,
+                        AllItems[24].Name,
+                        AllItems[25].Name
+                    };
+
+                    return SpaceExploration;
+
+                case "Weather":
+
+
+                    List<string> Weather = new List<string>
+                    {
+                        AllItems[21].Name,
+                        AllItems[22].Name,
+                        AllItems[23].Name,
+                        AllItems[24].Name,
+                        AllItems[25].Name
+                    };
+                    return Weather;
+
+                default:
+                     List<string> temp = new List<string>();
+
+                    return temp;
+            }
         }
 
         //better to put in database?
@@ -291,8 +343,10 @@ namespace Whats_Up.Controllers
             return boxItem;
         }
 
-        public List<CheckBoxes> SettingCheckBoxes(string currentUserEmail, List<string> bigCategory)
+        public List<CheckBoxes> SettingCheckBoxes(string currentUserEmail, string bigCategory)
         {
+            bool hasFavorites = false;
+            List<string> bigListSelection = BigCategories(bigCategory);
             List<Favorite> favoriteList = new List<Favorite>();
             if (currentUserEmail == null)                            //first time log in or no log in
             {
@@ -313,10 +367,10 @@ namespace Whats_Up.Controllers
 
 
             favoriteList = favQuery.ToList();                               //to List and are there favorites?
+            List<CheckBoxes> favBox = new List<CheckBoxes>();
             if (favoriteList.Count != 0)
             {
-                //add big list check here
-                List<CheckBoxes> favBox = new List<CheckBoxes>();
+
                 foreach (CheckBoxes box in AddingCatsToList())
                 {
                     foreach (Favorite fav in favoriteList)
@@ -331,13 +385,74 @@ namespace Whats_Up.Controllers
                         }
                     }
                 }
-
-                return favBox;
+                hasFavorites = true;
+                
             }
             else
             {
-                return AddingCatsToList();
+                hasFavorites = false;
+                
             }
+
+            if (bigListSelection.Count == 0)                                        //if selection is 0 then return just the favorites
+            {
+                if(hasFavorites == true)                                            //if the favorite loop ran returns favlist else it returns everything unchecked
+                {
+                    return favBox; 
+                }
+                else
+                {
+                    favBox = AddingCatsToList();
+                    return AddingCatsToList();
+                }
+            }
+            else
+            {                                                                       //if the category is selected
+                if (hasFavorites == false)                                          //seeing is the favorites loop ran if it didnt it populates all list  
+                {
+                    favBox = AddingCatsToList();
+                }
+
+                bool isMatch = false;                                               //if a match is found in the loop below it will break out of the seconed loop
+                List<CheckBoxes> bigCat = new List<CheckBoxes>();
+                
+                foreach (string big in bigListSelection)                            //selection from bigCategories
+                {
+                    isMatch = false;
+
+                    foreach (CheckBoxes box in favBox)                              //adding true values from the all list or fav list to new big cat list
+                    {
+
+                        if (big == box.Name && !bigCat.Any(x => x.Name == box.Name))
+                        {
+                            isMatch = true;
+                            bigCat.Add(new CheckBoxes() { IsCheck = true, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+                        }
+
+                        if (isMatch == true)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                foreach(CheckBoxes box in favBox)                                   //with the added true values, add the rest of the values if they are not in the list
+                {
+                    if (!bigCat.Any(x => x.Name == box.Name))
+                    {
+                        bigCat.Add(new CheckBoxes() { IsCheck = box.IsCheck, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+                    }
+                }
+                return bigCat;
+            }
+        }
+
+        public ActionResult SaveFavorties(Favorite newFavorite)
+        {
+            DataContext db = new DataContext();
+            db.Favorites.Add(newFavorite);
+            db.SaveChanges();
+            return RedirectToAction("Favorites"); 
         }
 
         public ActionResult SatErrors(string error)

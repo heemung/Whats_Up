@@ -32,6 +32,31 @@ namespace Whats_Up.Controllers
             return View();
         }
 
+        public ActionResult Favorites()
+        {
+            DataContext db = new DataContext();
+            ViewBag.FavoriteList = db.Favorites.ToList();
+            return View();
+        }
+
+        public ActionResult DeleteFavorite(int id)
+        {
+            DataContext db = new DataContext();
+            List<Favorite> NewFavoriteList = db.Favorites.Where(x => x.FavID == id).ToList();
+            
+            foreach(Favorite favorite in NewFavoriteList)
+            {
+                db.Favorites.Remove(favorite);
+            }
+
+            Favorite found = db.Favorites.Find(id);
+            db.Favorites.Remove(found);
+            db.SaveChanges();
+            
+            return RedirectToAction("Favorites");
+        }
+        
+        
         public ActionResult WhatsUp()
         {
 
@@ -40,9 +65,8 @@ namespace Whats_Up.Controllers
             return View();
         }
 
-        public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2)
+        public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2, string bigCategory)
         {
-
             HttpCookie userCookie;           //making same cookie reguardless
             if (Request.Cookies["RegisteredUser"] == null) //still throwing null
             {
@@ -58,10 +82,8 @@ namespace Whats_Up.Controllers
             }
 
             Response.Cookies.Add(userCookie); //save cookie?
-
-            //TEST BIG CAT SELECTION
-            List<string> bigCategory = new List<string>();
-            //TEST END
+            TempData["Email"] = currentUser.Email;
+            TempData["Address"] = currentUser.AddressLine;
 
             currentUserController.AddUser(currentUser);
             resultFromLocation = InputLocation(currentUser.AddressLine, address2);     //calling method to get user information in home controller
