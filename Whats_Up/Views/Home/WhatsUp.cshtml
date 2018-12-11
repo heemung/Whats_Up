@@ -63,9 +63,9 @@
                     document.getElementById('map'), { zoom: 4, center: userLocation });
                 var userMarker = new google.maps.Marker({position: userLocation, map: map})
 
-                    @if (ViewBag.Coordinates != null)
+                    @if (ViewBag.CoordinatesUnique != null)
                     {
-                        foreach (var outerArray in ViewBag.Coordinates)
+                        foreach (var outerArray in ViewBag.CoordinatesUnique)
                         {
                             if (outerArray["info"]["satcount"].Value != 0)
                             {
@@ -165,7 +165,7 @@
         <th align="center" style="color:gold">Launch Date</th>
         <th align="center" style="color:gold">Int Designator</th>
     </tr>
-    @if (ViewBag.Coordinates2 != null)
+   @* @if (ViewBag.Coordinates2 != null)
     {
         foreach (var satDataArray in ViewBag.Coordinates2)
         {
@@ -185,7 +185,7 @@
                 }
             }
         }
-    }
+    }*@
 </table>
 @*<div class="slidecontainer">
         <label for="radfrom" style="color:gold">Radius From Zip Code</label>

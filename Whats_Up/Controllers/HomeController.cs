@@ -140,7 +140,7 @@ namespace Whats_Up.Controllers
 
         public string AddressForGoogle(string address)
         {
-            if (address.Contains(' '))
+            if (address.Contains(' ') && address != null)
             {
                 string addressForLink = address;
                 char[] tempForLoop = new char[addressForLink.Length];
@@ -175,12 +175,13 @@ namespace Whats_Up.Controllers
 
             if (address2 != null)
             {
-
-                string formattedAddress1 = AddressForGoogle(address1);      //method use to format " " to +
-                string formattedAddress2 = AddressForGoogle(address2);
-
-                addresses.Add(formattedAddress1);
-                addresses.Add(formattedAddress2);
+                if (address2 != "")
+                {
+                    string formattedAddress1 = AddressForGoogle(address1);      //method use to format " " to +
+                    string formattedAddress2 = AddressForGoogle(address2);
+                    addresses.Add(formattedAddress1);
+                    addresses.Add(formattedAddress2);
+                }
 
             }
             else
