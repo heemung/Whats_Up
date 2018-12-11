@@ -2,6 +2,7 @@
 <html>
 <head>
     <style>
+
         /* Set the size of the div element that contains the map */
         #map {
             height: 400px; /* The height is 400 pixels */
@@ -9,13 +10,10 @@
         }
     </style>
 </head>
-
 <br />
 <br />
-
 <!-- Button to open the modal -->
 <button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
-
 <!-- The Modal (contains the Sign Up form) -->
 <form action="/Home/FormCollection" method="post">
     <div id="id01" class="modal">
@@ -27,14 +25,10 @@
                 <p>Enter information to see what's up</p>
                 <hr>
 
-
-
                 <label for="email" style="color:gold">Enter Email...</label>
                 <input type="text" id="email" name="Email" placeholder="Enter Email Address.." required>
-
                 <label for="addressline" style="color:gold">Enter House Address...</label>
                 <input type="text" id="addressline" name="AddressLine" placeholder="Enter Address.." required>
-
                 <label for="scat" style="color:gold">Satellite Category</label>
                 <select size="9" multiple="multiple" onchange="" name="bigCategory" id="scat">
                     <option value="Astronomy">Astronomy Satellites</option>
@@ -46,19 +40,15 @@
                     <option value="SearchRescue">Search & Rescue Satellites</option>
                     <option value="SpaceExploration">Space Exploration Satellites</option>
                     <option value="Weather">Weather Satellites</option>
-
                 </select>
                 <button type="submit" class="signupbtn">Enter Info.</button>
-
 
             </div>
         </div>
     </div>
 </form>
-
 <body>
     <h3>My Google Maps Demo</h3>
-
     <div id="map"></div>
     <script>
         function initMap() {
@@ -83,12 +73,31 @@
                                 {
                                     double latitude = innerArray["satlat"].Value;
                                     double longitude = innerArray["satlng"].Value;
-                                    <text>
-                                    var satPosition = { lat: @latitude, lng: @longitude }
+                                   <text>
+                                    var satPosition = new google.maps.LatLng(@latitude, @longitude);
+                                    var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: '+ '@innerArray["launchDate"]';
+                                    var satInfoWindow = new google.maps.InfoWindow({
+                                    //position: satPosition,
+                                    content: satContent
+                                    });
+
+
                                     var satMarker = new google.maps.Marker({
-                                    position: satPosition,
-                                    map: map
-                                    })
+                                        position: satPosition,
+                                        map: map,
+                                        title: @innerArray["satid"],
+                                        info: satContent
+                                    });
+                                    //satMarker.infowindow = satInfoWindow;
+                                    google.maps.event.addListener(satMarker, 'click', function () {
+
+                                        satInfoWindow.setContent(this.info);
+                                        satInfoWindow.open(map, this);
+
+                                    });
+                                    //satMarker.addListener('click', function () {
+                                    //    return this.infowindow.open(map, satMarker)
+                                    //});
                                     </text>
 
                                     }
@@ -104,7 +113,6 @@
     </script>
 </body>
 </html>
-
 
 <form action="/Home/FormCollection" method="post">
     @if (TempData["Address"] != null)
@@ -142,18 +150,16 @@
 
         }
     }
-    <br/>
-    <input type="submit" class="btn-primary" value="Add Satellites to Favorites" formaction="/Satellite/SaveFavorties"/>
+    <br />
+    <input type="submit" class="btn-primary" value="Add Satellites to Favorites" formaction="/Satellite/SaveFavorties" />
     <input type="reset" value="Reset Form" />
 </form>
 
-
 <table class="table table-bordered table-responsive table-hover">
-
     <tr>
         <th align="center" style="color:gold">Sat ID</th>
         <th align="center" style="color:gold">Sat Name </th>
-        <th align="center"style="color:gold">Sat Lat </th>
+        <th align="center" style="color:gold">Sat Lat </th>
         <th align="center" style="color:gold">Sat Long</th>
         <th align="center" style="color:gold">Sat Alt</th>
         <th align="center" style="color:gold">Launch Date</th>
@@ -175,14 +181,12 @@
                         <td>@satData["satalt"]</td>
                         <td>@satData["launchDate"]</td>
                         <td>@satData["intDesignator"]</td>
-
                     </tr>
                 }
             }
         }
     }
 </table>
-
 @*<div class="slidecontainer">
         <label for="radfrom" style="color:gold">Radius From Zip Code</label>
         <input type="range" min="1" max="20" value="10" class="slider" id="radfrom" name="radiusfromzip">
@@ -199,4 +203,3 @@
             output.innerHTML = this.value;
         }
     </script>*@
-
