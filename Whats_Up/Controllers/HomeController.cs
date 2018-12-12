@@ -33,14 +33,14 @@ namespace Whats_Up.Controllers
 
         public ActionResult Favorites()
         {
-            DataContext db = new DataContext();
+            WhatsUpDBEntities db = new WhatsUpDBEntities();
             ViewBag.FavoriteList = db.Favorites.ToList();
             return View();
         }
 
         public ActionResult DeleteFavorite(int id)
         {
-            DataContext db = new DataContext();
+            WhatsUpDBEntities db = new WhatsUpDBEntities();
             List<Favorite> NewFavoriteList = db.Favorites.Where(x => x.FavID == id).ToList();
             
             foreach(Favorite favorite in NewFavoriteList)
