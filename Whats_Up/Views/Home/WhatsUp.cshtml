@@ -2,13 +2,19 @@
 <html>
 <head>
     <style>
-
-
         /* Set the size of the div element that contains the map */
         #map {
             height: 400px; /* The height is 400 pixels */
             width: 100%; /* The width is the width of the web page */
         }
+
+        #Checkboxes {
+            -webkit-column-count: 2; /* Chrome, Safari, Opera */
+            -moz-column-count: 2; /* Firefox */
+            column-count: 2;
+            
+        }
+        
     </style>
 
 </head>
@@ -285,25 +291,27 @@
 
     }
     <h2 style="color:gold">Satellites</h2>
-    @using Whats_Up.Models;
-    @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
-    @if (SatList != null)
-    {
-        foreach (CheckBoxes x in SatList)
+    <div id="Checkboxes">
+        @using Whats_Up.Models;
+        @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
+        @if (SatList != null)
         {
-            if (x.IsCheck == true)
+            foreach (CheckBoxes x in SatList)
             {
-                <label>@x.Name</label>
-                <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
-            }
-            else
-            {
-                <label>@x.Name</label>
-                <input type="checkbox" name="@x.CheckName" value="@x.Value" />
-            }
+                if (x.IsCheck == true)
+                {
+                    <label>@x.Name</label>
+                    <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
+                }
+                else
+                {
+                    <label>@x.Name</label>
+                    <input type="checkbox" name="@x.CheckName" value="@x.Value" />
+                }
 
+            }
         }
-    }
+    </div>
 
     <br />
     <input type="submit" class="btn-primary" value="Add Satellites to Favorites" formaction="/Satellite/SaveFavorties" />
