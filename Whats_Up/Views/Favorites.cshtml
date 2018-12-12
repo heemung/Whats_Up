@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Whats_Up.Models.Favorite>
+
+@{
+    ViewBag.Title = "Favorites";
+}
+
+<h1 align="middle" style="color:gold">Favorites</h1> 
+<img src="http://cdn.history.com/sites/2/2013/12/back-up-of-first-russian-sputnik.jpg" alt="Sputnik" align="middle" style="width:600px;height:300px;"/>
+
+
+
+<p>
+    @Html.ActionLink("Create New", "/WhatsUp")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.FavoriteList)
+    {
+        <tr>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.Category)
+            </td>
+            <td>
+                <a href="/Home/DeleteFavorite?id=@item.FavID" onclick="return confirm('Are you sure you want to delete this favorite?')" class="btn-danger btn-sm" name="delete">Delete</a>
+                @*@Html.ActionLink("Delete", "DeleteFavorite", new { id = item.FavID })*@
+            </td>
+        </tr>
+    }
+
+</table>
