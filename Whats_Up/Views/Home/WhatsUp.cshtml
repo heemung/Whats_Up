@@ -55,8 +55,6 @@
 
             var geoLat = @ViewBag.GoogleLat;
             var geoLong = @ViewBag.GoogleLong;
-            var geoLat2 = @ViewBag.GoogleLat2;
-            var geoLong2 = @ViewBag.GoogleLong2;
 
             if (geoLat != null && geoLong != null) {
 
@@ -69,20 +67,6 @@
                    content: contentString
                 });
 
-                @*
-                    DOES NOT WORK. only works when inputing two address
-
-                    if (geoLat2 != null && geoLong2 != null) {
-                    var userLocation2 = { lat: geoLat2, lng: geoLong2 }
-
-                    var marker2 = new google.maps.Marker({
-                        position: userLocation2,
-                        map: map,
-                        icon: 'https://i.imgur.com/CaOG9uB.png'
-                    });
-                }*@
-
-
                var marker = new google.maps.Marker({
                    position: userLocation,
                    map: map,
@@ -90,7 +74,8 @@
                });
                marker.addListener('click', function () {
                    infowindow.open(map, marker);
-               });
+                });
+
                    @if (ViewBag.CoordinatesComparison1 != null)
                    {
                        foreach (var satList in ViewBag.CoordinatesComparison1)
@@ -277,6 +262,10 @@
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
 
     </script>
+    <span>Information: @ViewBag.LocationError</span>
+    <span>@ViewBag.Error</span>
+    <span>@ViewBag.Info</span>
+    <span>@ViewBag.Count</span>
 </body>
 </html>
 <form action="/Home/FormCollection" method="post">
