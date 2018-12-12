@@ -295,23 +295,23 @@ namespace Whats_Up.Controllers
                 case "Astronomy":
                     List<string> Astronomy = new List<string>
                     {
-                        AllItems[0].Name,
-                        AllItems[1].Name,
                         AllItems[2].Name,
-                        AllItems[3].Name,
-                        AllItems[4].Name
+                        AllItems[5].Name,
+                        AllItems[6].Name,
+                        AllItems[38].Name,
+                        AllItems[44].Name
                     };
                     return Astronomy;
                     
                 case "AtmosphericStudies":
                     List<string> AtmosphericStudies = new List<string>
                     {
-                        AllItems[5].Name,
-                        AllItems[6].Name,
-                        AllItems[7].Name,
+                        AllItems[1].Name,
+                        AllItems[4].Name,
                         AllItems[8].Name,
                         AllItems[9].Name,
-                        AllItems[10].Name
+                        AllItems[10].Name,
+                        AllItems[13].Name
                     };
                     return AtmosphericStudies;
 
@@ -319,11 +319,11 @@ namespace Whats_Up.Controllers
 
                     List<string> Communications = new List<string>
                     {
-                        AllItems[11].Name,
-                        AllItems[12].Name,
-                        AllItems[13].Name,
-                        AllItems[14].Name,
-                        AllItems[15].Name
+                        AllItems[26].Name,
+                        AllItems[27].Name,
+                        AllItems[28].Name,
+                        AllItems[29].Name,
+                        AllItems[30].Name
                     };
 
                     return Communications;
@@ -331,11 +331,11 @@ namespace Whats_Up.Controllers
                 case "Navigation":
                     List<string> Navigation = new List<string>
                     {
-                        AllItems[16].Name,
-                        AllItems[17].Name,
-                        AllItems[18].Name,
-                        AllItems[19].Name,
-                        AllItems[20].Name
+                        AllItems[0].Name,
+                        AllItems[33].Name,
+                        AllItems[12].Name,
+                        AllItems[25].Name,
+                        AllItems[31].Name
                     };
 
                     return Navigation;
@@ -344,11 +344,11 @@ namespace Whats_Up.Controllers
 
                     List<string> Reconaissance = new List<string>
                     {
-                        AllItems[21].Name,
-                        AllItems[22].Name,
-                        AllItems[23].Name,
-                        AllItems[24].Name,
-                        AllItems[25].Name
+                        AllItems[32].Name,
+                        AllItems[33].Name,
+                        AllItems[18].Name,
+                        AllItems[40].Name,
+                        AllItems[41].Name
                     };
 
                     return Reconaissance;
@@ -356,11 +356,11 @@ namespace Whats_Up.Controllers
                 case "RemoteSensing":
                     List<string> RemoteSensing = new List<string>
                     {
-                        AllItems[26].Name,
-                        AllItems[27].Name,
-                        AllItems[23].Name,
+                        AllItems[3].Name,
+                        AllItems[7].Name,
+                        AllItems[14].Name,
                         AllItems[24].Name,
-                        AllItems[25].Name
+                        AllItems[11].Name
                     };
 
                     return RemoteSensing;
@@ -368,22 +368,22 @@ namespace Whats_Up.Controllers
 
                     List<string> SearchRescue = new List<string>
                     {
-                        AllItems[21].Name,
-                        AllItems[22].Name,
-                        AllItems[23].Name,
-                        AllItems[24].Name,
-                        AllItems[25].Name
+                        AllItems[15].Name,
+                        AllItems[16].Name,
+                        AllItems[17].Name,
+                        AllItems[34].Name,
+                        AllItems[23].Name
                     };
                     return SearchRescue;
 
                 case "SpaceExploration":
                     List<string> SpaceExploration = new List<string>
                     {
+                        AllItems[35].Name,
+                        AllItems[19].Name,
+                        AllItems[20].Name,
                         AllItems[21].Name,
-                        AllItems[22].Name,
-                        AllItems[23].Name,
-                        AllItems[24].Name,
-                        AllItems[25].Name
+                        AllItems[39].Name
                     };
 
                     return SpaceExploration;
@@ -393,11 +393,11 @@ namespace Whats_Up.Controllers
 
                     List<string> Weather = new List<string>
                     {
-                        AllItems[21].Name,
                         AllItems[22].Name,
-                        AllItems[23].Name,
-                        AllItems[24].Name,
-                        AllItems[25].Name
+                        AllItems[36].Name,
+                        AllItems[37].Name,
+                        AllItems[42].Name,
+                        AllItems[43].Name
                     };
                     return Weather;
 
