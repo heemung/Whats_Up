@@ -12,10 +12,7 @@
             -webkit-column-count: 2; /* Chrome, Safari, Opera */
             -moz-column-count: 2; /* Firefox */
             column-count: 2;
-         
-            
         }
-        
     </style>
 
 </head>
@@ -291,8 +288,8 @@
 
 
     }
-    
-        <span><h2 style="color:gold">Satellites</h2><input type="submit" value="Submit" /></span>
+
+    <span><h2 style="color:gold">Satellites</h2><input type="submit" value="Submit" /></span>
     <div id="Checkboxes">
         @using Whats_Up.Models;
         @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
@@ -319,6 +316,7 @@
     <input type="submit" class="btn-primary" value="Add Satellites to Favorites" formaction="/Satellite/SaveFavorties" />
     <input type="reset" value="Reset Form" />
 </form>
+<div>Address 1</div>
 <table class="table table-bordered table-responsive table-hover">
     <tr>
         <th align="center" style="color:gold">Sat ID</th>
@@ -329,27 +327,111 @@
         <th align="center" style="color:gold">Launch Date</th>
         <th align="center" style="color:gold">Int Designator</th>
     </tr>
-    @* @if (ViewBag.Coordinates2 != null)
+    @if (ViewBag.TableInfo != null)
+    {
+        foreach (var satDataArray in ViewBag.TableInfo)
         {
-            foreach (var satDataArray in ViewBag.Coordinates2)
+            if (satDataArray["info"]["satcount"].Value != 0)
             {
-                if (satDataArray["info"]["satcount"].Value != 0)
+                foreach (var satData in satDataArray["above"])
                 {
-                    foreach (var satData in satDataArray["above"])
-                    {
-                        <tr>
-                            <td>@satData["satid"]</td>
-                            <td>@satData["satname"]</td>
-                            <td>@satData["satlat"]</td>
-                            <td>@satData["satlng"]</td>
-                            <td>@satData["satalt"]</td>
-                            <td>@satData["launchDate"]</td>
-                            <td>@satData["intDesignator"]</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+                    </tr>
                 }
             }
-        }*@
+        }
+    }
+
+    @if (ViewBag.TableInfo1 != null)
+    {
+                foreach (var satData in ViewBag.TableInfo1)
+                {
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+                    </tr>
+                }
+            
+        
+    }
+</table>
+
+<div>Address 2</div>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th align="center" style="color:gold">Sat ID</th>
+        <th align="center" style="color:gold">Sat Name </th>
+        <th align="center" style="color:gold">Sat Lat </th>
+        <th align="center" style="color:gold">Sat Long</th>
+        <th align="center" style="color:gold">Sat Alt</th>
+        <th align="center" style="color:gold">Launch Date</th>
+        <th align="center" style="color:gold">Int Designator</th>
+    </tr>
+    @if (ViewBag.TableInfo2 != null)
+    {
+        foreach (var satData in ViewBag.TableInfo2)
+        {
+          
+                
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+                    </tr>
+                
+            
+        }
+    }
+
+</table>
+
+<div>Both Addresses</div>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th align="center" style="color:gold">Sat ID</th>
+        <th align="center" style="color:gold">Sat Name </th>
+        <th align="center" style="color:gold">Sat Lat </th>
+        <th align="center" style="color:gold">Sat Long</th>
+        <th align="center" style="color:gold">Sat Alt</th>
+        <th align="center" style="color:gold">Launch Date</th>
+        <th align="center" style="color:gold">Int Designator</th>
+    </tr>
+    @if (ViewBag.TableInfoCommon != null)
+    {
+        foreach (var satData in ViewBag.TableInfoCommon)
+        {
+            
+                
+                    <tr>
+                        <td>@satData["satid"]</td>
+                        <td>@satData["satname"]</td>
+                        <td>@satData["satlat"]</td>
+                        <td>@satData["satlng"]</td>
+                        <td>@satData["satalt"]</td>
+                        <td>@satData["launchDate"]</td>
+                        <td>@satData["intDesignator"]</td>
+                    </tr>
+                
+            
+        }
+    }
+
 </table>
 @*<div class="slidecontainer">
         <label for="radfrom" style="color:gold">Radius From Zip Code</label>

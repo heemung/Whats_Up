@@ -105,6 +105,11 @@ namespace Whats_Up.Controllers
             ViewBag.CoordinatesComparison1 = satController.SatCoordinates2;
             ViewBag.CoordinatesComparison2 = satController.SatCoordinates3;
             ViewBag.Coordinates1Address = satController.SatCoordinates1Address;
+            ViewBag.TableInfo = satController.SatCoordinates1Address;
+            ViewBag.TableInfo1 = satController.SatCoordinates2;
+            ViewBag.TableInfo2 = satController.SatCoordinates3;
+            ViewBag.TableInfoCommon = satController.SatCoordinates;
+
             /*
             TempData["CoordinatesUnique"] = satController.SatCoordinates;
             TempData["CoordinatesComparison1"] = satController.SatCoordinates2;
