@@ -65,24 +65,8 @@ namespace Whats_Up.Controllers
         }
 
         public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2, string bigCategory)
-        {
-            /*
-            HttpCookie userCookie;           //making same cookie reguardless
-            if (Request.Cookies["RegisteredUser"] == null) //still throwing null
-            {
-                userCookie = new HttpCookie("RegisteredUser");
-                userCookie.Values.Add("Email", currentUser.Email);
-                userCookie.Values.Add("Address", currentUser.AddressLine);
-            }
-            else
-            {
-                userCookie = Request.Cookies["RegisteredUser"];
-                userCookie.Values.Add("Email", currentUser.Email);
-                userCookie.Values.Add("Address", currentUser.AddressLine);
-            }
-
-            Response.Cookies.Add(userCookie); //save cookie?
-            */
+        {           
+            
             TempData["Email"] = currentUser.Email;
             TempData["Address"] = currentUser.AddressLine;
 
@@ -250,19 +234,6 @@ namespace Whats_Up.Controllers
             return View();
         }
 
-        /*
-        public User GetCookie() //getting the cookie to a new user object.
-        {
-            User cookieUser = new User();
-            if(HttpContext.Request.Cookies["RegisteredUser"] != null)
-            {
-                HttpCookie cookie = HttpContext.Request.Cookies.Get("RegisteredUser");
-                cookieUser.Email = cookie.Values["Email"].ToString();
-                cookieUser.AddressLine = cookie.Values["Address"].ToString();
-            }
-
-            return cookieUser;
-        }*/
     }
 }
 
