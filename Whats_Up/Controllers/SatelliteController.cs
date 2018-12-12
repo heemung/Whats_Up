@@ -473,7 +473,7 @@ namespace Whats_Up.Controllers
 
             if (currentUserEmail == null)                            //first time log in or no log in
             {
-                currentUserEmail == "abcdefg@abcdefg.com;"
+                currentUserEmail = "abcdefg@abcdefg.com;";
             }
 
             IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();     //favorites search in DB
