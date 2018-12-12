@@ -478,29 +478,44 @@ namespace Whats_Up.Controllers
 
             IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();     //favorites search in DB
             favQuery = favQuery.Where(x => x.Email == currentUserEmail);
-
-
             favoriteList = favQuery.ToList();                               //to List and are there favorites?
+
             List<CheckBoxes> favBox = new List<CheckBoxes>();
             if (favoriteList.Count != 0)
             {
+                bool isMatch = false;                                               //if a match is found in the loop below it will break out of the seconed loop
 
-                foreach (CheckBoxes box in AddingCatsToList())
+
+                foreach (Favorite fav in favoriteList)                            //selection from bigCategories
                 {
-                    foreach (Favorite fav in favoriteList)
+                    isMatch = false;
+
+                    foreach (CheckBoxes box in AddingCatsToList())                //adding true values from the all list or fav list to new big cat list
                     {
-                        if (fav.Category == box.Name)
+
+                        if (fav.Category == box.Name && !favBox.Any(x => x.Name == box.Name))
                         {
+                            isMatch = true;
                             favBox.Add(new CheckBoxes() { IsCheck = true, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
                         }
-                        else if (!favBox.Any(x => x.Name == box.Name))
+
+                        if (isMatch == true)
                         {
-                            favBox.Add(new CheckBoxes() { IsCheck = box.IsCheck, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+                            break;
                         }
                     }
                 }
+
+                foreach (CheckBoxes box in AddingCatsToList())                                   //with the added true values, add the rest of the values if they are not in the list
+                {
+                    if (!favBox.Any(x => x.Name == box.Name))
+                    {
+                        favBox.Add(new CheckBoxes() { IsCheck = box.IsCheck, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+                    }
+                }
+
                 hasFavorites = true;
-                
+               
             }
             else
             {
@@ -587,3 +602,18 @@ namespace Whats_Up.Controllers
             return satCatDic;
         }*/
 
+//return bigCat;
+/*foreach (CheckBoxes box in AddingCatsToList())
+{
+    foreach (Favorite fav in favoriteList)
+    {
+        if (fav.Category == box.Name)
+        {
+            favBox.Add(new CheckBoxes() { IsCheck = true, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+        }
+        else if (!favBox.Any(x => x.Name == box.Name))
+        {
+            favBox.Add(new CheckBoxes() { IsCheck = box.IsCheck, CheckName = box.CheckName, Name = box.Name, Value = box.Value });
+        }
+    }
+}*/
