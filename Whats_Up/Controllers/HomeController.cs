@@ -104,8 +104,8 @@ namespace Whats_Up.Controllers
 
             ViewBag.CoordinatesUnique = satController.SatCoordinates;
             ViewBag.CoordinatesComparison1 = satController.SatCoordinates2;
-            ViewBag.CoodinatesComparison2 = satController.SatCoordinates3;
-            ViewBag.Coodinates1Address = satController.SatCoordinates1Address;
+            ViewBag.CoordinatesComparison2 = satController.SatCoordinates3;
+            ViewBag.Coordinates1Address = satController.SatCoordinates1Address;
             /*
             TempData["CoordinatesUnique"] = satController.SatCoordinates;
             TempData["CoordinatesComparison1"] = satController.SatCoordinates2;

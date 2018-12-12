@@ -53,8 +53,14 @@ namespace Whats_Up.Controllers
 
                 int ApiOverLimit = db.SatelliteN2YOs.Find(lastSatRecordDB).TransactionsCount;
                 ApiOverLimit += satelliteCategoies.Length;                          //getting transaction count from last entry and adding it to current transaction
-                                        //TO DO
-                if (ApiOverLimit < 1000)//NEED TO ACCOUNT FOR DOUBLE ADDRESS                                            //checking to see if API current Transaction is over 1000
+
+                int transactionMulti = 1;
+                if(geoLocations.Count == 2)                                         //if there is more than one address then the requests will run twice
+                {
+                    transactionMulti = 2;
+                }
+
+                if (ApiOverLimit < 1000*transactionMulti)                           //checking to see if API current Transaction is over 1000
                 {
                     foreach (JObject location in geoLocations)
                     {
@@ -125,6 +131,8 @@ namespace Whats_Up.Controllers
             JArray comparisionSame = new JArray();
             JArray comparision1Unque = new JArray();
             JArray comparision2Unque = new JArray();
+            Dictionary<string, JObject> satAdress1 = new Dictionary<string, JObject>();
+            Dictionary<string, JObject> satAdress2 = new Dictionary<string, JObject>();
             try
             {
                 if (returnFromSatCat.Count == 1)
@@ -140,34 +148,76 @@ namespace Whats_Up.Controllers
                     comparision1 = returnFromSatCat[0];
                     comparision2 = returnFromSatCat[1];
 
-                    foreach (dynamic outerArrayIn2 in comparision2)                 //going in outer json array in list 2
+
+                    foreach (dynamic outerArray1 in comparision1)
                     {
-                        if ((outerArrayIn2["info"]["satcount"] != 0))               //checking if there is satellites in the list
+                        if (outerArray1["info"]["satcount"] != 0)               //checking if there is satellites in the list
                         {
-                            foreach (dynamic outerArrayIn1 in comparision1)         //going into outer json in list 1
+                            foreach(JObject innerArray1 in outerArray1["above"])
                             {
-                                if (outerArrayIn1["info"]["satcount"] != 0)         //checking if there is satellites in the list
+                                if (!satAdress1.ContainsKey(innerArray1["satid"].ToString()))
                                 {
-                                    foreach (dynamic innerArray1 in outerArrayIn1["above"]) //inner above array for each sat.
-                                    {
-                                        foreach (dynamic innerArray2 in outerArrayIn2["above"]) //inner above array for each sat2
-                                        {
-                                            if (innerArray1["satid"].Value == innerArray2["satid"].Value) //comparing satellites ID's
-                                            {
-                                                comparisionSame.Add(innerArray1);
-                                            }
-                                            else
-                                            {
-                                                comparision1Unque.Add(innerArray1);
-                                                comparision2Unque.Add(innerArray2);
-                                            }
-                                        }//end of 2nd inner loop or loop 4
-                                    } //end of 1st inner loop or loop 3
-                                }//end of second if
-                            } //end 2nd loop
-                        } //end 1st if
-                    } //end 1st loop
-                } //end else if
+                                    satAdress1.Add(innerArray1["satid"].ToString(), innerArray1);
+                                }
+                            }
+                        }
+                    }
+                    foreach (dynamic outerArray2 in comparision2)
+                    {
+                        if (outerArray2["info"]["satcount"] != 0)               //checking if there is satellites in the list
+                        {
+                            foreach (JObject innerArray2 in outerArray2["above"])
+                            {
+                                if (!satAdress2.ContainsKey(innerArray2["satid"].ToString()))
+                                {
+                                satAdress2.Add(innerArray2["satid"].ToString(), innerArray2);
+                                }
+                            }
+                        }
+                    }
+                    
+                if(satAdress1.Count == 0 || satAdress2.Count == 0)              //checking to make sure lists wont be comparing nulls
+                {
+                    if(satAdress2.Count == 0)
+                    {
+                            foreach (var j in satAdress1)
+                            {
+                                comparision1Unque.Add(j.Value);
+                            }
+                    }
+                    else
+                    {
+                            foreach (var j in satAdress2)
+                            {
+                                comparision2Unque.Add(j.Value);
+                            }
+                    }
+                }
+                else
+                {
+                    foreach(string key in satAdress1.Keys)
+                    {
+                        if(satAdress2.Keys.Contains(key))
+                        {
+                            comparisionSame.Add(satAdress2[key]);
+                            satAdress2.Remove(key);
+
+                        }
+                        else
+                        {
+                            comparision1Unque.Add(satAdress1[key]);
+                        }
+                    }
+                    if(satAdress2.Count !=0)
+                    {
+                        foreach(var j in satAdress2)
+                        {
+                            comparision2Unque.Add(j.Value);
+                        }
+                    }
+
+                }
+            } //end else if
                 if (oneAddress == false)
                 {
                     SatCoordinates = comparisionSame;
@@ -423,16 +473,7 @@ namespace Whats_Up.Controllers
 
             if (currentUserEmail == null)                            //first time log in or no log in
             {
-
-                if("cookie there" == "cookie there")
-                {
-                    //COOKIE CHECK CAN GO HERE
-                    currentUserEmail = "test1234@gmail.com";
-                }
-                else
-                {
-                    currentUserEmail = "1";                         //meaning no favorite check, user did not select to sign in
-                }
+                currentUserEmail = "abcdefg@abcdefg.com;";
             }
 
             IQueryable<Favorite> favQuery = db.Favorites.AsQueryable();     //favorites search in DB
