@@ -22,7 +22,7 @@ namespace Whats_Up.Controllers
         private List<JObject> resultFromLocation = new List<JObject>();
 
 
-
+        public string LocationError;
         public string GeoKey = WebConfigurationManager.AppSettings["GMapper"];
         public string GoogleKey = WebConfigurationManager.AppSettings["GMapper"];
 
@@ -60,9 +60,7 @@ namespace Whats_Up.Controllers
         {
 
             ViewBag.GoogleKey = GoogleKey;                                  //sends google key for embedded map
-            ViewBag.Error = satController.Error;
-            ViewBag.Info = satController.Info;
-            ViewBag.Count = satController.TransCount;
+
             return View();
         }
 
@@ -138,6 +136,12 @@ namespace Whats_Up.Controllers
                 ViewBag.GoogleLat2 = double.Parse(latitude2);
                 ViewBag.GoogleLong2 = double.Parse(longitude2);
             }
+
+            //viewbags for errors and information
+            ViewBag.Error = satController.Error;
+            ViewBag.Info = satController.Info;
+            ViewBag.Count = satController.TransCount;
+            ViewBag.LocationError = LocationError;
 
             return View("WhatsUp");
         }
@@ -218,10 +222,16 @@ namespace Whats_Up.Controllers
                     JParser = JObject.Parse(output);
 
                 }
-                
-                //TO DO VALIDATION result[0]
 
-                geoLocations.Add(JParser);                                  //adds jobject to list
+                //TO DO VALIDATION result[0]
+                if (JParser["status"].ToString() == "ZERO_RESULTS")
+                {
+                    LocationError = "Address Not Found";                                   
+                }
+                else
+                {
+                    geoLocations.Add(JParser);                      //adds jobject to list
+                }
             }
 
             return geoLocations;
