@@ -91,32 +91,35 @@
                                    double longitude = satList["satlng"].Value;
                                   <text>
                var satPosition = new google.maps.LatLng(@latitude, @longitude);
-               var satContent =
-                   '<h3 style="color:gold">Name:' + '<u>@satList["satname"]</u></h3>' +
-                   '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
-                   '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
-                   '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
-                   '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>';
+                var satContent =
+                    '<h3 style="color:gold">Name:' + '<u>@satList["satname"]</u></h3>' +
+                    '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
+                    '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
+                    '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
+                    '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>' +
+                    '<h4 style="color:black">Click To Learn More:' + '<u>@satList["launchDate"]</u></h4>' +
+                    '<a href=https://www.wikipedia.com/?utm_source=' + '@satList["satname"] >';
 
-                var satInfoWindow = new google.maps.InfoWindow({
+
+                    var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
                     content: satContent
                 });
 
 
-                var satMarker = new google.maps.Marker({
+                           var satMarker = new google.maps.Marker({
                     position: satPosition,
                     map: map,
                     info: satContent,
                     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
                 });
-                //satMarker.infowindow = satInfoWindow;
-                google.maps.event.addListener(satMarker, 'click', function () {
+                       //satMarker.infowindow = satInfoWindow;
+                       google.maps.event.addListener(satMarker, 'click', function () {
 
-                    satInfoWindow.setContent(this.info);
-                    satInfoWindow.open(map, this);
+                       satInfoWindow.setContent(this.info);
+                       satInfoWindow.open(map, this);
 
-                });
+                   });
                 //satMarker.addListener('click', function () {
                 //    return this.infowindow.open(map, satMarker)
                 //});
@@ -294,9 +297,7 @@
         <br />  
         <label for="address2"size><big><u>Add Another Address for Comparison</u></big></label>
         <input type="text" id="addressline" name="address2" placeholder="Optional..">
-
-
-
+        
     }
 
     <span><h2 style="color:gold">Satellites</h2><input type="submit" value="Submit" /></span>
