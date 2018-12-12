@@ -23,23 +23,21 @@ namespace Whats_Up.Controllers
 
         public void AddUser(User registeredUser)
         {
-            //TO DO
-            //1. add user to database if exists
-            
-            DataContext db = new DataContext();
 
-            if(db.Users.Find(registeredUser.Email) == null)
+            if (registeredUser.Email == null)                       //checks if the user address is null and assigns dummy data if it is.
             {
-                
-                db.Entry(registeredUser).State = EntityState.Added;
-                db.SaveChanges();                           //TO DO FAILS HERE!!!
-            }         
-            /*HttpCookie cookie = new HttpCookie("some_cookie_name");
-            HttpContext.Response.Cookies.Remove("some_cookie_name");
-            HttpContext.Response.SetCookie(cookie);*/ //save cookie?
+                registeredUser.AddressLine = "no address";
+                registeredUser.Email = "abcdefg@abcdefg.com";
+            }
 
-            //return usersEmail;
+                DataContext db = new DataContext();
 
+                if (db.Users.Find(registeredUser.Email) == null)
+                {
+
+                    db.Entry(registeredUser).State = EntityState.Added;
+                    db.SaveChanges();                     
+                }
         }
     }
 }
