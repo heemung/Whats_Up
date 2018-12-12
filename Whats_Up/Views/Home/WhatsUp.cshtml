@@ -56,9 +56,23 @@
     <div id="map"></div>
     <script>
         function initMap() {
-
+            @{ 
+                double Lng;
+                double Lat;
+                if (ViewBag.GoogleLat2 != null && ViewBag.GoogleLong2 != null) {
+                    Lng = ViewBag.GoogleLong2;
+                    Lat = ViewBag.GoogleLat2;
+                }
+                else {
+                    Lng = 0;
+                    Lat = 0;
+                }
+        }
             var geoLat = @ViewBag.GoogleLat;
             var geoLong = @ViewBag.GoogleLong;
+            var geoLat2 = @Lat;
+            var geoLong2 = @Lng;
+
 
             if (geoLat != null && geoLong != null) {
 
@@ -79,6 +93,26 @@
                marker.addListener('click', function () {
                    infowindow.open(map, marker);
                 });
+
+
+                if (geoLat2 != 0 && geoLong2 != 0) {
+                    var userLocation2 = { lat: @Lat, lng: @Lng }
+                   
+                    var contentString = '<h4 style="color:gold"><i>This is the entered location</i></h4>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+
+                    var marker2 = new google.maps.Marker({
+                        position: userLocation2,
+                        map: map,
+                        icon: 'https://i.imgur.com/CaOG9uB.png'
+                    });
+                    marker.addListener('click', function () {
+                        infowindow.open(map, marker);
+                    });
+                }
 
                    @if (ViewBag.CoordinatesComparison1 != null)
                    {
@@ -294,7 +328,7 @@
 
 
 
-    }
+     }
 
     <span><h2 style="color:gold">Satellites</h2><input type="submit" value="Submit" /></span>
     <div id="Checkboxes">
