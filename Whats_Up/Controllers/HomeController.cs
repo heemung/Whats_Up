@@ -19,7 +19,6 @@ namespace Whats_Up.Controllers
 
 
         private List<CheckBoxes> homeCheckBoxData = new List<CheckBoxes>();
-        private List<CheckBoxes> homeSatData = new List<CheckBoxes>();
         private List<JObject> resultFromLocation = new List<JObject>();
 
 
@@ -69,6 +68,7 @@ namespace Whats_Up.Controllers
 
         public ActionResult FormCollection(User currentUser, string[] satelliteCategoies, string address2, string bigCategory)
         {
+            /*
             HttpCookie userCookie;           //making same cookie reguardless
             if (Request.Cookies["RegisteredUser"] == null) //still throwing null
             {
@@ -84,6 +84,7 @@ namespace Whats_Up.Controllers
             }
 
             Response.Cookies.Add(userCookie); //save cookie?
+            */
             TempData["Email"] = currentUser.Email;
             TempData["Address"] = currentUser.AddressLine;
 
@@ -217,7 +218,9 @@ namespace Whats_Up.Controllers
                     JParser = JObject.Parse(output);
 
                 }
-                                                                            
+                
+                //TO DO VALIDATION result[0]
+
                 geoLocations.Add(JParser);                                  //adds jobject to list
             }
 
@@ -232,6 +235,7 @@ namespace Whats_Up.Controllers
             return View();
         }
 
+        /*
         public User GetCookie() //getting the cookie to a new user object.
         {
             User cookieUser = new User();
@@ -243,7 +247,7 @@ namespace Whats_Up.Controllers
             }
 
             return cookieUser;
-        }
+        }*/
     }
 }
 

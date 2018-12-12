@@ -55,8 +55,11 @@
 
             var geoLat = @ViewBag.GoogleLat;
             var geoLong = @ViewBag.GoogleLong;
+            var geoLat2 = @ViewBag.GoogleLat2;
+            var geoLong2 = @ViewBag.GoogleLong2;
 
             if (geoLat != null && geoLong != null) {
+
                 var userLocation = { lat: geoLat, lng: geoLong }
                 var map = new google.maps.Map(
                 document.getElementById('map'), { zoom: 4, center: userLocation });
@@ -64,7 +67,21 @@
 
                var infowindow = new google.maps.InfoWindow({
                    content: contentString
-               });
+                });
+
+                @*
+                    DOES NOT WORK. only works when inputing two address
+
+                    if (geoLat2 != null && geoLong2 != null) {
+                    var userLocation2 = { lat: geoLat2, lng: geoLong2 }
+
+                    var marker2 = new google.maps.Marker({
+                        position: userLocation2,
+                        map: map,
+                        icon: 'https://i.imgur.com/CaOG9uB.png'
+                    });
+                }*@
+
 
                var marker = new google.maps.Marker({
                    position: userLocation,
@@ -128,7 +145,13 @@
                                     double longitude = satList["satlng"].Value;
                                    <text>
                 var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: ' + '@satList["launchDate"]';
+               var satContent =
+                   '<h3 style="color:gold">Name:' + '<u>@satList["satname"]</u></h3>' +
+                   '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
+                   '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
+                   '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
+                   '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>';
+
                 var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
                     content: satContent
@@ -165,7 +188,13 @@
                                     double longitude = satList["satlng"].Value;
                                    <text>
                 var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                var satContent = 'Name: ' + '@satList["satname"] ' + 'Launch Date: ' + '@satList["launchDate"]';
+               var satContent =
+                   '<h3 style="color:gold">Name:' + '<u>@satList["satname"]</u></h3>' +
+                   '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
+                   '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
+                   '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
+                   '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>';
+
                 var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
                     content: satContent
@@ -207,7 +236,13 @@
                                    double longitude = innerArray["satlng"].Value;
                                   <text>
                 var satPosition = new google.maps.LatLng(@latitude, @longitude);
-                var satContent = 'Name: ' + '@innerArray["satname"] ' + 'Launch Date: ' + '@innerArray["launchDate"]';
+               var satContent =
+                   '<h3 style="color:gold">Name:' + '<u>@innerArray["satname"]</u></h3>' +
+                   '<h4 style="color:black">Latitude:' + '<u>@innerArray["satlat"]</u></h4>' +
+                   '<h4 style="color:black">Longitude:' + '<u>@innerArray["satlng"]</u></h4>' +
+                   '<h4 style="color:black">Altitude:' + '<u>@innerArray["satalt"]</u></h4>' +
+                   '<h4 style="color:black">Launch Date:' + '<u>@innerArray["launchDate"]</u></h4>';
+
                 var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
                     content: satContent
