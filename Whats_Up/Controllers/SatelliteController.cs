@@ -23,7 +23,7 @@ namespace Whats_Up.Controllers
         public string Info;
         public string TransCount;
         //ORM private to this class.
-        private DataContext db = new DataContext();
+        private WhatsUpDBEntities db = new WhatsUpDBEntities();
         // GET: Satellite
         public ActionResult Index()
         {
@@ -238,7 +238,7 @@ namespace Whats_Up.Controllers
             string atTime = DateTime.Now.ToString();
 
             // creating a new db object
-            SatelliteN2YO dbObj = new SatelliteN2YO();
+            SatelliteN2YOs dbObj = new SatelliteN2YOs();
 
             //iterating through the satdata table returnong the request
             foreach (var SatRequest in satdata)
@@ -576,6 +576,13 @@ namespace Whats_Up.Controllers
             }
         }
 
+        public ActionResult SaveFavorties(Favorite newFavorite)
+        {
+            WhatsUpDBEntities db = new WhatsUpDBEntities();
+            db.Favorites.Add(newFavorite);
+            db.SaveChanges();
+            return RedirectToAction("Favorites"); 
+        }
     }
     
 }

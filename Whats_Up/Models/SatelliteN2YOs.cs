@@ -13,14 +13,24 @@ namespace Whats_Up.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Favorite
+    public partial class SatelliteN2YOs
     {
-        public int FavID { get; set; }
-
-        [Required]
-        public string Email { get; set; }
-
+        
+        public int ID { get; set; }
         [Required]
         public string Category { get; set; }
+        [Required]
+        public int TransactionsCount { get; set; }
+        [Required]
+        public int SatCount { get; set; }
+
+        public Nullable<int> SatId { get; set; }
+        public string SatName { get; set; }
+        public string Designator { get; set; }
+        public string LaunchDate { get; set; }
+        public Nullable<double> SatLat { get; set; }
+        public Nullable<double> SatLng { get; set; }
+        public Nullable<double> SatAlt { get; set; }
+        public string AtTime { get; set; }
     }
 }

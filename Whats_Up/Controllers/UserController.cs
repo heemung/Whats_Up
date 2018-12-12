@@ -30,7 +30,7 @@ namespace Whats_Up.Controllers
                 registeredUser.Email = "abcdefg@abcdefg.com";
             }
 
-                DataContext db = new DataContext();
+            WhatsUpDBEntities db = new WhatsUpDBEntities();
 
                 if (db.Users.Find(registeredUser.Email) == null)
                 {

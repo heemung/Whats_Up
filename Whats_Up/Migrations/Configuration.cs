@@ -5,7 +5,7 @@ namespace Whats_Up.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Whats_Up.Models.DataContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Whats_Up.Models.WhatsUpDBEntities>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Whats_Up.Migrations
             ContextKey = "Whats_Up.Models.DataContext";
         }
 
-        protected override void Seed(Whats_Up.Models.DataContext context)
+        protected override void Seed(Whats_Up.Models.WhatsUpDBEntities context)
         {
             //  This method will be called after migrating to the latest version.
 
