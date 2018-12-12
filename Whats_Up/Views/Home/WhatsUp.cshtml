@@ -134,7 +134,7 @@
 
 
                     var satInfoWindow = new google.maps.InfoWindow({
-                    //position: satPosition,
+                    
                     content: satContent
                 });
 
@@ -174,10 +174,12 @@
                 var satPosition = new google.maps.LatLng(@latitude, @longitude);
                var satContent =
                    '<h3 style="color:gold">Name:' + '<u>@satList["satname"]</u></h3>' +
-                   '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
-                   '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
-                   '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
-                   '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>';
+                    '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
+                    '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
+                    '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
+                    '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>' +
+                    '<h4 style="color:gold"><a href="https://www.google.com/search?source=hp&ei=KlURXOKsMOSpjwTKuK7IBA&q=' + '@satList["satname"]" target="_blank">' +
+                    'More Satellite Info Click Here!</a> ';
 
                 var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
@@ -217,10 +219,12 @@
                 var satPosition = new google.maps.LatLng(@latitude, @longitude);
                var satContent =
                    '<h3 style="color:gold">Name:' + '<u>@satList["satname"]</u></h3>' +
-                   '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
-                   '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
-                   '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
-                   '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>';
+                    '<h4 style="color:black">Latitude:' + '<u>@satList["satlat"]</u></h4>' +
+                    '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
+                    '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
+                    '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>' +
+                    '<h4 style="color:gold"><a href="https://www.google.com/search?source=hp&ei=KlURXOKsMOSpjwTKuK7IBA&q=' + '@satList["satname"]" target="_blank">' +
+                    'More Satellite Info Click Here!</a> ';
 
                 var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
@@ -265,10 +269,12 @@
                 var satPosition = new google.maps.LatLng(@latitude, @longitude);
                var satContent =
                    '<h3 style="color:gold">Name:' + '<u>@innerArray["satname"]</u></h3>' +
-                   '<h4 style="color:black">Latitude:' + '<u>@innerArray["satlat"]</u></h4>' +
-                   '<h4 style="color:black">Longitude:' + '<u>@innerArray["satlng"]</u></h4>' +
-                   '<h4 style="color:black">Altitude:' + '<u>@innerArray["satalt"]</u></h4>' +
-                   '<h4 style="color:black">Launch Date:' + '<u>@innerArray["launchDate"]</u></h4>';
+                    '<h4 style="color:black">Latitude:' + '<u>@innerArray["satlat"]</u></h4>' +
+                    '<h4 style="color:black">Longitude:' + '<u>@innerArray["satlng"]</u></h4>' +
+                    '<h4 style="color:black">Altitude:' + '<u>@innerArray["satalt"]</u></h4>' +
+                    '<h4 style="color:black">Launch Date:' + '<u>@innerArray["launchDate"]</u></h4>' +
+                    '<h4 style="color:gold"><a href="https://www.google.com/search?source=hp&ei=KlURXOKsMOSpjwTKuK7IBA&q=' + '@innerArray["satname"]" target="_blank">' +
+                    'More Satellite Info Click Here!</a> ';
 
                 var satInfoWindow = new google.maps.InfoWindow({
                     //position: satPosition,
