@@ -12,6 +12,7 @@
             -webkit-column-count: 2; /* Chrome, Safari, Opera */
             -moz-column-count: 2; /* Firefox */
             column-count: 2;
+         
             
         }
         
@@ -21,7 +22,7 @@
 <br />
 <br />
 <!-- Button to open the modal -->
-<button onclick="document.getElementById('id01').style.display='block'">What's Up</button>
+<button onclick="document.getElementById('id01').style.display='block'">Click Here To Get Started</button>
 <!-- The Modal (contains the Sign Up form) -->
 <form action="/Home/FormCollection" method="post">
     <div id="id01" class="modal">
@@ -287,10 +288,11 @@
         <label for="address2" style="color:gold">Add Another Address for Comparison</label>
         <input type="text" id="addressline" name="address2" placeholder="Optional..">
 
-        <input type="submit" value="Submit" />
+
 
     }
-    <h2 style="color:gold">Satellites</h2>
+    
+        <span><h2 style="color:gold">Satellites</h2><input type="submit" value="Submit" /></span>
     <div id="Checkboxes">
         @using Whats_Up.Models;
         @{List<CheckBoxes> SatList = (List<CheckBoxes>)TempData["SatList"];}
@@ -300,13 +302,13 @@
             {
                 if (x.IsCheck == true)
                 {
-                    <label>@x.Name</label>
-                    <input type="checkbox" name="@x.CheckName" value="@x.Value" checked />
+                    <span>@x.Name</span>
+                    <input type="checkbox" name="@x.CheckName" value="@x.Value" checked /><br />
                 }
                 else
                 {
-                    <label>@x.Name</label>
-                    <input type="checkbox" name="@x.CheckName" value="@x.Value" />
+                    <span>@x.Name</span>
+                    <input type="checkbox" name="@x.CheckName" value="@x.Value" /><br />
                 }
 
             }
