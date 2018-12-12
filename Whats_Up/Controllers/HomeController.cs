@@ -38,6 +38,23 @@ namespace Whats_Up.Controllers
             return View();
         }
 
+        public ActionResult AddFavorites(Favorite favorite)
+        {
+            if(ModelState.IsValid)
+            {
+                DataContext db = new DataContext();
+                db.Favorites.Add(favorite);
+                db.SaveChanges();
+                return View("Favorites");
+            }
+            else
+            {
+                ViewBag.Added = "Not a valid selection";
+                return View("Favorites");
+            }
+            
+        }
+
         public ActionResult DeleteFavorite(int id)
         {
             DataContext db = new DataContext();
