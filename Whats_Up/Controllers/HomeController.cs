@@ -218,7 +218,9 @@ namespace Whats_Up.Controllers
                     JParser = JObject.Parse(output);
 
                 }
-                                                                            
+                
+                //TO DO VALIDATION result[0]
+
                 geoLocations.Add(JParser);                                  //adds jobject to list
             }
 
@@ -233,6 +235,7 @@ namespace Whats_Up.Controllers
             return View();
         }
 
+        /*
         public User GetCookie() //getting the cookie to a new user object.
         {
             User cookieUser = new User();
@@ -244,7 +247,7 @@ namespace Whats_Up.Controllers
             }
 
             return cookieUser;
-        }
+        }*/
     }
 }
 
