@@ -32,7 +32,7 @@ namespace Whats_Up.Controllers
             {
                 
                 db.Entry(registeredUser).State = EntityState.Added;
-                db.SaveChanges();
+                db.SaveChanges();                           //TO DO FAILS HERE!!!
             }         
             /*HttpCookie cookie = new HttpCookie("some_cookie_name");
             HttpContext.Response.Cookies.Remove("some_cookie_name");
