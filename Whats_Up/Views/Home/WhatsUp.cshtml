@@ -94,8 +94,9 @@
                     '<h4 style="color:black">Longitude:' + '<u>@satList["satlng"]</u></h4>' +
                     '<h4 style="color:black">Altitude:' + '<u>@satList["satalt"]</u></h4>' +
                     '<h4 style="color:black">Launch Date:' + '<u>@satList["launchDate"]</u></h4>' +
-                    '<h4 style="color:black">Click To Learn More:' + '<u>@satList["launchDate"]</u></h4>' +
-                    '<a href=https://www.wikipedia.com/?utm_source=' + '@satList["satname"] >';
+                    '<h4 style="color:gold"><a href="https://www.google.com/search?source=hp&ei=KlURXOKsMOSpjwTKuK7IBA&q=' + '@satList["satname"]">' +
+                    'More Satellite Info Click Here!</a> ';
+                   
 
 
                     var satInfoWindow = new google.maps.InfoWindow({
