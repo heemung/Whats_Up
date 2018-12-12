@@ -266,23 +266,30 @@
             src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleKey&callback=initMap">
 
     </script>
-    <span>Information: @ViewBag.LocationError</span>
+
+    <span>Information:</span>
+    <u style="color:gold">
+    <span>@ViewBag.LocationError</span>
     <span>@ViewBag.Error</span>
     <span>@ViewBag.Info</span>
     <span>@ViewBag.Count</span>
+    </u><br /><br />
 </body>
 </html>
 <form action="/Home/FormCollection" method="post">
     @if (TempData["Address"] != null)
     {
-        <p>@TempData["Address"]</p>
+        <span>Entered Location:</span>
+        <span style="color:gold"><u>@TempData["Address"]</u></span>
 
         <input type="hidden" id="email" name="Email" value="@TempData["Email"]" required>
 
         <label for="addressline" style="color:gold"></label>
         <input type="hidden" id="addressline" name="AddressLine" value="@TempData["Address"]" hidden>
 
-        <label for="address2" style="color:gold">Add Another Address for Comparison</label>
+        <br /> 
+        <br />  
+        <label for="address2"size><big><u>Add Another Address for Comparison</u></big></label>
         <input type="text" id="addressline" name="address2" placeholder="Optional..">
 
 
